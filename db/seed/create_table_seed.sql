@@ -15,4 +15,4 @@ total_questions INT,
 total_answers INT,
 total_upvotes INT,
 total_downvotes INT
-)
+);

@@ -46,6 +46,7 @@ const login = async (req, res) => {
         req.session.user = {
             user_id: checkUser[0].user_id,
             email: checkUser[0].email,
+            display_name: checkUser[0].display_name,
             is_admin: checkUser[0].is_admin
         };
         return res.status(200).json(req.session.user);
