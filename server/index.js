@@ -6,6 +6,7 @@ const session = require('express-session');
 const app = express();
 
 const AC = require('./controllers/authController/authController');
+const PC = require('./controllers/profileController/profileController');
 
 const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env;
 
@@ -36,6 +37,11 @@ app.get('/auth/logout', AC.logout);
 app.post('/auth/register', AC.register);
 app.post('/auth/login', AC.login);
 
+//Profile
+app.get('/prof/all/:user_id', PC.getUserProfile);
+app.put('/prof/displayname', PC.editDisplayName);
+app.put('/prof/bio', PC.editBio);
+app.put('/prof/img', PC.editImg);
 
 app.listen(SERVER_PORT, () => {
     console.log(`Listening on Port: ${SERVER_PORT}`)
