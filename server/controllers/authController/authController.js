@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 
 const register = async (req, res) => {
+    console.log(req.body);
     const db = req.app.get('db');
     const { email, password, display_name, is_admin, student_invite_code, admin_invite_code } = req.body;
     const { STUDENT_INVITE_CODE, ADMIN_INVITE_CODE } = process.env;
