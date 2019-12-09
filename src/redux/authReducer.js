@@ -34,15 +34,24 @@ export const registerUser = (email, password, display_name, student_invite_code,
         })
     }
 }
-export const loginUser = (email, password, isAdmin) => {
+export const loginUser = (email, password) => {
+
     return {
         type: LOGIN_USER,
         payload: axios.post('/auth/login', {
             email,
-            password,
-            isAdmin
+            password
+            
         })
     }
+
+}
+export const logoutUser = () => {
+    return {
+        type: LOGOUT_USER,
+        payload: axios.get(`/auth/logout`)
+    }
+
 }
 export default function authReducer(state = initialState, action) {
     const { payload, type } = action;
@@ -52,11 +61,12 @@ export default function authReducer(state = initialState, action) {
         case `${REGISTER_USER}_PENDING`:
             return {...state, loading: true}
         case `${REGISTER_USER}_FULFILLED`:
-            return {...state, loading: false, user: payload.data}
+            console.log(payload.data);
+            return {...state, loading: false, user: payload.data} 
         case `${LOGIN_USER}_PENDING`:
             return {...state, loading: true}
         case `${LOGIN_USER}_FULFILLED`:
-            return {...state, loading: false, user: payload.data, img: payload.data.img}
+            return {...state, loading: false, user: payload.data}
         case `${LOGOUT_USER}_PENDING`:
             return {...state, loading: true}
         case `${LOGOUT_USER}_FULFILLED`:

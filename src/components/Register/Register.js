@@ -18,11 +18,11 @@ class Register extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    this.props.registerUser(this.props.display_name, this.props.email, this.props.password, this.props.student_invite_code, this.props.admin_invite_code);
+    this.props.registerUser(this.props.email, this.props.password, this.props.display_name, this.props.student_invite_code, this.props.admin_invite_code);
   }
 
   render() {
-    // if (this.props.email) return <Redirect to="/" />
+    //  if (req.session.user_id) return <Redirect to="/" />
     return (
       <div className="Register-container">
         <h1>Register</h1>
@@ -48,7 +48,8 @@ const mapStateToProps = reduxState => {
     email: reduxState.authReducer.email,
     password: reduxState.authReducer.password,
     student_invite_code:reduxState.authReducer.student_invite_code,
-    admin_invite_code: reduxState.authReducer.admin_invite_code
+    admin_invite_code: reduxState.authReducer.admin_invite_code,
+    user: reduxState.authReducer.user
   }
 }
 
