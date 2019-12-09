@@ -6,6 +6,8 @@ const session = require('express-session');
 const app = express();
 
 const AC = require('./controllers/authController/authController');
+const SC = require('./controllers/searchController/searchController');
+const QC = require('./controllers/questionsController/questionsController');
 
 const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env;
 
@@ -35,6 +37,13 @@ app.use(express.json());
 app.get('/auth/logout', AC.logout);
 app.post('/auth/register', AC.register);
 app.post('/auth/login', AC.login);
+
+//Search
+app.get('/search/title', SC.searchTitle);
+app.get('/search/desc', SC.searchDesc);
+
+//Questions
+app.post('/question/create', QC.createQuestion);
 
 
 app.listen(SERVER_PORT, () => {
