@@ -13,7 +13,8 @@ const register = async (req, res) => {
         req.session.user = {
             user_id: user[0].user_id,
             email,
-            display_name
+            display_name,
+            is_admin
         }
         res.status(200).json(user)
     } else if(checkUser.length === 0 && ADMIN_INVITE_CODE === admin_invite_code) {
@@ -46,6 +47,7 @@ const login = async (req, res) => {
         req.session.user = {
             user_id: checkUser[0].user_id,
             email: checkUser[0].email,
+            display_name: checkUser[0].display_name,
             is_admin: checkUser[0].is_admin
         };
         return res.status(200).json(req.session.user);
