@@ -41,11 +41,12 @@ app.post('/auth/login', AC.login);
 //Search
 app.get('/search/title', SC.searchTitle);
 app.get('/search/desc', SC.searchDesc);
+app.get('/search/tags', SC.searchTags);
 
 //Questions
 app.post('/question/create', QC.createQuestion);
 
 
 app.listen(SERVER_PORT, () => {
-    console.log(`Listening on Port: ${SERVER_PORT}`)
+    console.log(`Listening on Port: ${SERVER_PORT}`);
 });
