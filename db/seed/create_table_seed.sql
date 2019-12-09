@@ -29,3 +29,4 @@ down_vote_count INT NOT null,
 total_vote_count INT NOT null,
 time_stamp TEXT NOT null
 )
+);

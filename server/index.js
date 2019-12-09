@@ -8,6 +8,7 @@ const app = express();
 const AC = require('./controllers/authController/authController');
 const SC = require('./controllers/searchController/searchController');
 const QC = require('./controllers/questionsController/questionsController');
+const PC = require('./controllers/profileController/profileController');
 
 const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env;
 
@@ -46,6 +47,11 @@ app.get('/search/tags', SC.searchTags);
 //Questions
 app.post('/question/create', QC.createQuestion);
 
+//Profile
+app.get('/prof/all/:user_id', PC.getUserProfile);
+app.put('/prof/displayname', PC.editDisplayName);
+app.put('/prof/bio', PC.editBio);
+app.put('/prof/img', PC.editImg);
 
 app.listen(SERVER_PORT, () => {
     console.log(`Listening on Port: ${SERVER_PORT}`);
