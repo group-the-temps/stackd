@@ -3,14 +3,27 @@ import { Link } from "react-router-dom";
 import {loginUser, updateState} from "../../redux/authReducer";
 import "./Login.css";
 import { connect } from "react-redux";
+import Modal from "react-modal"
 
 class Login extends Component {
   constructor(){
     super()
     this.state = {
-      error: false
+      error: false,
+      showModal: true
     }
+    this.handleOpenModal = this.handleOpenModal.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
   }
+
+  handleOpenModal = () => {
+    this.setState({showModal: true})
+  }
+
+  handleCloseModal = () => {
+    this.setState({showModal: false})
+  }
+
   handleInput = e => {
     this.props.updateState({[e.target.name]: e.target.value}) 
 
@@ -18,21 +31,30 @@ class Login extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    this.props.loginUser(this.props.email, this.props.password);
+    this.props.loginUser(this.props.email, this.props.password)
+    .then(this.setState({showModal: false}))
+    .catch(err => console.log(err));
   }
   render() {
     return (
       <div className="Login-container">
-        <h1>Login</h1>
+        <Modal
+          isOpen={this.state.showModal}
+          className="login-modal"
+          >
+          <h1 className="login-header">Login</h1>
         <form className="Login-form">
-          <input onChange={this.handleInput} name="email" placeholder="email" />
-          <input onChange={this.handleInput} type="password" name="password" placeholder="password" />
+          <input className="login-input" onChange={this.handleInput} name="email" placeholder="email" />
+          <input className="login-input" onChange={this.handleInput} type="password" name="password" placeholder="password" />
         </form>
-        <button onClick={this.handleSubmit}>Login</button>
+        <button className="modal-button" onClick={this.handleSubmit}>Login</button>
         <Link to="/register">
-          <p>create new account</p>
+          <p className="new-account">create new account</p>
         </Link>
+        <button className="modal-button" onClick={this.handleCloseModal}>Close</button>
+          </Modal>
       </div>
+
     );
   }
 }
