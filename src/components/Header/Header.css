@@ -15,7 +15,9 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  width: 60vw;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 50vw;
 }
 
 .Search-border {
@@ -42,6 +44,15 @@
   margin-left: 5px;
 }
 
+.tags-dropdown-button {
+  height: 40px;
+  width: 120px;
+  padding-top: 4px;
+  background: #313D3F;
+  color: #EFC01A;
+  border-radius: 5px;
+}
+
 .Nav-links-container {
   display: flex;
   flex-direction: row;
@@ -49,5 +60,19 @@
   width: 20vw;
 }
 
-.Nav-link {
+.tags-container {
+  position: fixed;
+  top: 100px;
+  height: 300px;
+  width: 800px;
+  background: #313D3F;
+  border-radius: 20px;
+  border: 6px #F16D6E outset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+/* .Nav-link {
+} */
+
