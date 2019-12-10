@@ -1,7 +1,8 @@
 .Landing-container {
   width: 100%;
-  height: 700px;
-  position: top;
+  height: 850px;
+  padding-top: 100px;
+  position: absolute;
   background-image: url("../../landing-background.png");
   background-repeat: no-repeat;
   background-attachment: scroll;
