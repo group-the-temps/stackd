@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import {loginUser, updateState} from "../../redux/authReducer";
 import "./Login.css";
 import { connect } from "react-redux";
-import Modal from "react-modal"
+import Modal from "react-modal";
+
+
 
 class Login extends Component {
   constructor(){
@@ -38,6 +40,8 @@ class Login extends Component {
   render() {
     return (
       <div className="Login-container">
+
+
         <Modal
           isOpen={this.state.showModal}
           className="login-modal"
