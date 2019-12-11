@@ -11,6 +11,10 @@
   width: 20vw;
 }
 
+.Logo-container img {
+  width: 200px;
+}
+
 .Search-container {
   display: flex;
   flex-direction: row;
@@ -18,6 +22,10 @@
   align-items: center;
   justify-content: space-evenly;
   width: 80vw;
+}
+
+.Search-container a {
+  text-decoration: none;
 }
 
 .Search-border {
@@ -52,14 +60,13 @@
 }
 
 .tags-dropdown-button {
-  height: 40px;
   width: 130px;
-  padding-top: 4px;
-  background-image: linear-gradient(to top right, #5DC8DD, #EFC01A, #5DC8DD);
+  padding: 15px 0px 15px 0px;
+  background-image: linear-gradient(to top right, #5dc8dd, #efc01a, #5dc8dd);
   color: #000000;
   border-radius: 5px;
   font-weight: 700;
-  border: 2px #37BA99 outset;
+  border: 2px #37ba99 outset;
 }
 
 .tags-dropdown-button:hover {
@@ -73,23 +80,23 @@
   left: 190px;
   height: 300px;
   width: 800px;
-  background: #313D3F;
+  z-index: 1;
+  background: #313d3f;
   border-radius: 20px;
-  border: 6px #37BA99 outset;
+  border: 6px #37ba99 outset;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .Nav-link-1 {
-  height: 32px;
-  width: 100px;
-  padding-top: 12px;
-  background-image: linear-gradient(to bottom right, #5DC8DD, #EFC01A, #5DC8DD);
+  width: 110px;
+  padding: 15px 0px 15px 0px;
+  background-image: linear-gradient(to bottom right, #5dc8dd, #efc01a, #5dc8dd);
   color: #000000;
   border-radius: 5px;
   font-weight: 700;
-  border: 2px #37BA99 outset;
+  border: 2px #37ba99 outset;
 }
 
 .Nav-link-1:hover {
@@ -98,14 +105,13 @@
 }
 
 .Nav-link-2 {
-  height: 32px;
   width: 100px;
-  padding-top: 12px;
-  background-image: linear-gradient(to bottom left, #5DC8DD, #EFC01A, #5DC8DD);
+  padding: 15px 0px 15px 0px;
+  background-image: linear-gradient(to bottom left, #5dc8dd, #efc01a, #5dc8dd);
   color: #000000;
   border-radius: 5px;
   font-weight: 700;
-  border: 2px #37BA99 outset;
+  border: 2px #37ba99 outset;
 }
 
 .Nav-link-2:hover {
@@ -114,14 +120,13 @@
 }
 
 .Nav-link-3 {
-  height: 32px;
   width: 100px;
-  padding-top: 12px;
-  background-image: linear-gradient(to bottom right, #5DC8DD, #EFC01A, #5DC8DD);
+  padding: 15px 0px 15px 0px;
+  background-image: linear-gradient(to bottom right, #5dc8dd, #efc01a, #5dc8dd);
   color: #000000;
   border-radius: 5px;
   font-weight: 700;
-  border: 2px #37BA99 outset;
+  border: 2px #37ba99 outset;
 }
 
 .Nav-link-3:hover {
