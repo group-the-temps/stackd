@@ -50,6 +50,7 @@ class Header extends Component {
 
   routeLogin = () => {
     this.props.history.push("/login");
+    this.props.handleCloseTags();
   };
 
   logout = async () => {
@@ -104,10 +105,16 @@ class Header extends Component {
           ) : null}
           {this.props.user[0] || this.props.user.user_id ? (
             <>
-              <Link to="/askquestion">
-                <li className="Nav-link-1">Ask Question</li>
-              </Link>
-              <li onClick={this.logout} className="Nav-link-2">
+              {/* <Link to="/askquestion"> */}
+                <li className="Nav-link-1" onClick={() => {
+                  this.props.history.push('/askquestion');
+                  this.props.handleCloseTags();
+                }}>Ask Question</li>
+              {/* </Link> */}
+              <li onClick={() => {
+                this.logout()
+                this.props.handleCloseTags()
+                }} className="Nav-link-2">
                 Logout
               </li>
             </>
