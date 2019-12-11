@@ -1,2 +1,2 @@
 SELECT * FROM questions
-WHERE question_desc LIKE $1;
+WHERE question_desc ILIKE $1;
