@@ -1,3 +1,2 @@
 SELECT * FROM questions
-WHERE question_title LIKE $1;
-
+WHERE question_title ILIKE $1;

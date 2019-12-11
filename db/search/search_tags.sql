@@ -1,2 +1,2 @@
 SELECT * FROM questions
-WHERE tags LIKE $1;
+WHERE tags = $1;
