@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const initialState = {
-  question: ["test"]
+  question: []
 };
 
 const CREATE_QUESTION = "CREATE_QUESTION";
