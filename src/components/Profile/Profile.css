@@ -17,24 +17,35 @@
 }
 
 .left__innerCont {
-    width: 20vw;
+    display: flex;
+    width: 20%;
+    height: 100%;
     margin-right: 5px;
 }
 
 .right__innerCont {
-    width: 80vw;
+    display: flex;
+    align-items: center;
+    width: 80%;
     height: 100%;
     margin-left: 5px;
 }
 
 .img__section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
     border: 1px solid black;
 }
 
 .name__bio__section {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     flex-direction: column;
+    height: 100%;
+    width: 70%;
+    margin-right: 5px;
     text-align: left;
     font-size: 15px;
     border: 1px solid black;
@@ -43,6 +54,9 @@
 .extra__info__section {
     display: flex;
     flex-direction: column;
+    width: 30%;
+    height: 100%;
+    margin-left: 5px;
     border: 1px solid black;
 }
 

@@ -127,7 +127,7 @@ class Profile extends Component {
                                         <input className="save__changes__btn" type="button" value="Save Changes" onClick={this.handleEditName} />
                                     </>
                                 ) : null}
-                            <div>
+                            <div className="bio_container">
                                 <label className="profile__bio">{bio}</label>
                                 <button className="edit__bio__btn" onClick={this.handleOpenBio}>
                                     <i className="fas fa-edit fa-1x"></i>
