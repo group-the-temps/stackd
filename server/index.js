@@ -48,9 +48,10 @@ app.get('/search/tags', SC.searchTags);
 app.post('/question/create', QC.createQuestion);
 
 //Profile
-app.get('/prof/all/:user_id', PC.getUserProfile);
+app.get('/prof/all/:id', PC.getUserProfile);
 app.put('/prof/displayname', PC.editDisplayName);
 app.put('/prof/bio', PC.editBio);
+app.put('/prof/cohort', PC.editCohort);
 app.put('/prof/img', PC.editImg);
 
 app.listen(SERVER_PORT, () => {
