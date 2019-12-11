@@ -15,11 +15,12 @@ class Tags extends Component {
 
     clickTag = async e => {
         await this.setState({searchTag: e.target.getAttribute('name')});
+        this.props.tagResults.splice(0);
         axios.get(`/search/tags?tags=${this.state.searchTag}`).then(response => {
-            console.log(response)
             const { tagResults} = this.props;
             tagResults.push(response.data);
             this.props.handleCloseTags();
+            console.log(this.props.tagResults[0]);
         }).catch(() => {
             this.props.handleCloseTags();
             alert('No Results Found');
@@ -27,6 +28,7 @@ class Tags extends Component {
     }
 
     render() {
+        console.log(this.state.searchTag);
         return (
             <div className='category-container'>
                 <div className='category'>
@@ -61,8 +63,8 @@ class Tags extends Component {
                         <li className='topic' name='React 5' onClick={this.clickTag}>React 5</li>
                         <li className='topic' name='React 6' onClick={this.clickTag}>React 6</li>
                         <li className='topic' name='React 7' onClick={this.clickTag}>React 7</li>
-                        <li className='topic' name='Adv. React 1' onClick={this.clickTag}>Adv. React I</li>
-                        <li className='topic' name='Adv. React 2' onClick={this.clickTag}>Adv. React II</li>
+                        <li className='topic' name='Adv. React 1' onClick={this.clickTag}>Adv. React 1</li>
+                        <li className='topic' name='Adv. React 2' onClick={this.clickTag}>Adv. React 2</li>
                     </ul>
                 </div>
                 <div className='category'>

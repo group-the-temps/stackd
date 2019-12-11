@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./Header.css";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import searchicon from "../../search_icon.png";
 import { connect } from "react-redux";
 import { logoutUser } from "../../redux/authReducer";
@@ -28,10 +28,10 @@ class Header extends Component {
   }
 
   handleSearch = e => {
-    this.setState({searchInput: e.target.value})
-    if(this.state.searchInput === '') {
+    this.setState({ searchInput: e.target.value })
+    if (this.state.searchInput.length <= 1) {
       this.props.searchResults.splice(0);
-    } 
+    }
   }
 
   _handleKeyDown = e => {
@@ -45,7 +45,17 @@ class Header extends Component {
     }
   }
 
+  routeLogin = () => {
+    this.props.history.push('/login');
+  }
+
+  logout = async () => {
+    await this.props.logoutUser();
+    this.props.history.push('/');
+  }
+
   render() {
+    console.log(this.state.searchInput)
     return (
       <div className="Nav-bar-container">
         <div className="Logo-container">
@@ -72,18 +82,14 @@ class Header extends Component {
               </div>
             </Tween>
           ) : null}
-        </div>
-        <div className="Nav-links-container">
           {this.props.user[0] || this.props.user.user_id ? (
             <>
-              <li className="Nav-link">Questions</li>
-              <li className="Nav-link">Topics</li>
-              <li onClick={this.props.logoutUser} className="Nav-link">Logout</li>
+              <li className="Nav-link-1">Questions</li>
+              <li onClick={this.logout} className="Nav-link-2">Logout</li>
             </>
-          ) : (<> <Link to="/login">
-            <li className="Nav-link">Login</li>
-          </Link></>)
-          }
+          ) : (
+              <li className="Nav-link-3" onClick={this.routeLogin}>Login</li>
+            )}
         </div>
       </div>
     );
@@ -99,4 +105,4 @@ const mapStateToProps = reduxState => {
 }
 
 
-export default connect(mapStateToProps, { logoutUser, handleOpenTags, handleCloseTags })(Header)
+export default withRouter(connect(mapStateToProps, { logoutUser, handleOpenTags, handleCloseTags })(Header));
