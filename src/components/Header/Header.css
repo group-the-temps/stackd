@@ -15,7 +15,9 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  width: 60vw;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 80vw;
 }
 
 .Search-border {
@@ -49,5 +51,80 @@
   width: 20vw;
 }
 
-.Nav-link {
+.tags-dropdown-button {
+  height: 40px;
+  width: 130px;
+  padding-top: 4px;
+  background-image: linear-gradient(to top right, #5DC8DD, #EFC01A, #5DC8DD);
+  color: #000000;
+  border-radius: 5px;
+  font-weight: 700;
+  border: 2px #37BA99 outset;
+}
+
+.tags-dropdown-button:hover {
+  cursor: pointer;
+  color: #0000005b;
+}
+
+.tags-container {
+  position: fixed;
+  top: 100px;
+  left: 190px;
+  height: 300px;
+  width: 800px;
+  background: #313D3F;
+  border-radius: 20px;
+  border: 6px #37BA99 outset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Nav-link-1 {
+  height: 32px;
+  width: 100px;
+  padding-top: 12px;
+  background-image: linear-gradient(to bottom right, #5DC8DD, #EFC01A, #5DC8DD);
+  color: #000000;
+  border-radius: 5px;
+  font-weight: 700;
+  border: 2px #37BA99 outset;
+}
+
+.Nav-link-1:hover {
+  cursor: pointer;
+  color: #0000005b;
+}
+
+.Nav-link-2 {
+  height: 32px;
+  width: 100px;
+  padding-top: 12px;
+  background-image: linear-gradient(to bottom left, #5DC8DD, #EFC01A, #5DC8DD);
+  color: #000000;
+  border-radius: 5px;
+  font-weight: 700;
+  border: 2px #37BA99 outset;
+}
+
+.Nav-link-2:hover {
+  cursor: pointer;
+  color: #0000005b;
+}
+
+.Nav-link-3 {
+  height: 32px;
+  width: 100px;
+  padding-top: 12px;
+  background-image: linear-gradient(to bottom right, #5DC8DD, #EFC01A, #5DC8DD);
+  color: #000000;
+  border-radius: 5px;
+  font-weight: 700;
+  border: 2px #37BA99 outset;
+}
+
+.Nav-link-3:hover {
+  cursor: pointer;
+  color: #0000005b;
 }
