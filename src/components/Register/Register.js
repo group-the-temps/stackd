@@ -3,14 +3,22 @@ import {connect} from "react-redux";
 import {updateState, registerUser} from "../../redux/authReducer";
 import { Link, Redirect} from "react-router-dom";
 import "./Register.css";
+import Modal from "react-modal";
 
 class Register extends Component {
   constructor(){
     super()
     this.state = {
-      error: false
+      error: false,
+      showModal: true
     }
+    this.handleCloseModal = this.handleCloseModal.bind(this);
   }
+
+  handleCloseModal = () => {
+    this.setState({showModal: false})
+  }
+
   handleInput = e => {
     this.props.updateState({[e.target.name]: e.target.value}) 
 
@@ -18,25 +26,33 @@ class Register extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    this.props.registerUser(this.props.email, this.props.password, this.props.display_name, this.props.student_invite_code, this.props.admin_invite_code);
+    this.props.registerUser(this.props.email, this.props.password, this.props.display_name, this.props.student_invite_code, this.props.admin_invite_code)
+    .then(this.setState({showModal: false}))
+    .catch(err => console.log(err));
   }
 
   render() {
-    //  if (req.session.user_id) return <Redirect to="/" />
+
     return (
       <div className="Register-container">
-        <h1>Register</h1>
+        <Modal
+          isOpen={this.state.showModal}
+          className="register-modal"
+          >
+            <h1 className="register-header">Register</h1>
         <form className="Register-form">
-          <input onChange={this.handleInput} name="display_name" placeholder="display name" />
-          <input onChange={this.handleInput} name="email" placeholder="email" />
-          <input onChange={this.handleInput} name="password" placeholder="password" />
-          <input onChange={this.handleInput} name="student_invite_code" placeholder="student access code" />
-          <input onChange={this.handleInput} name="admin_invite_code" placeholder="admin access code" />
+          <input className="register-input" onChange={this.handleInput} name="display_name" placeholder="display name" />
+          <input className="register-input" onChange={this.handleInput} name="email" placeholder="email" />
+          <input className="register-input" onChange={this.handleInput} name="password" placeholder="password" />
+          <input className="register-input" onChange={this.handleInput} name="student_invite_code" placeholder="student access code" />
+          <input className="register-input" onChange={this.handleInput} name="admin_invite_code" placeholder="admin access code" />
         </form>
-        <button onClick={this.handleSubmit}>Register</button>
+        <button className="register-button" onClick={this.handleSubmit}>Register</button>
         <Link to="/login">
-          <p>log into existing account</p>
+          <p className="existing-account">log into existing account</p>
         </Link>
+        <button className="register-button" onClick={this.handleCloseModal}>Close</button>
+          </Modal>
       </div>
     );
   }
