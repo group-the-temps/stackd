@@ -5,6 +5,8 @@ import { Link, Redirect} from "react-router-dom";
 import "./Register.css";
 import Modal from "react-modal";
 
+Modal.setAppElement('#root');
+
 class Register extends Component {
   constructor(){
     super()

@@ -7,6 +7,8 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Modal from "react-modal";
 
+Modal.setAppElement('#root')
+
 class AskQuestion extends Component {
   state = {
     question_title: "",
