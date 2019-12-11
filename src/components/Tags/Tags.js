@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './Tags.css';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { handleCloseTags } from '../../redux/tagsReducer';
+import { handleCloseTags } from '../../redux/searchReducer';
 
 class Tags extends Component {
     constructor() {
@@ -16,7 +16,7 @@ class Tags extends Component {
     clickTag = async e => {
         await this.setState({searchTag: e.target.getAttribute('name')});
         axios.get(`/search/tags?tags=${this.state.searchTag}`).then(response => {
-            // console.log(response.data)
+            console.log(response)
             const { tagResults} = this.props;
             tagResults.push(response.data);
             this.props.handleCloseTags();
@@ -27,7 +27,6 @@ class Tags extends Component {
     }
 
     render() {
-        // console.log(this.props.tagResults)
         return (
             <div className='category-container'>
                 <div className='category'>
@@ -90,7 +89,7 @@ class Tags extends Component {
 
 const mapStateToProps = reduxState => {
     return {
-        tagResults: reduxState.tagsReducer.tagResults
+        tagResults: reduxState.searchReducer.tagResults
     }
 }
 

@@ -1,11 +1,11 @@
 import {createStore, combineReducers, applyMiddleware} from "redux";
 import promise from "redux-promise-middleware";
 import authReducer from "./authReducer";
-import tagsReducer from "./tagsReducer";
+import searchReducer from "./searchReducer";
 
 const root = combineReducers({
     authReducer,
-    tagsReducer
+    searchReducer
 })
 
 export default createStore(root, applyMiddleware(promise));

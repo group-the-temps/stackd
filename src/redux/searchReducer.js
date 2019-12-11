@@ -1,7 +1,7 @@
 
 const initialState = {
-    loading: false,
     tagResults: [],
+    searchResults: [],
     clickedTags: false
 }
 
@@ -28,7 +28,7 @@ export const handleCloseTags = () => {
     }
 }
 
-export default function tagsReducer(state=initialState, action) {
+export default function searchReducer(state=initialState, action) {
     const { payload, type } = action;
 
     switch(type) {
