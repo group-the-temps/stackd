@@ -30,7 +30,8 @@ searchTags = (req, res) => {
     const db = req.app.get('db');
     let { tags } = req.query;
 
-    // tags = '%' + tags + '%';
+    tags = '%' + tags + '%';
+    tags = `{${tags}}`;
     db.search.search_tags(tags).then(response => {
         if(response.length === 0) {
             res.status(404).json("No Results Found");

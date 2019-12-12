@@ -1,3 +1,3 @@
 SELECT * FROM questions
-WHERE tags = $1
-ORDER BY time_stamp ASC;
+WHERE tags LIKE ANY($1)
+ORDER BY total_vote_count DESC;

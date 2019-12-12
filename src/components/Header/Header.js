@@ -108,7 +108,7 @@ class Header extends Component {
   _handleKeyDown = e => {
     if (e.key === "Enter") {
       axios
-        .get(`/search/title?title=${this.state.searchInput}`)
+        .get(`/search/tags?tags=${this.state.searchInput}`)
         .then(response => {
           this.props.searchResults.push(response.data);
           console.log(this.props.searchResults[0]);
@@ -170,7 +170,7 @@ class Header extends Component {
             <img src={searchicon} alt="icon_img" />
             <input
               className="Search-input"
-              placeholder="Search..."
+              placeholder="Search a Topic..."
               type="text"
               onChange={this.handleSearch}
               onKeyDown={this._handleKeyDown}
