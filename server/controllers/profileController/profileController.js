@@ -35,10 +35,7 @@ editDisplayName = async (req, res) => {
 
     const displayName = await db.users.edit_user_display_name([display_name, user_id])
         req.session.user.display_name = displayName[0].display_name;
-        res.status(200).json(req.session.user)
-        .catch( () => {
-            res.status(500).json({error: "Could not edit display name."});
-        });
+        res.status(200).json(req.session.user);
 };
 
 editBio = async (req, res) => {
@@ -62,17 +59,26 @@ editCohort = async (req, res) => {
 editImg = async (req, res) => {
     const db = req.app.get("db");
     const {img} = req.body;
+    const {user_id} = req.params;
+
+    const image = await db.users.edit_user_img([img, user_id])
+        res.status(200).json(image)
+        // .catch( () => {
+        //     res.status(500).json({error: "Could not edit image."});
+        // });
+};
+
+getImg = async (req, res) => {
+    const db = req.app.get("db");
     const {user_id} = req.session.user;
 
-    const image = await db.users.edit_user_img(img, user_id)
-        res.status(200).json(image)
-        .catch( () => {
-            res.status(500).json({error: "Could not edit image."});
-        });
-};
+    const getImage = await db.users.get_user_image(user_id)
+    res.status(200).json(getImage);
+}
 
 module.exports = {
     getUserProfile,
+    getImg,
     editDisplayName,
     editBio,
     editImg,

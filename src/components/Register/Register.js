@@ -4,6 +4,7 @@ import {updateState, registerUser} from "../../redux/authReducer";
 import { Link, Redirect} from "react-router-dom";
 import "./Register.css";
 import Modal from "react-modal";
+import axios from 'axios';
 
 class Register extends Component {
   constructor(){
@@ -26,10 +27,24 @@ class Register extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
+    this.sendWelcomeEmail();
     this.props.registerUser(this.props.email, this.props.password, this.props.display_name, this.props.student_invite_code, this.props.admin_invite_code)
     .then(this.setState({showModal: false}))
     .catch(err => console.log(err));
   }
+
+  sendWelcomeEmail = () => {
+    const userName = this.props.display_name;
+    const userEmail = this.props.email;
+    axios({
+        method: "POST",
+        url: "http://localhost:3000/send",
+        data: {
+            userName,
+            userEmail
+        }
+    });
+};
 
   render() {
 
