@@ -6,6 +6,8 @@ import "./Register.css";
 import Modal from "react-modal";
 import axios from 'axios';
 
+Modal.setAppElement('#root');
+
 class Register extends Component {
   constructor(){
     super()

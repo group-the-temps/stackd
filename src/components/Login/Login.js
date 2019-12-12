@@ -5,6 +5,8 @@ import "./Login.css";
 import { connect } from "react-redux";
 import Modal from "react-modal";
 
+Modal.setAppElement('#root');
+
 class Login extends Component {
   constructor() {
     super();
