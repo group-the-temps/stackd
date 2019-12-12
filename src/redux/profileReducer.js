@@ -47,25 +47,32 @@ export function editDisplayName(display_name) {
 };
 
 export default function profileReducer(state = initialState, action) {
-    const {payload, type} = action;
-    switch(type) {
+    console.log(state.profile)
+    const { payload, type } = action;
+    switch (type) {
         case `${GET_PROFILE}_PENDING`:
-            return {...state, loading: true}
+            return { ...state, loading: true }
         case `${GET_PROFILE}_FULFILLED`:
             console.log(state.profile)
-            return {...state, loading: false, profile: payload.data}
+            return { ...state, loading: false, profile: payload.data }
         case `${EDIT_BIO}_PENDING`:
-            return {...state, loading: true}
+            return { ...state, loading: true }
         case `${EDIT_BIO}_FULFILLED`:
-            return {...state, loading: false, profile: payload.data}
+            let newBio = { ...state.profile }
+            newBio = payload.data
+            return { ...state, loading: false, profile: newBio }
         case `${EDIT_COHORT}_PENDING`:
-            return {...state, loading: true}
+            return { ...state, loading: true }
         case `${EDIT_COHORT}_FULFILLED`:
-            return {...state, loading: false, profile: payload.data}
+            let newCohort = { ...state.profile }
+            newCohort = payload.data
+            return { ...state, loading: false, profile: newCohort }
         case `${EDIT_NAME}_PENDING`:
-            return {...state, loading: true}
+            return { ...state, loading: true }
         case `${EDIT_NAME}_FULFILLED`:
-            return {...state, loading: false, profile: payload.data}
+            let newName = { ...state.profile }
+            newName = payload.data
+            return { ...state, loading: false, profile: newName }
         default:
             return state;
     }

@@ -80,6 +80,7 @@ const mapStateToProps = reduxState => {
     display_name: reduxState.authReducer.display_name,
     email: reduxState.authReducer.email,
     password: reduxState.authReducer.password,
+    img: reduxState.authReducer.img,
     student_invite_code:reduxState.authReducer.student_invite_code,
     admin_invite_code: reduxState.authReducer.admin_invite_code,
     user: reduxState.authReducer.user

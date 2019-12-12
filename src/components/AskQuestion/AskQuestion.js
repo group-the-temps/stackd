@@ -81,7 +81,7 @@ class AskQuestion extends Component {
     e.preventDefault();
     this.setState({ testing: this.state.question_desc });
     this.props.createQuestion(this.state);
-    this.setState({showModal: false});
+    // this.setState({showModal: false});
   };
 
   static modules = {

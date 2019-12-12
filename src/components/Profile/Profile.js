@@ -13,7 +13,10 @@ class Profile extends Component {
         editCohort: false,
         cohort: "",
         editName: false,
-        display_name: ""
+        display_name: "",
+        showProfileName: false,
+        showProfileBio: false,
+        showProfileCohort: false
     }
 
     componentDidMount() {
@@ -44,15 +47,19 @@ class Profile extends Component {
 
     handleEditBio = (e) => {
         e.preventDefault();
+        // console.log(this.props)
         this.props
         .editBio(this.state.bio)
         .then( () => {
             this.setState({
-                bio: "",
-                editBio: false
+                editBio: false,
+                showProfileBio: true
             })
             this.props.history.push("/profile");
             this.props.getProfile(this.props.user_id);
+            this.setState({
+                bio: this.props[0].bio,
+            })
         })
         .catch( () => {
             this.setState({
@@ -67,8 +74,9 @@ class Profile extends Component {
         .editDisplayName(this.state.display_name)
         .then( () => {
             this.setState({
-                display_name: "",
-                editName: false
+                display_name: this.props.profile.display_name,
+                editName: false,
+                showProfileName: true
             })
             this.props.history.push("/profile");
             this.props.getProfile(this.props.user_id);
@@ -86,11 +94,14 @@ class Profile extends Component {
         .editCohort(this.state.cohort)
         .then( () => {
             this.setState({
-                cohort: "",
+                showProfileCohort: true,
                 editCohort: false
             })
             this.props.history.push("/profile");
             this.props.getProfile(this.props.user_id);
+            this.setState({
+                cohort: this.props[0].cohort
+            })
         })
         .catch( () => {
             this.setState({
@@ -104,8 +115,11 @@ class Profile extends Component {
     }
 
     render() {
-        console.log(this.props.profile)
-        const {display_name, bio, cohort} = this.props.profile;
+        console.log(this.state.display_name)
+        console.log(this.state)
+        // console.log(this.props.user)
+        // console.log(this.props.profile)
+        const {display_name, bio, cohort} = this.props.user;
         return (
             <main className="page__container">
                 <div className="profile__container">
@@ -117,7 +131,7 @@ class Profile extends Component {
                     </div>
                     <div className="right__innerCont">
                         <section className="name__bio__section">
-                            <label className="profile__name">{display_name}</label>
+                            {!this.state.showProfileName ? <label className="profile__name">{display_name}</label> : <label className="profile__name">{this.state.display_name}</label>}
                             <button className="edit__name__btn" onClick={this.handleOpenName}>
                                 <i className="fas fa-edit fa-1x"></i>
                             </button>
@@ -129,7 +143,7 @@ class Profile extends Component {
                                     </>
                                 ) : null}
                             <div className="bio_container">
-                                <label className="profile__bio">{bio}</label>
+                                {!this.state.showProfileBio ? <label className="profile__bio">{bio}</label> : <label className="profile__bio">{this.state.bio}</label>}
                                 <button className="edit__bio__btn" onClick={this.handleOpenBio}>
                                     <i className="fas fa-edit fa-1x"></i>
                                 </button>
@@ -146,9 +160,9 @@ class Profile extends Component {
                         <section className="extra__info__section">
                             <label>answers</label>
                             <label>questions</label>
-                            <label>Cohort: {cohort}</label>
+                            {!this.state.showProfileCohort ? <label>Cohort: {cohort}</label> : <label>Cohort: {this.state.cohort}</label>}
                             <button className="edit__cohort__btn" onClick={this.handleOpenCohort}>
-                                <i class="fas fa-edit fa-1x"></i>
+                                <i className="fas fa-edit fa-1x"></i>
                             </button>
                             {this.state.editCohort ? 
                                 (
@@ -170,6 +184,7 @@ const mapStateToProps = reduxState => {
     return {
         profile: reduxState.profileReducer.profile,
         id: reduxState.profileReducer.profile.user_id,
+        user: reduxState.authReducer.user,
         user_id: reduxState.authReducer.user.user_id
     }
 }
