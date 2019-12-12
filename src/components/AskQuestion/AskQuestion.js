@@ -57,7 +57,7 @@ Font.whitelist = [
 ];
 Quill.register(Font, true);
 
-Modal.setAppElement('#root')
+Modal.setAppElement("#root");
 
 class AskQuestion extends Component {
   state = {
@@ -65,6 +65,7 @@ class AskQuestion extends Component {
     question_desc: "",
     tags: "",
     testing: "",
+    time_stamp: "",
     showModal: true
   };
 
@@ -81,7 +82,7 @@ class AskQuestion extends Component {
     e.preventDefault();
     this.setState({ testing: this.state.question_desc });
     this.props.createQuestion(this.state);
-    this.setState({showModal: false});
+    this.setState({ showModal: false });
   };
 
   static modules = {
@@ -151,7 +152,7 @@ class AskQuestion extends Component {
               <div className="AskQuestion-submit">
                 <button onClick={this.handleSubmit}>Submit</button>
               </div>
-              <div>
+              <div className="Markdown-render-test">
                 <h1>REVIEW/TESTING (delete later)</h1>
                 <ReactMarkdown source={this.state.testing} escapeHtml={false} />
               </div>
