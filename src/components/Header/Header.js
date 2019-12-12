@@ -15,8 +15,73 @@ class Header extends Component {
     super(props);
     this.state = {
       error: false,
-      searchInput: ""
+      searchInput: "",
+      toggleJS: false,
+      toggleCSS: false,
+      toggleReact: false,
+      toggleNode: false,
+      toggleSQL: false
     };
+  }
+
+  handleJS = () => {
+    if (this.state.toggleJS === false) {
+      this.setState({ toggleJS: true });
+      this.setState({ toggleCSS: false });
+      this.setState({ toggleReact: false });
+      this.setState({ toggleNode: false });
+      this.setState({ toggleSQL: false });
+    } else {
+      this.setState({ toggleJS: false });
+    }
+  }
+
+  handleCSS = () => {
+    if (this.state.toggleCSS === false) {
+      this.setState({ toggleCSS: true });
+      this.setState({ toggleJS: false });
+      this.setState({ toggleReact: false });
+      this.setState({ toggleNode: false });
+      this.setState({ toggleSQL: false });
+    } else {
+      this.setState({ toggleCSS: false });
+    }
+  }
+
+  handleReact = () => {
+    if (this.state.toggleReact === false) {
+      this.setState({ toggleReact: true });
+      this.setState({ toggleJS: false });
+      this.setState({ toggleCSS: false });
+      this.setState({ toggleNode: false });
+      this.setState({ toggleSQL: false });
+    } else {
+      this.setState({ toggleReact: false });
+    }
+  }
+
+  handleNode = () => {
+    if (this.state.toggleNode === false) {
+      this.setState({ toggleNode: true });
+      this.setState({ toggleReact: false });
+      this.setState({ toggleJS: false });
+      this.setState({ toggleCSS: false });
+      this.setState({ toggleSQL: false });
+    } else {
+      this.setState({ toggleNode: false });
+    }
+  }
+
+  handleSQL = () => {
+    if (this.state.toggleSQL === false) {
+      this.setState({ toggleSQL: true });
+      this.setState({ toggleReact: false });
+      this.setState({ toggleJS: false });
+      this.setState({ toggleCSS: false });
+      this.setState({ toggleNode: false });
+    } else {
+      this.setState({ toggleSQL: false });
+    }
   }
 
   handleTagDropdown = () => {
@@ -24,6 +89,11 @@ class Header extends Component {
       this.props.handleOpenTags();
     } else {
       this.props.handleCloseTags();
+      this.setState({ toggleSQL: false });
+      this.setState({ toggleReact: false });
+      this.setState({ toggleJS: false });
+      this.setState({ toggleCSS: false });
+      this.setState({ toggleNode: false });
     }
   };
 
@@ -51,15 +121,37 @@ class Header extends Component {
   routeLogin = () => {
     this.props.history.push("/login");
     this.props.handleCloseTags();
+    this.setState({ toggleSQL: false });
+    this.setState({ toggleReact: false });
+    this.setState({ toggleJS: false });
+    this.setState({ toggleCSS: false });
+    this.setState({ toggleNode: false });
   };
 
   logout = async () => {
     await this.props.logoutUser();
     this.props.history.push("/");
+    this.setState({ toggleSQL: false });
+    this.setState({ toggleReact: false });
+    this.setState({ toggleJS: false });
+    this.setState({ toggleCSS: false });
+    this.setState({ toggleNode: false });
   };
 
   render() {
-    console.log(this.state.searchInput);
+    let {toggleJS, toggleCSS, toggleNode, toggleReact, toggleSQL} = this.state;
+
+    let tagsLoggedOut = "tags-container"
+    if (this.props.user.user_id) {
+        tagsLoggedOut += "-loggedin"
+    }
+
+    let navLoggedOut = "nav-actions-container"
+    if (this.props.user.user_id) {
+        navLoggedOut += "-loggedin"
+    }
+
+    console.log(this.props.clickedTags)
     return (
       <div className="Nav-bar-container">
         <div className="Logo-container">
@@ -78,51 +170,76 @@ class Header extends Component {
               onKeyDown={this._handleKeyDown}
             />
           </div>
-          {this.props.clickedTags === false ? (
-            <h3
-              className="tags-dropdown-button"
-              onClick={this.handleTagDropdown}
-            >
-              Search By Topic
-            </h3>
-          ) : (
-            <h3
-              className="tags-dropdown-button"
-              onClick={this.handleTagDropdown}
-            >
-              Search By Topic
-            </h3>
-          )}
           {this.props.clickedTags === true ? (
             <Tween
-              from={{ y: "-50px" }}
-              to={{ y: "10px", ease: "Bounce.easeOut" }}
+              to={{ y: "10px" }}
             >
-              <div className="tags-container">
-                <Tags clickedTags={this.state.clickedTags} />
-              </div>
+                <div className={tagsLoggedOut}>
+                  {this.state.toggleJS ? <h3 className='topic-selector' onClick={this.handleJS}>JavaScript -</h3> : <h3 className='topic-selector' onClick={this.handleJS}>JavaScript +</h3>}
+                  {this.state.toggleReact ? <h3 className='topic-selector' onClick={this.handleReact}>React -</h3> : <h3 className='topic-selector' onClick={this.handleReact}>React +</h3>}
+                  {this.state.toggleNode ? <h3 className='topic-selector' onClick={this.handleNode}>Node -</h3> : <h3 className='topic-selector' onClick={this.handleNode}>Node +</h3>}
+                  {this.state.toggleCSS ? <h3 className='topic-selector' onClick={this.handleCSS}>HTML/CSS -</h3> : <h3 className='topic-selector' onClick={this.handleCSS}>HTML/CSS +</h3>}
+                  {this.state.toggleSQL ? <h3 className='topic-selector' onClick={this.handleSQL}>SQL -</h3> : <h3 className='topic-selector' onClick={this.handleSQL}>SQL +</h3>}
+                </div>
+              <Tags 
+              toggleJS={toggleJS} 
+              toggleCSS={toggleCSS} 
+              toggleReact={toggleReact}
+              toggleNode={toggleNode}
+              toggleSQL={toggleSQL}
+              />
             </Tween>
           ) : null}
           {this.props.user[0] || this.props.user.user_id ? (
-            <>
-              {/* <Link to="/askquestion"> */}
-                <li className="Nav-link-1" onClick={() => {
-                  this.props.history.push('/askquestion');
-                  this.props.handleCloseTags();
-                }}>Ask Question</li>
-              {/* </Link> */}
+            <div className={navLoggedOut}>
+              {this.props.clickedTags ?
+              <h3
+                className="tags-dropdown-button"
+                onClick={this.handleTagDropdown}
+              >
+                Topics -
+              </h3>
+            :
+              <h3
+                className="tags-dropdown-button"
+                onClick={this.handleTagDropdown}
+              >
+                Topics +
+              </h3>
+            }
+              <li className="Nav-link-1" onClick={() => {
+                this.props.history.push('/askquestion');
+                this.props.handleCloseTags();
+              }}>Ask Question</li>
               <li onClick={() => {
                 this.logout()
                 this.props.handleCloseTags()
-                }} className="Nav-link-2">
+              }} className="Nav-link-2">
                 Logout
               </li>
-            </>
+            </div>
           ) : (
-            <li className="Nav-link-3" onClick={this.routeLogin}>
-              Login
+              <div className={navLoggedOut}>
+                {this.props.clickedTags ? 
+                  <h3
+                    className="tags-dropdown-button"
+                    onClick={this.handleTagDropdown}
+                  >
+                    Topics -
+                </h3>
+                :
+                <h3
+                    className="tags-dropdown-button"
+                    onClick={this.handleTagDropdown}
+                  >
+                    Topics +
+                </h3>
+                }
+                <li className="Nav-link-3" onClick={this.routeLogin}>
+                  Login
             </li>
-          )}
+              </div>
+            )}
         </div>
       </div>
     );
