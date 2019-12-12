@@ -3,6 +3,7 @@ const express = require('express');
 const massive = require('massive');
 const session = require('express-session');
 var nodemailer = require('nodemailer');
+const companyMail = require('./nodemailerCredentials/nodemailerCredentials');
 
 const app = express();
 
@@ -49,11 +50,12 @@ app.get('/search/tags', SC.searchTags);
 app.post('/question/create', QC.createQuestion);
 
 //Profile
-app.get('/prof/all/:id', PC.getUserProfile);
+app.get('/prof/all/:user_id', PC.getUserProfile);
+app.get('/prof/img', PC.getImg);
 app.put('/prof/displayname', PC.editDisplayName);
 app.put('/prof/bio', PC.editBio);
 app.put('/prof/cohort', PC.editCohort);
-app.put('/prof/img', PC.editImg);
+app.put('/prof/img/:user_id', PC.editImg);
 
 //Nodemailer
 app.use((request, response, next) => {
@@ -62,17 +64,17 @@ app.use((request, response, next) => {
     next();
   });
 
-var vehicle = {
+var transport = {
     service: "Gmail",
     host: "smtp.gmail.com",
     port: 587,
     auth: {
-        user: "",
-        pass: "",
+        user: companyMail.USER,
+        pass: companyMail.PASS,
     }
 };
 
-var transporter = nodemailer.createTransport(vehicle);
+var transporter = nodemailer.createTransport(transport);
 transporter.verify((error, success) => {
     if (error) {
         console.log(error);
@@ -82,13 +84,13 @@ transporter.verify((error, success) => {
 });
 
 app.post("/send", (req, res, next) => {
-    var name = req.body.name;
-    var email = req.body.email;
+    var userName = req.body.userName;
+    var userEmail = req.body.userEmail;
     var mail = {
-        from: "", // sender address
-        to: email, // list of receivers
-        subject: "", // Subject line
-        text: `Welcome ${name}!`// plain text body
+        from: companyMail.USER, // sender address
+        to: userEmail, // list of receivers
+        subject: "Welcome Devs!", // Subject line
+        text: `We want to thank you for creating an account with us ${userName}! If you have any feedback for us, keep it to yourself, cause we're purfect.`// plain text body
       };
 
 transporter.sendMail(mail, (error, data) => {
