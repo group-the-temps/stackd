@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {getProfile, editBio, editDisplayName, editCohort} from '../../redux/profileReducer';
+import ProfileImage from './ProfileImage';
 import './Profile.css';
 
 class Profile extends Component {
@@ -103,14 +104,14 @@ class Profile extends Component {
     }
 
     render() {
-        console.log(this.props.user_id)
-        const {display_name, img, bio, cohort} = this.props.profile;
+        console.log(this.props.profile)
+        const {display_name, bio, cohort} = this.props.profile;
         return (
             <main className="page__container">
                 <div className="profile__container">
                     <div className="left__innerCont">
                         <section className="img__section">
-                            <div>img{img}</div>
+                            <ProfileImage user_id={this.props.user_id} />
                             <label>{`166 CRUDability`}</label>
                         </section>
                     </div>

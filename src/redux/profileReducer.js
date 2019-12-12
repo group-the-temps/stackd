@@ -53,7 +53,6 @@ export default function profileReducer(state = initialState, action) {
             return {...state, loading: true}
         case `${GET_PROFILE}_FULFILLED`:
             console.log(state.profile)
-            console.log(initialState.profile)
             return {...state, loading: false, profile: payload.data}
         case `${EDIT_BIO}_PENDING`:
             return {...state, loading: true}
