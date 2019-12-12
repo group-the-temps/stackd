@@ -69,6 +69,10 @@ class AskQuestion extends Component {
     showModal: true
   };
 
+  handleTagChange = e => {
+    this.setState({ tags: e.target.value.toLowerCase() })
+  }
+
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
     console.log(e);
@@ -146,7 +150,7 @@ class AskQuestion extends Component {
                 <input
                   name="tags"
                   placeholder="e.g. variables"
-                  onChange={this.handleChange}
+                  onChange={this.handleTagChange}
                 />
               </div>
               <div className="AskQuestion-submit">

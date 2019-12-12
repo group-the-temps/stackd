@@ -15,7 +15,7 @@ class Tags extends Component {
     }
 
     clickTag = async e => {
-        await this.setState({ searchTag: e.target.getAttribute('name') });
+        await this.setState({ searchTag: e.target.getAttribute('name').toLowerCase() });
         this.props.tagResults.splice(0);
         axios.get(`/search/tags?tags=${this.state.searchTag}`).then(response => {
             const { tagResults } = this.props;
@@ -41,15 +41,15 @@ class Tags extends Component {
                     <Tween to={{ y: '75px' }}>
                         <div className={notLoggedIn}>
                             <ul>
-                                <li className='topic' name='JavaScript 1' onClick={this.clickTag}>JavaScript 1</li>
-                                <li className='topic' name='JavaScript 2' onClick={this.clickTag}>JavaScript 2</li>
-                                <li className='topic' name='JavaScript 3' onClick={this.clickTag}>JavaScript 3</li>
-                                <li className='topic' name='JavaScript 4' onClick={this.clickTag}>JavaScript 4</li>
-                                <li className='topic' name='JavaScript 5' onClick={this.clickTag}>JavaScript 5</li>
-                                <li className='topic' name='JavaScript 6' onClick={this.clickTag}>JavaScript 6</li>
-                                <li className='topic' name='JavaScript 7' onClick={this.clickTag}>JavaScript 7</li>
-                                <li className='topic' name='Vanilla JS 1' onClick={this.clickTag}>Vanilla JS 1</li>
-                                <li className='topic' name='Vanilla JS 2' onClick={this.clickTag}>Vanilla JS 2</li>
+                                <li className='topic' name='javascript 1' onClick={this.clickTag}>JavaScript 1</li>
+                                <li className='topic' name='javascript 2' onClick={this.clickTag}>JavaScript 2</li>
+                                <li className='topic' name='javascript 3' onClick={this.clickTag}>JavaScript 3</li>
+                                <li className='topic' name='javascript 4' onClick={this.clickTag}>JavaScript 4</li>
+                                <li className='topic' name='javascript 5' onClick={this.clickTag}>JavaScript 5</li>
+                                <li className='topic' name='javascript 6' onClick={this.clickTag}>JavaScript 6</li>
+                                <li className='topic' name='javascript 7' onClick={this.clickTag}>JavaScript 7</li>
+                                <li className='topic' name='vanilla js 1' onClick={this.clickTag}>Vanilla JS 1</li>
+                                <li className='topic' name='vanilla js 2' onClick={this.clickTag}>Vanilla JS 2</li>
                             </ul>
                         </div>
                     </Tween>
@@ -57,10 +57,10 @@ class Tags extends Component {
                     <Tween to={{ y: '130px' }}>
                         <div className={notLoggedIn}>
                             <ul>
-                                <li className='topic' name='React 1' onClick={this.clickTag}>React 1</li>
-                                <li className='topic' name='React 2' onClick={this.clickTag}>React 2</li>
-                                <li className='topic' name='React 3' onClick={this.clickTag}>React 3</li>
-                                <li className='topic' name='React 4' onClick={this.clickTag}>React 4</li>
+                                <li className='topic' name='react 1' onClick={this.clickTag}>React 1</li>
+                                <li className='topic' name='react 2' onClick={this.clickTag}>React 2</li>
+                                <li className='topic' name='react 3' onClick={this.clickTag}>React 3</li>
+                                <li className='topic' name='react 4' onClick={this.clickTag}>React 4</li>
                                 <li className='topic' name='React 5' onClick={this.clickTag}>React 5</li>
                                 <li className='topic' name='React 6' onClick={this.clickTag}>React 6</li>
                                 <li className='topic' name='React 7' onClick={this.clickTag}>React 7</li>
