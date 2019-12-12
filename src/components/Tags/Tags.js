@@ -76,7 +76,8 @@ class Tags extends Component {
                                 <li className='topic' name='Node 1' onClick={this.clickTag}>Node 1</li>
                                 <li className='topic' name='Node 2' onClick={this.clickTag}>Node 2</li>
                                 <li className='topic' name='Node 3' onClick={this.clickTag}>Node 3</li>
-                                <li className='topic' name='Node 4' onClick={this.clickTag}>Node 4</li>                                        <li className='topic' name='Node 5' onClick={this.clickTag}>Node 5</li>
+                                <li className='topic' name='Node 4' onClick={this.clickTag}>Node 4</li>   
+                                <li className='topic' name='Node 5' onClick={this.clickTag}>Node 5</li>
                             </ul>
                         </div>
                     </Tween>
