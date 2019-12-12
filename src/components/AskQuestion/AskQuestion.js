@@ -57,6 +57,8 @@ Font.whitelist = [
 ];
 Quill.register(Font, true);
 
+Modal.setAppElement('#root')
+
 class AskQuestion extends Component {
   state = {
     question_title: "",
@@ -79,6 +81,7 @@ class AskQuestion extends Component {
     e.preventDefault();
     this.setState({ testing: this.state.question_desc });
     this.props.createQuestion(this.state);
+    this.setState({showModal: false});
   };
 
   static modules = {
