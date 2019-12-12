@@ -5,6 +5,7 @@ import searchicon from "../../search_icon.png";
 import { connect } from "react-redux";
 import { logoutUser } from "../../redux/authReducer";
 import { handleOpenTags, handleCloseTags } from "../../redux/searchReducer";
+import { getProfile } from '../../redux/profileReducer';
 import Tags from "../Tags/Tags";
 import { Tween } from "react-gsap";
 import stackd_logo from "../../stackd_logo.png";
@@ -138,6 +139,11 @@ class Header extends Component {
     this.setState({ toggleNode: false });
   };
 
+  viewMyProfile = async () => {
+    await this.props.getProfile(this.props.user.user_id);
+    this.props.history.push('/profile');
+  }
+
   render() {
     let {toggleJS, toggleCSS, toggleNode, toggleReact, toggleSQL} = this.state;
 
@@ -211,6 +217,9 @@ class Header extends Component {
                 this.props.history.push('/askquestion');
                 this.props.handleCloseTags();
               }}>Ask Question</li>
+
+              <li className="Nav-link-1" onClick={this.viewMyProfile}>Profile</li>
+
               <li onClick={() => {
                 this.logout()
                 this.props.handleCloseTags()
@@ -255,7 +264,7 @@ const mapStateToProps = reduxState => {
 };
 
 export default withRouter(
-  connect(mapStateToProps, { logoutUser, handleOpenTags, handleCloseTags })(
+  connect(mapStateToProps, { logoutUser, handleOpenTags, handleCloseTags, getProfile })(
     Header
   )
 );
