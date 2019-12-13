@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {connect} from "react-redux";
 import {updateState, registerUser} from "../../redux/authReducer";
-import { Link, Redirect} from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Register.css";
 import Modal from "react-modal";
 import axios from 'axios';
