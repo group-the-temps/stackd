@@ -47,7 +47,11 @@ app.get('/search/desc', SC.searchDesc);
 app.get('/search/tags', SC.searchTags);
 
 //Questions
+app.get('/question/all', QC.getAllQuestions);
+app.get('/question/selected/:question_id', QC.viewSelectedQuestion);
+app.get('/question/selected/answers/:question_id', QC.getSelectedAnswers);
 app.post('/question/create', QC.createQuestion);
+app.post('/question/create/answer/:question_id', QC.createAnswer);
 
 //Profile
 app.get('/prof/all/:user_id', PC.getUserProfile);
