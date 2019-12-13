@@ -15,7 +15,7 @@ total_questions INT,
 total_answers INT,
 total_upvotes INT,
 total_downvotes INT
-)
+);
 
 CREATE TABLE questions
 (
@@ -28,5 +28,13 @@ up_vote_count INT NOT null,
 down_vote_count INT NOT null,
 total_vote_count INT NOT null,
 time_stamp TEXT NOT null
-)
+);
+
+CREATE TABLE answers
+(
+answer_id SERIAL PRIMARY KEY,
+question_id INT REFERENCES questions(question_id),
+user_id INT REFERENCES users(user_id),
+answer_desc TEXT NOT null,
+time_stamp TEXT NOT null
 );
