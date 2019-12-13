@@ -39,4 +39,5 @@
 .topic:hover {
     cursor: pointer;
     color: black;
+    background: red;
 }

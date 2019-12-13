@@ -63,7 +63,7 @@ class Tags extends Component {
                                 name='JavaScript 7, Work on What you have not turned in'
                                  onClick={this.clickTag}>JavaScript 7</li>
                                 <li className='topic' 
-                                name='Vanilla JS 1, Event Listeners, The DOM, The Virtual DOM' 
+                                name='Vanilla JS, Event Listeners, The DOM, The Virtual DOM' 
                                 onClick={this.clickTag}>Vanilla JS</li>
                                 <li className='topic' 
                                 name='Testing, Unit Test, Component Test, unmountComponentAtNode, createElement, expect, toBe, Simulate.click, Simulate.change' 
