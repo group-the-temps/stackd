@@ -147,3 +147,31 @@
   font-size: 14px;
   color: #313d3f;
 }
+
+.Landing-contactus-header {
+  padding-top: 18px;
+  padding-bottom: 5px;
+  background: #313d3f;
+}
+
+.Landing-contactus-header h3 {
+  font-size: 22px;
+  color: white;
+  font-weight: bold;
+  padding-bottom: 5px;
+}
+
+.Landing-contactus-container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  background: #313d3f;
+  height: 600px;
+}
+
+.Landing-contactus-form {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
