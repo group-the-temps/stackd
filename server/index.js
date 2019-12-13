@@ -106,6 +106,33 @@ transporter.sendMail(mail, (error, data) => {
   });
 });
 
+app.post("/send/to/us", (req, res, next) => {
+    var senderName = req.body.senderName;
+    var senderEmail = req.body.senderEmail;
+    var senderMessage = req.body.senderMessage;
+    var totalMessage = `Hey Mountaineer, it looks like ${senderName} has sent you a message!
+    \n Message: ${senderMessage}. \n If you would like to respond to this message, please contact the following email: ${senderEmail}`;
+  
+    var mail = {
+      from: senderName,
+      to: companyMail.USER,
+      subject: "You've got mail!",
+      text: totalMessage
+    };
+  
+    transporter.sendMail(mail, (err, data) => {
+      if (err) {
+        res.json({
+          msg: "fail"
+        });
+      } else {
+        res.json({
+          msg: "success"
+        });
+      }
+    });
+  });
+
 
 app.listen(SERVER_PORT, () => {
     console.log(`Listening on Port: ${SERVER_PORT}`);

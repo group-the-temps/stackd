@@ -126,15 +126,34 @@ class Profile extends Component {
                     <div className="left__innerCont">
                         <section className="img__section">
                             <ProfileImage user_id={this.props.user_id} />
+                            <div className="cohort__cont">
+                                {!this.state.showProfileCohort ? <label>Cohort: DM{cohort}</label> : <label>Cohort: DM{this.state.cohort}</label>}
+                                <div className="cohort__edit">
+                                    <button className="edit__cohort__btn" onClick={this.handleOpenCohort}>
+                                        <i className="fas fa-edit fa-1x"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            {this.state.editCohort ? 
+                                (
+                                <>
+                                    <input name="cohort" placeholder="26." onChange={this.handleChange} />
+                                    <input className="save__changes__btn" type="button" value="Save Changes" onClick={this.handleEditCohort} />
+                                </>
+                                ) : null}
                             <label>{`166 CRUDability`}</label>
                         </section>
                     </div>
                     <div className="right__innerCont">
                         <section className="name__bio__section">
-                            {!this.state.showProfileName ? <label className="profile__name">{display_name}</label> : <label className="profile__name">{this.state.display_name}</label>}
-                            <button className="edit__name__btn" onClick={this.handleOpenName}>
-                                <i className="fas fa-edit fa-1x"></i>
-                            </button>
+                            <div className="cont">
+                            <section className="name__container">
+                                {!this.state.showProfileName ? <label className="profile__name">{display_name}</label> : <label className="profile__name">{this.state.display_name}</label>}
+                            </section>
+                                <button className="edit__name__btn" onClick={this.handleOpenName}>
+                                    <i className="fas fa-edit fa-1x"></i>
+                                </button>
+                            </div>
                             {this.state.editName ?
                                 (
                                     <>
@@ -142,8 +161,11 @@ class Profile extends Component {
                                         <input className="save__changes__btn" type="button" value="Save Changes" onClick={this.handleEditName} />
                                     </>
                                 ) : null}
-                            <div className="bio_container">
-                                {!this.state.showProfileBio ? <label className="profile__bio">{bio}</label> : <label className="profile__bio">{this.state.bio}</label>}
+                            <div className="cont">
+                            <section className="bio__container">
+                                <h2 className="bio__header">About Me:</h2>
+                                {!this.state.showProfileBio ? <p className="profile__bio">{bio}</p> : <p className="profile__bio">{this.state.bio}</p>}
+                            </section>
                                 <button className="edit__bio__btn" onClick={this.handleOpenBio}>
                                     <i className="fas fa-edit fa-1x"></i>
                                 </button>
@@ -157,24 +179,16 @@ class Profile extends Component {
                                 ) : null}
 
                         </section>
-                        <section className="extra__info__section">
-                            <label>answers</label>
-                            <label>questions</label>
-                            {!this.state.showProfileCohort ? <label>Cohort: {cohort}</label> : <label>Cohort: {this.state.cohort}</label>}
-                            <button className="edit__cohort__btn" onClick={this.handleOpenCohort}>
-                                <i className="fas fa-edit fa-1x"></i>
-                            </button>
-                            {this.state.editCohort ? 
-                                (
-                                <>
-                                    <input name="cohort" placeholder="DM 26 Rules All." onChange={this.handleChange} />
-                                    <input className="save__changes__btn" type="button" value="Save Changes" onClick={this.handleEditCohort} />
-                                </>
-                                ) : null}
-
-                        </section>
                     </div>
                 </div>
+                        <section className="extra__info__section">
+                            <div className="profile__questions">
+                                <label>Asked Questions List</label>
+                            </div>
+                            <div className="profile__questions">
+                                <label>Saved Questions List</label>
+                            </div>
+                        </section>
             </main>
         )
     }

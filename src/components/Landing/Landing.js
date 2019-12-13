@@ -8,6 +8,7 @@ import James from "../../icons and pics/james profile.jpg";
 import DevMountain from "../../icons and pics/devmountain logo.png";
 import LevelUp from "../../icons and pics/level up.png";
 import Ask from "../../icons and pics/ask.png";
+import ContactUs from "../ContactUs/ContactUs";
 
 export default class Landing extends Component {
   render() {
@@ -105,6 +106,14 @@ export default class Landing extends Component {
                 of each person
               </h6>
             </div>
+          </div>
+          <div>
+            <div className="Landing-contactus-header">
+              <h3>Contact Us</h3>
+            </div>
+            <section className="Landing-contactus-container">
+              <ContactUs className="Landing-contactus-form" />
+            </section>
           </div>
         </div>
       </>
