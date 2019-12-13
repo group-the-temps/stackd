@@ -1,43 +1,43 @@
 .category-loggedin {
-    border: 2px black solid;
-    box-shadow: 5px 5px 5px -5px rgb(0, 0, 0, 0.56);
-    border-radius: 4px;
-    width: 150px;
-    background: #313d3f;
-    z-index: 1;
-    position: absolute;
-    right: 25.9%;
+  border: 2px black solid;
+  box-shadow: 5px 5px 5px -5px rgb(0, 0, 0, 0.56);
+  border-radius: 4px;
+  width: 150px;
+  background: #313d3f;
+  z-index: 1;
+  position: absolute;
+  right: 36.9%;
 }
 
 .category {
-    border: 2px black solid;
-    box-shadow: 5px 5px 5px -5px rgb(0, 0, 0, 0.56);
-    border-radius: 4px;
-    width: 150px;
-    background: #313d3f;
-    z-index: 1;
-    position: absolute;
-    right: 17.9%;
+  border: 2px black solid;
+  box-shadow: 5px 5px 5px -5px rgb(0, 0, 0, 0.56);
+  border-radius: 4px;
+  width: 150px;
+  background: #313d3f;
+  z-index: 1;
+  position: absolute;
+  right: 17.9%;
 }
 
 .category-title {
-    font-size: 1.3em;
-    font-weight: 650;
-    margin-top: 15px;
-    margin-bottom: 10px;
-    text-shadow: 5px 5px 5px -5px black;
-    color: black;
+  font-size: 1.3em;
+  font-weight: 650;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  text-shadow: 5px 5px 5px -5px black;
+  color: black;
 }
 
 .topic {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    color: white;
-    font-weight: 600;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: white;
+  font-weight: 600;
 }
 
 .topic:hover {
-    cursor: pointer;
-    color: black;
-    background: red;
+  cursor: pointer;
+  color: black;
+  background: white;
 }
