@@ -1,27 +1,49 @@
 .Nav-bar-container {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-  height: 100px;
+  justify-content: space-between;
+  /* align-items: center; */
+  height: 160px;
   background: transparent;
 }
 
+.Logo-search-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-top: 5px;
+  /* justify-content: space-evenly; */
+  /* width: 20vw; */
+}
 .Logo-container {
-  width: 20vw;
+  /* width: 20vw; */
+  margin: 11px 0px 10px 42px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .Logo-container img {
   width: 200px;
 }
 
+.Logo-container h6 {
+  margin-left: 20px;
+  font-weight: bold;
+  font-style: italic;
+  font-size: 13px;
+}
+
 .Search-container {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  position: absolute;
+  left: 39%;
+  top: 10%;
+  /* justify-content: center; */
   align-items: center;
   justify-content: space-between;
-  width: 80vw;
+  /* width: 60vw; */
   z-index: 1;
 }
 
@@ -51,21 +73,28 @@
   border: none;
   width: 90%;
   margin-left: 5px;
+  outline: none;
 }
 
 .Nav-links-container {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  width: 20vw;
+  margin: 20px 20px 0px 0px;
+  border: 1px solid;
+  height: 40px;
+  /* width: 20vw; */
 }
 
 .nav-actions-container-loggedin {
   position: absolute;
-  left: 74.1%;
-  height: 48px;
+  left: 70.5%;
+  height: 23px;
+  width: 126px;
+  top: 111%;
+  font-size: 12px;
   /* width: 400px; */
-  background: #313D3F;
+  background: #313d3f;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -76,14 +105,16 @@
 
 .nav-actions-container {
   position: absolute;
-  left: 81.99%;
-  height: 48px;
-  /* width: 400px; */
-  background: #313D3F;
+  left: 70.5%;
+  top: 111%;
+  height: 23px;
+  width: 126px;
+  font-size: 12px;
+  background: #313d3f;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  border: 2px black solid;
+  border: 1px black solid;
   border-radius: 4px;
   box-shadow: 5px 5px 5px -5px rgb(0, 0, 0, 0.56);
 }
@@ -91,18 +122,21 @@
 .tags-dropdown-button {
   color: white;
   font-weight: 700;
-  padding: 0px 15px 0px 15px;
+  width: 115px;
+  border-radius: 4px;
+  padding: 5px 5px 4px 4px;
 }
 
 .tags-dropdown-button:hover {
   cursor: pointer;
   color: black;
+  background: white;
 }
 
 .tags-container-loggedin {
   position: absolute;
   top: 64px;
-  left: 74.1%;
+  left: 63.1%;
   height: 300px;
   width: 120px;
   z-index: 1;
@@ -138,42 +172,54 @@
 .Nav-link-1 {
   color: white;
   font-weight: 700;
-  padding: 0px 15px 0px 15px;
+  width: 102px;
+  font-size: 14px;
+  padding: 14px 32px 12px 32px;
+  background: #313d3f;
 }
 
 .Nav-link-1:hover {
   cursor: pointer;
   color: black;
+  background: white;
 }
 
 .Nav-link-2 {
   color: white;
   font-weight: 700;
-  padding: 0px 15px 0px 15px;
+  font-size: 14px;
+  padding: 14px 32px 12px 32px;
+  background: #313d3f;
 }
 
 .Nav-link-2:hover {
   cursor: pointer;
   color: black;
+  background: white;
 }
 
 .Nav-link-3 {
   color: white;
   font-weight: 700;
-  padding: 0px 15px 0px 45px;
+  font-size: 14px;
+  padding: 14px 32px 12px 32px;
+  background: #313d3f;
 }
 
 .Nav-link-3:hover {
   cursor: pointer;
   color: black;
+  background: white;
 }
 
 .topic-selector {
   color: white;
   font-weight: 700;
+  width: 100%;
 }
 
 .topic-selector:hover {
   cursor: pointer;
   color: black;
+  background: white;
 }
