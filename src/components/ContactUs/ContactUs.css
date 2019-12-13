@@ -1,0 +1,94 @@
+.main__container {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    min-height: 400px;
+    margin: 5px;
+}
+
+.contact__container {
+    width: 50%;
+    height: 480px;
+    display: flex;
+    justify-content: center;
+    /* flex-direction: column; */
+    align-items: center;
+    /* padding: 15%; */
+    /* border: 1px solid black; */
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.contact__inner__container1 {
+    width: 100px;
+    height: 400px;
+    margin-bottom: 100px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+    /* padding: 15%; */
+    /* border: 1px solid black; */
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.contact__inner__container2 {
+    width: 50%;
+    height: 480px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+    /* padding: 15%; */
+    /* border: 1px solid black; */
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+/* .contact__header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: x-large;
+    font-weight: 550;
+    color: white;
+    height: 15%;
+    width: 85%;
+} */
+
+.contact__inputs {
+    border: 1.5px solid rgb(216, 220, 225);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    padding: 5px;
+    width: 85%;
+    height: 10%;
+}
+
+.contact__send {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10%;
+    width: 85%;
+}
+
+.contact__send__btn {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    color: rgb(220, 233, 251);
+    background: rgb(14, 100, 225);
+    font-weight: 550;
+    height: 100%;
+    width: 100px;
+}

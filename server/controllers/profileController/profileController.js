@@ -2,7 +2,7 @@ getUserProfile =  (req, res) => {
     const db = req.app.get("db");
     const {id} = req.params;
     const {user_id} = req.session.user;
-    if (user_id === id) {
+    if (user_id !== id) {
          db.users.get_user_profile(user_id)
          .then ( (response) => {
             //  console.log(response[0])
