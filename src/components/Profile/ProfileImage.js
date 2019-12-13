@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { storage } from '../../config/firebaseConfig';
 import axios from 'axios';
+import './ProfileImage.css';
 
 class ProfileImage extends Component {
 
@@ -45,10 +46,10 @@ class ProfileImage extends Component {
         return (
             <div>
                 <div>
-                    <img src={this.state.imageUrl} alt="Upload a pic!" height='50px' width='50px'></img>
+                    <img className="profile__image" src={this.state.imageUrl} alt="Upload a pic!"></img>
                     <input type="file" onChange={this.handleImageUpload} />
                 </div>
-                <button onClick={this.saveImg}>Save Changes</button>
+                <button className="save__image" onClick={this.saveImg}>Save Image</button>
             </div>
 
         )
