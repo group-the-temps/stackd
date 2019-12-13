@@ -5,7 +5,7 @@ import Register from "./components/Register/Register";
 import Login from "./components/Login/Login";
 import Profile from "./components/Profile/Profile";
 import AskQuestion from "./components/AskQuestion/AskQuestion";
-// import QuestionsList from "./components/QuestionsList/QuestionsList";
+import QuestionsList from "./components/QuestionsList/QuestionsList";
 
 export default (
   <Switch>
@@ -13,7 +13,7 @@ export default (
     <Route component={Register} path="/register" />
     <Route component={Login} path="/login" />
     <Route component={Profile} path="/profile" />
-    {/* <Route component={QuestionsList} path="/questionslist" /> */}
+    <Route component={QuestionsList} path="/questionslist" />
     <Route component={AskQuestion} path="/askquestion" />
     <Route render={() => <h1>404 - Not Found</h1>} />
   </Switch>
