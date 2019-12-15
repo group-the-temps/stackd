@@ -89,7 +89,7 @@
 .nav-actions-container-loggedin {
   position: absolute;
   left: 70.5%;
-  height: 23px;
+  height: 29px;
   width: 126px;
   top: 111%;
   font-size: 12px;
@@ -98,7 +98,7 @@
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  border: 2px black solid;
+  border: 1px black solid;
   border-radius: 4px;
   box-shadow: 5px 5px 5px -5px rgb(0, 0, 0, 0.56);
 }
@@ -107,7 +107,7 @@
   position: absolute;
   left: 70.5%;
   top: 111%;
-  height: 23px;
+  height: 29px;
   width: 126px;
   font-size: 12px;
   background: #313d3f;
@@ -124,7 +124,7 @@
   font-weight: 700;
   width: 115px;
   border-radius: 4px;
-  padding: 5px 5px 4px 4px;
+  padding: 8px 5px 7px 4px;
 }
 
 .tags-dropdown-button:hover {
@@ -135,13 +135,13 @@
 
 .tags-container-loggedin {
   position: absolute;
-  top: 64px;
-  left: 63.1%;
+  top: 76px;
+  left: 70.5%;
   height: 300px;
-  width: 120px;
+  width: 125px;
   z-index: 1;
   background: #313d3f;
-  border: 2px black solid;
+  border: 1px black solid;
   box-shadow: 5px 5px 5px -5px rgb(0, 0, 0, 0.56);
   border-radius: 4px;
   display: flex;
@@ -153,13 +153,13 @@
 
 .tags-container {
   position: absolute;
-  top: 64px;
-  left: 81.99%;
+  top: 76px;
+  left: 70.5%;
   height: 300px;
-  width: 120px;
+  width: 125px;
   z-index: 1;
   background: #313d3f;
-  border: 2px black solid;
+  border: 1px black solid;
   box-shadow: 5px 5px 5px -5px rgb(0, 0, 0, 0.56);
   border-radius: 4px;
   display: flex;
