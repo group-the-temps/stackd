@@ -4,9 +4,14 @@ import {
   handleOpenTags,
   handleCloseTags
 } from "../../redux/searchReducer";
-import { getAllQuestions, updateQuestionState } from '../../redux/questionsReducer';
+import {
+  getAllQuestions,
+  updateQuestionState
+} from "../../redux/questionsReducer";
+import "./QuestionsList.css";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import Moment from "react-moment";
 
 class QuestionsList extends Component {
   componentDidMount() {
@@ -15,35 +20,63 @@ class QuestionsList extends Component {
   }
 
   render() {
-    console.log(this.props.searchResults);
+    // console.log(this.props.searchResults);
+    console.log(this.props);
     console.log(this.props.allQuestions);
-    const questionsMapped =
-      this.props.searchResults &&
-      this.props.searchResults.map(search => {
-        return <h1>{search.question_title}</h1>;
-      });
-    const mappedAllQuestions = this.props.allQuestions.map((question) => {
+    // const questionsMapped =
+    //   this.props.searchResults &&
+    //   this.props.searchResults.map(search => {
+    //     return <h1>{search.question_title}</h1>;
+    //   });
+    const mappedAllQuestions = this.props.allQuestions.map(question => {
+      console.log(question.time_stamp);
       return (
-        <div>
-          <div>
-            <h1
-              onClick={() => {
-                this.props.updateQuestionState({ selectedQuestionID: question.question_id });
-                this.props.history.push(`/selectedquestion/${question.question_id}`);
-              }}>
-              {question.question_title}</h1>
-            <h2>{question.display_name}</h2>
-            <h3>{question.cohort}</h3>
+        <div className="QuestionsList-question-container">
+          <div className="QuestionsList-question-left">
+            <div className="QuestionsList-question-box">
+              <li>{question.total_vote_count}</li>
+              <li>Liked</li>
+            </div>
+            <div className="QuestionsList-question-box">
+              <li>0</li>
+              <li>Saved</li>
+            </div>
           </div>
-          <h3>{question.question_desc}</h3>
-          <h5>{question.time_stamp}</h5>
+          <div className="QuestionsList-question-right">
+            <h1
+              className="QuestionsList-question-title"
+              onClick={() => {
+                this.props.updateQuestionState({
+                  selectedQuestionID: question.question_id
+                });
+                this.props.history.push(
+                  `/selectedquestion/${question.question_id}`
+                );
+              }}
+            >
+              {question.question_title}
+            </h1>
+            {/* <h3>{question.cohort}</h3> */}
+            {/* <h3>{question.question_desc}</h3> */}
+
+            <h5>
+              Asked <Moment fromNow>{question.time_stamp}</Moment> by{" "}
+              {question.display_name} from {question.cohort}
+            </h5>
+            <h5>0 Answers Submitted</h5>
+          </div>
         </div>
-      )
+      );
     });
-    return <div>
-      <div>{questionsMapped}</div>
-      <div>{mappedAllQuestions}</div>
-    </div>;
+    return (
+      <div className="QuestionsList-container">
+        {/* <div>{questionsMapped}</div> */}
+        <h1 className="QuestionsList-header">All Questions</h1>
+        <div className="QuestionsList-mapped-container">
+          {mappedAllQuestions}
+        </div>
+      </div>
+    );
   }
 }
 
