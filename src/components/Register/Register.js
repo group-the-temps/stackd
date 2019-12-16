@@ -56,6 +56,10 @@ class Register extends Component {
           isOpen={this.state.showModal}
           className="register-modal"
           >
+            <Link to='/'>
+            <button className="close-button" onClick={this.handleCloseModal}>X</button>
+            </Link>
+
             <h1 className="register-header">Register</h1>
         <form className="Register-form">
           <input className="register-input" onChange={this.handleInput} name="display_name" placeholder="display name" />
@@ -68,7 +72,6 @@ class Register extends Component {
         <Link to="/login">
           <p className="existing-account">log into existing account</p>
         </Link>
-        <button className="register-button" onClick={this.handleCloseModal}>Close</button>
           </Modal>
       </div>
     );
