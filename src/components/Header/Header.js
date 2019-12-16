@@ -292,8 +292,17 @@ class Header extends Component {
             >
               Ask Question
             </li>
+            <li
+              className="Nav-link-1"
+              onClick={() => {
+                this.props.history.push("/questionslist");
+                this.props.handleCloseTags();
+              }}
+            >
+              View Questions
+            </li>
 
-            <li className="Nav-link-1" onClick={this.viewMyProfile}>
+            <li className="Nav-link-2" onClick={this.viewMyProfile}>
               Profile
             </li>
 
