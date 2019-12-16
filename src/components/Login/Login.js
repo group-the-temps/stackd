@@ -41,6 +41,11 @@ class Login extends Component {
     return (
       <div className="Login-container">
         <Modal isOpen={this.state.showModal} className="login-modal">
+        <Link to="/">
+            <button className="close-button" onClick={this.handleCloseModal}>
+              X
+            </button>
+          </Link>
           <h1 className="login-header">Login</h1>
           <form className="Login-form">
             <input
@@ -62,11 +67,6 @@ class Login extends Component {
           </button>
           <Link to="/register">
             <p className="new-account">create new account</p>
-          </Link>
-          <Link to="/">
-            <button className="modal-button" onClick={this.handleCloseModal}>
-              Close
-            </button>
           </Link>
         </Modal>
       </div>

@@ -4,13 +4,16 @@ const initialState = {
   createQuestion: [],
   allQuestions: [],
   selectedQuestionID: "",
-  selectedQuestion: [{}]
+  selectedQuestion: [{}],
+  selectedAnswers: [{}],
+  clickedTitle: false
 };
 
 const CREATE_QUESTION = "CREATE_QUESTION";
 const GET_ALL_QUESTIONS = "GET_ALL_QUESTIONS";
 const UPDATE_QUESTION_STATE = "UPDATE_QUESTION_STATE";
 const GET_SELECTED_QUESTION = "GET_SELECTED_QUESTION";
+const GET_SELECTED_ANSWERS = "GET_SELECTED_ANSWERS";
 
 export const createQuestion = newQuestion => {
   return {
@@ -40,6 +43,13 @@ export const getSelectedQuestion = question_id => {
   };
 };
 
+export const getSelectedAnswers = question_id => {
+  return {
+    type: GET_SELECTED_ANSWERS,
+    payload: axios.get(`/question/selected/answers/${question_id}`)
+  }
+}
+
 export default function questionsReducer(state = initialState, action) {
   const { type, payload } = action;
 
@@ -64,6 +74,11 @@ export default function questionsReducer(state = initialState, action) {
         ...state,
         selectedQuestion: payload.data
       };
+    case `${GET_SELECTED_ANSWERS}_FULFILLED`:
+      return {
+        ...state,
+        selectedAnswers: payload.data
+      }
 
     default:
       return state;
