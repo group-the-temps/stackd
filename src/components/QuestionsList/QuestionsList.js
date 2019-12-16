@@ -12,8 +12,17 @@ import "./QuestionsList.css";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import Moment from "react-moment";
+import SelectedQuestion from "../SelectedQuestion/SelectedQuestion";
+// import Modal from "react-modal"
 
 class QuestionsList extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      // clickedTitle: false
+    }
+  }
   componentDidMount() {
     this.props.updateTagsState();
     this.props.getAllQuestions();
@@ -21,6 +30,7 @@ class QuestionsList extends Component {
 
   render() {
     // console.log(this.props.searchResults);
+    console.log(this.props.clickedTitle)
     console.log(this.props);
     console.log(this.props.allQuestions);
     // const questionsMapped =
@@ -47,11 +57,13 @@ class QuestionsList extends Component {
               className="QuestionsList-question-title"
               onClick={() => {
                 this.props.updateQuestionState({
-                  selectedQuestionID: question.question_id
+                  selectedQuestionID: question.question_id,
+                  clickedTitle: true
                 });
                 this.props.history.push(
                   `/selectedquestion/${question.question_id}`
                 );
+                
               }}
             >
               {question.question_title}
@@ -75,6 +87,7 @@ class QuestionsList extends Component {
         <div className="QuestionsList-mapped-container">
           {mappedAllQuestions}
         </div>
+        {/* {this.props.clickedTitle ? <SelectedQuestion showModal={this.state.showModal}/> : null} */}
       </div>
     );
   }
@@ -85,7 +98,8 @@ const mapStateToProps = reduxState => {
     clickedTags: reduxState.searchReducer.clickedTags,
     searchResults: reduxState.searchReducer.searchResults[0],
     allQuestions: reduxState.questionsReducer.allQuestions,
-    selectedQuestionID: reduxState.questionsReducer.selectedQuestionID
+    selectedQuestionID: reduxState.questionsReducer.selectedQuestionID,
+    clickedTitle: reduxState.questionsReducer.clickedTitle
   };
 };
 

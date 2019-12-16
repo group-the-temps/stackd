@@ -1,29 +1,49 @@
 import React, { Component } from "react";
 import "./SelectedQuestion.css";
-import { getSelectedQuestion } from "../../redux/questionsReducer";
+import { getSelectedQuestion, getSelectedAnswers } from "../../redux/questionsReducer";
 import { connect } from "react-redux";
 import ArrowUp from "../../icons and pics/arrow_up.png";
 import ArrowDown from "../../icons and pics/arrow_down.png";
 import Star from "../../icons and pics/star.png";
 import ReactMarkdown from "react-markdown";
+// import Modal from "react-modal";
 
 class SelectedQuestion extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      showModal: true
+    };
   }
 
   componentDidMount() {
     this.props.getSelectedQuestion(this.props.selectedQuestionID);
+    this.props.getSelectedAnswers(this.props.selectedQuestionID);
   }
 
   render() {
     console.log(this.props.selectedQuestionID);
     console.log(this.props.selectedQuestion[0]);
+    console.log(this.props.selectedAnswers)
     const selectedQuestion =
       this.props.selectedQuestion && this.props.selectedQuestion[0];
+    const answersMapped = this.props.selectedAnswers.map(answer => {
+      return (
+        <div>
+          {answer.answer_desc}
+          {answer.display_name}
+          {answer.cohort}
+          {answer.time_stamp}
+        </div>
+      )
+    })
     return (
+      // <Modal
+      // isOpen={this.state.showModal}
+      // className='selected-question-modal'
+      // background=
+      // >
       <div className="SelectedQuestion-container">
         <h6 className="SelectedQuestion-header">Question</h6>
         <div className="SelectedQuestion-question-container">
@@ -53,10 +73,12 @@ class SelectedQuestion extends Component {
         </div>
         <div className="SelectedQuestion-answers-container">
           <h6>Answers</h6>
+          {answersMapped}
           <div className="SelectedQuestion-answers-header">All Answers</div>
           <div className="SelectedQuestion-answers-mapped">Answers Mapped</div>
         </div>
       </div>
+      // </Modal>
     );
   }
 }
@@ -64,10 +86,12 @@ class SelectedQuestion extends Component {
 const mapStateToProps = reduxState => {
   return {
     selectedQuestionID: reduxState.questionsReducer.selectedQuestionID,
-    selectedQuestion: reduxState.questionsReducer.selectedQuestion
+    selectedQuestion: reduxState.questionsReducer.selectedQuestion,
+    selectedAnswers: reduxState.questionsReducer.selectedAnswers,
+    clickedTitle: reduxState.questionsReducer.clickedTitle
   };
 };
 
-export default connect(mapStateToProps, { getSelectedQuestion })(
+export default connect(mapStateToProps, { getSelectedQuestion, getSelectedAnswers })(
   SelectedQuestion
 );
