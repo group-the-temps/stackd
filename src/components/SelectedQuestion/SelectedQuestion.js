@@ -166,7 +166,7 @@ class SelectedQuestion extends Component {
             <h3>
               {selectedQuestion.question_title}
               <h6 className="SelectedQuestion-subtitle-details">
-                Asked 6 hours ago by Pat (not actual data)
+              Asked <Moment fromNow>{selectedQuestion.time_stamp}</Moment> by{" "} {selectedQuestion.display_name} from {selectedQuestion.cohort}
               </h6>
             </h3>
           </div>

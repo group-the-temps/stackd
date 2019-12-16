@@ -6,7 +6,8 @@ const initialState = {
   selectedQuestionID: "",
   selectedQuestion: [{}],
   selectedAnswers: [{}],
-  clickedTitle: false
+  clickedTitle: false,
+  answerCount: []
 };
 
 const CREATE_QUESTION = "CREATE_QUESTION";
@@ -62,7 +63,8 @@ export default function questionsReducer(state = initialState, action) {
     case `${GET_ALL_QUESTIONS}_FULFILLED`:
       return {
         ...state,
-        allQuestions: payload.data
+        allQuestions: payload.data[0],
+        answerCount: payload.data[1]
       };
     case "UPDATE_QUESTION_STATE":
       return {

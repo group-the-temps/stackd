@@ -12,7 +12,7 @@ import "./QuestionsList.css";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import Moment from "react-moment";
-import SelectedQuestion from "../SelectedQuestion/SelectedQuestion";
+// import SelectedQuestion from "../SelectedQuestion/SelectedQuestion";
 // import Modal from "react-modal"
 
 class QuestionsList extends Component {
@@ -30,10 +30,11 @@ class QuestionsList extends Component {
 
   render() {
     // console.log(this.props.searchResults);
-    console.log(this.props.clickedTitle);
-    console.log(this.props);
+    // console.log(this.props.clickedTitle);
+    // console.log(this.props);
     console.log(this.props.allQuestions);
-    console.log(this.props.searchResults);
+    // console.log(this.props.searchResults);
+    console.log(this.props.answerCount)
     // const questionsMapped =
     //   this.props.searchResults &&
     //   this.props.searchResults.map(search => {
@@ -41,7 +42,12 @@ class QuestionsList extends Component {
     //   });
     if (this.props.searchResults.length > 0) {
       var mappedAllQuestions = this.props.searchResults.map(question => {
-        console.log(question.time_stamp);
+        const mappedCount = this.props.answerCount.map((answer) => {
+          if (question.question_id === answer.question_id) {
+            return answer.count
+          }
+        })
+        console.log(this.props.searchResults);
         return (
           <div className="QuestionsList-question-container">
             <div className="QuestionsList-question-left">
@@ -75,14 +81,20 @@ class QuestionsList extends Component {
                 Asked <Moment fromNow>{question.time_stamp}</Moment> by{" "}
                 {question.display_name} from {question.cohort}
               </h5>
-              <h5>0 Answers Submitted</h5>
+              {mappedCount ? <h5>{mappedCount} Answers Submitted</h5> : <h5>0 Answers Submitted</h5>}
             </div>
           </div>
         );
       });
     } else {
       mappedAllQuestions = this.props.allQuestions.map(question => {
-        console.log(question.time_stamp);
+        const mappedCount = this.props.answerCount.map((answer) => {
+          console.log(answer)
+          if (question.question_id === answer.question_id) {
+            return answer.count
+          }
+        })
+        console.log(mappedCount);
         return (
           <div className="QuestionsList-question-container">
             <div className="QuestionsList-question-left">
@@ -133,7 +145,9 @@ class QuestionsList extends Component {
                 Asked <Moment fromNow>{question.time_stamp}</Moment> by{" "}
                 {question.display_name} from {question.cohort}
               </h5>
-              <h5>0 Answers Submitted</h5>
+              {mappedCount ? <h5>{mappedCount} Answers Submitted</h5> : <h5>0 Answers Submitted</h5>}
+
+              {/* {mappedCount[0] !== undefined || mappedCount[1] !== undefined ? <h5>{mappedCount} Answers Submitted</h5> : <h5>0 Answers Submitted</h5>} */}
             </div>
           </div>
           //   </div>
@@ -159,7 +173,8 @@ const mapStateToProps = reduxState => {
     searchResults: reduxState.searchReducer.searchResults,
     allQuestions: reduxState.questionsReducer.allQuestions,
     selectedQuestionID: reduxState.questionsReducer.selectedQuestionID,
-    clickedTitle: reduxState.questionsReducer.clickedTitle
+    clickedTitle: reduxState.questionsReducer.clickedTitle,
+    answerCount: reduxState.questionsReducer.answerCount
   };
 };
 
