@@ -3,8 +3,8 @@ import axios from "axios";
 const initialState = {
   createQuestion: [],
   allQuestions: [],
-  selectedQuestionID: '',
-  selectedQuestion: []
+  selectedQuestionID: "",
+  selectedQuestion: [{}]
 };
 
 const CREATE_QUESTION = "CREATE_QUESTION";
@@ -23,22 +23,22 @@ export const getAllQuestions = () => {
   return {
     type: GET_ALL_QUESTIONS,
     payload: axios.get("/question/all")
-  }
-}
+  };
+};
 
 export const updateQuestionState = e => {
   return {
     type: UPDATE_QUESTION_STATE,
     payload: e
-  }
-}
+  };
+};
 
-export const getSelectedQuestion = (question_id) => {
+export const getSelectedQuestion = question_id => {
   return {
     type: GET_SELECTED_QUESTION,
     payload: axios.get(`/question/selected/${question_id}`)
-  }
-}
+  };
+};
 
 export default function questionsReducer(state = initialState, action) {
   const { type, payload } = action;
@@ -54,7 +54,7 @@ export default function questionsReducer(state = initialState, action) {
         ...state,
         allQuestions: payload.data
       };
-    case 'UPDATE_QUESTION_STATE':
+    case "UPDATE_QUESTION_STATE":
       return {
         ...state,
         ...payload
@@ -63,8 +63,8 @@ export default function questionsReducer(state = initialState, action) {
       return {
         ...state,
         selectedQuestion: payload.data
-      }
-    
+      };
+
     default:
       return state;
   }
