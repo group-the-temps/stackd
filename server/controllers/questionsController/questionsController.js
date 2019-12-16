@@ -15,9 +15,15 @@ createQuestion = async (req, res) => {
 
 getAllQuestions = async (req, res) => {
   const db = req.app.get("db");
+  // const { question_id } = req.body;
 
   const allQuestions = await db.questions.get_all_questions();
-  res.status(200).json(allQuestions);
+  const countAnswers = await db.questions.answers.count_answers();
+  const response = [
+    allQuestions,
+    countAnswers
+  ]
+  res.status(200).json(response);
 };
 
 viewSelectedQuestion = async (req, res) => {
