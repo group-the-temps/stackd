@@ -10,32 +10,23 @@ export default class ContactUs extends Component {
         senderEmail: "",
         senderMessage: "",
     }
-
-    componentDidMount() {
-    }
     
     handleMessaging = () => {
         const senderName = this.state.senderName;
         const senderEmail = this.state.senderEmail;
         const senderMessage = this.state.senderMessage;
-        axios({
-            method: "POST",
-            url: "http://localhost:3000/send/to/us",
-            data: {
-                senderName,
-                senderEmail,
-                senderMessage,
-            }
-        }).then( () => {
-            this.setState({
-                senderName: "",
-                senderEmail: "",
-                senderMessage: ""
-            })
-            alert("Message Sent");
-            document.getElementsByClassName("contact__inner__container2").reset();
-        })
-        
+            axios({
+                method: "POST",
+                url: "http://localhost:3000/send/to/us",
+                data: {
+                    senderName,
+                    senderEmail,
+                    senderMessage,
+                }
+            }).then( () => {
+                alert("Message Sent");
+                document.getElementById("contact__container").reset();
+            })    
     }
 
     handleContactChange = (e) => {
@@ -45,7 +36,7 @@ export default class ContactUs extends Component {
     render() {
         return (
             <div className="main__container">
-                <form className="contact__container">
+                <form id="contact__container">
                     {/* <div className="contact__header">
                         <h1>Get In Touch</h1>
                     </div> */}
@@ -55,9 +46,9 @@ export default class ContactUs extends Component {
                         <h4>Message</h4>
                     </section> */}
                     <section className="contact__inner__container2">
-                        <input className="contact__inputs"type="text" name="senderName" placeholder="Name" onChange={this.handleContactChange}/>
-                        <input className="contact__inputs"type="email" name="senderEmail" placeholder="Email" onChange={this.handleContactChange}/>
-                        <input className="contact__inputs"type="text" name="senderMessage" placeholder="Message" onChange={this.handleContactChange}/>
+                        <input className="contact__inputs" required type="text" name="senderName" placeholder="Name" onChange={this.handleContactChange}/>
+                        <input className="contact__inputs" required type="email" name="senderEmail" placeholder="Email" onChange={this.handleContactChange}/>
+                        <textarea className="contact__inputs__msg" required type="text" name="senderMessage" placeholder="Message" onChange={this.handleContactChange}/>
                         <div className="contact__send">
                             <input className="contact__send__btn" type="submit" value="Submit" onClick={this.handleMessaging}/>
                         </div>

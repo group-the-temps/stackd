@@ -37,6 +37,7 @@ app.use(
 app.use(express.json());
 
 //Authentication
+app.get('/auth/session', AC.remainLoggedIn);
 app.get('/auth/logout', AC.logout);
 app.post('/auth/register', AC.register);
 app.post('/auth/login', AC.login);
@@ -54,8 +55,9 @@ app.post('/question/create', QC.createQuestion);
 app.post('/question/create/answer/:question_id', QC.createAnswer);
 
 //Profile
-app.get('/prof/all/:user_id', PC.getUserProfile);
+app.get('/prof/all/:id', PC.getUserProfile);
 app.get('/prof/img', PC.getImg);
+app.get('/prof/askedquestions/:user_id', PC.getAskedQuestions);
 app.put('/prof/displayname', PC.editDisplayName);
 app.put('/prof/bio', PC.editBio);
 app.put('/prof/cohort', PC.editCohort);
