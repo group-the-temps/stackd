@@ -1,0 +1,86 @@
+.QuestionsList-container {
+  position: absolute;
+  top: 230px;
+  width: 100%;
+}
+
+.QuestionsList-header {
+  font-size: 24px;
+  padding: 12px;
+  text-align: left;
+  margin: 12px;
+  margin-bottom: 2px;
+  background: #313d3f;
+  color: white;
+  border-radius: 4px;
+  border: 1px solid black;
+}
+
+.QuestionsList-mapped-container {
+  margin: 12px;
+  margin-top: 4px;
+  padding: 6px;
+  background: #313d3f;
+  color: white;
+  border-radius: 4px;
+  border: 1px solid black;
+}
+
+.QuestionsList-question-container {
+  border: 1px solid grey;
+  border-bottom: 0.5px solid grey;
+  border-top: 0.5px solid grey;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: row;
+  height: 76px;
+  padding: 2px;
+  margin-bottom: 4px;
+}
+
+.QuestionsList-question-container:hover {
+  border: 1px solid white;
+  border-bottom: 0.5px solid white;
+  border-top: 0.5px solid white;
+  border-radius: 4px;
+  /* margin-bottom: -1px; */
+}
+
+.QuestionsList-question-box {
+  height: 38px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.QuestionsList-question-box li {
+  font-size: 14px;
+}
+
+.QuestionsList-question-left {
+  width: 92px;
+}
+
+.QuestionsList-question-right {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.QuestionsList-question-right {
+  padding: 5px;
+  padding-left: 10px;
+}
+
+.QuestionsList-question-right h5 {
+  font-size: 12px;
+}
+
+.QuestionsList-question-title {
+  font-size: 18px;
+  cursor: pointer;
+  padding: 2px;
+  font-weight: 500;
+}
