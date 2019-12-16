@@ -1,6 +1,6 @@
 createQuestion = async (req, res) => {
   const db = req.app.get("db");
-  const { question_title, question_desc, tags, time_stamp } = req.body;
+  const [{ question_title, question_desc, tags, time_stamp }] = req.body;
   const { user_id } = req.session.user;
 
   const createdQuestion = await db.questions.create_question(
@@ -18,32 +18,36 @@ getAllQuestions = async (req, res) => {
 
   const allQuestions = await db.questions.get_all_questions();
   res.status(200).json(allQuestions);
-}
+};
 
 viewSelectedQuestion = async (req, res) => {
   const db = req.app.get("db");
   const { question_id } = req.params;
 
-  const selectedQuestion = await db.questions.view_selected_question(question_id);
+  const selectedQuestion = await db.questions.view_selected_question(
+    question_id
+  );
   try {
-    res.status(200).json(selectedQuestion)
+    res.status(200).json(selectedQuestion);
   } catch {
-    res.status(401).json("Oops, something went wrong!")
+    res.status(401).json("Oops, something went wrong!");
   }
-}
+};
 
 getSelectedAnswers = async (req, res) => {
   const db = req.app.get("db");
   const { question_id } = req.params;
   // const { user_id } = req.body;
 
-  const selectedAnswers = await db.questions.answers.get_selected_answers(question_id);
+  const selectedAnswers = await db.questions.answers.get_selected_answers(
+    question_id
+  );
   try {
     res.status(200).json(selectedAnswers);
   } catch {
     res.status(401).json("Oops, something went wrong!");
   }
-}
+};
 
 createAnswer = async (req, res) => {
   const db = req.app.get("db");
@@ -56,9 +60,9 @@ createAnswer = async (req, res) => {
     question_id: +question_id,
     user_id,
     answer_desc
-  }
+  };
   res.status(200).json(createdAnswer);
-}
+};
 
 module.exports = {
   createQuestion,

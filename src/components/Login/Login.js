@@ -5,7 +5,7 @@ import "./Login.css";
 import { connect } from "react-redux";
 import Modal from "react-modal";
 
-Modal.setAppElement('#root');
+Modal.setAppElement("#root");
 
 class Login extends Component {
   constructor() {
@@ -34,14 +34,17 @@ class Login extends Component {
     e.preventDefault();
     this.props
       .loginUser(this.props.email, this.props.password)
-      .then(this.setState({ showModal: false }))
+      .then(() => {
+        this.setState({ showModal: false });
+        this.props.history.push("/questionslist");
+      })
       .catch(err => console.log(err));
   };
   render() {
     return (
       <div className="Login-container">
         <Modal isOpen={this.state.showModal} className="login-modal">
-        <Link to="/">
+          <Link to="/">
             <button className="close-button" onClick={this.handleCloseModal}>
               X
             </button>

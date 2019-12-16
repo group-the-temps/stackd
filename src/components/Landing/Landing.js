@@ -31,8 +31,8 @@ export default class Landing extends Component {
                 a later date.
               </h6>
               <div className="Landing-button">
-                <Link to="/login">
-                  <button>Start learning</button>
+                <Link to="/questionslist">
+                  <button>Start Learning</button>
                 </Link>
               </div>
             </div>
