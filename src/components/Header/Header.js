@@ -4,7 +4,12 @@ import { Link, withRouter } from "react-router-dom";
 import searchicon from "../../search_icon.png";
 import { connect } from "react-redux";
 import { logoutUser } from "../../redux/authReducer";
-import { handleOpenTags, handleCloseTags } from "../../redux/searchReducer";
+import {
+  handleOpenTags,
+  handleCloseTags,
+  updateSearchResults,
+  updateSearchState
+} from "../../redux/searchReducer";
 import { getProfile } from "../../redux/profileReducer";
 import Tags from "../Tags/Tags";
 import { Tween } from "react-gsap";
@@ -110,8 +115,7 @@ class Header extends Component {
       axios
         .get(`/search/tags?tags=${this.state.searchInput}`)
         .then(response => {
-          this.props.searchResults.push(response.data);
-          console.log(this.props.searchResults[0]);
+          this.props.updateSearchResults(response.data);
         })
         .catch(() => {
           alert("No Results Found");
@@ -297,6 +301,7 @@ class Header extends Component {
               onClick={() => {
                 this.props.history.push("/questionslist");
                 this.props.handleCloseTags();
+                this.props.updateSearchState({ searchResults: [] });
               }}
             >
               View Questions
@@ -342,6 +347,8 @@ export default withRouter(
     logoutUser,
     handleOpenTags,
     handleCloseTags,
-    getProfile
+    getProfile,
+    updateSearchResults,
+    updateSearchState
   })(Header)
 );
