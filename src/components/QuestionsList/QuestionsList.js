@@ -12,8 +12,17 @@ import "./QuestionsList.css";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import Moment from "react-moment";
+import SelectedQuestion from "../SelectedQuestion/SelectedQuestion";
+// import Modal from "react-modal"
 
 class QuestionsList extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      // clickedTitle: false
+    };
+  }
   componentDidMount() {
     this.props.updateTagsState();
     this.props.getAllQuestions();
@@ -21,6 +30,7 @@ class QuestionsList extends Component {
 
   render() {
     // console.log(this.props.searchResults);
+    console.log(this.props.clickedTitle);
     console.log(this.props);
     console.log(this.props.allQuestions);
     console.log(this.props.searchResults);
@@ -86,11 +96,28 @@ class QuestionsList extends Component {
               </div>
             </div>
             <div className="QuestionsList-question-right">
-              <h1
+              {/* <h1
                 className="QuestionsList-question-title"
                 onClick={() => {
                   this.props.updateQuestionState({
                     selectedQuestionID: question.question_id
+                  });
+                  this.props.history.push(
+                    `/selectedquestion/${question.question_id}`
+                  );
+                }}
+              >
+                {question.question_title}
+              </h1> */}
+              {/* <h3>{question.cohort}</h3> */}
+              {/* <h3>{question.question_desc}</h3> */}
+              {/* <div className="QuestionsList-question-right"> */}
+              <h1
+                className="QuestionsList-question-title"
+                onClick={() => {
+                  this.props.updateQuestionState({
+                    selectedQuestionID: question.question_id,
+                    clickedTitle: true
                   });
                   this.props.history.push(
                     `/selectedquestion/${question.question_id}`
@@ -109,6 +136,7 @@ class QuestionsList extends Component {
               <h5>0 Answers Submitted</h5>
             </div>
           </div>
+          //   </div>
         );
       });
     }
@@ -119,6 +147,7 @@ class QuestionsList extends Component {
         <div className="QuestionsList-mapped-container">
           {mappedAllQuestions}
         </div>
+        {/* {this.props.clickedTitle ? <SelectedQuestion showModal={this.state.showModal}/> : null} */}
       </div>
     );
   }
@@ -129,7 +158,8 @@ const mapStateToProps = reduxState => {
     clickedTags: reduxState.searchReducer.clickedTags,
     searchResults: reduxState.searchReducer.searchResults,
     allQuestions: reduxState.questionsReducer.allQuestions,
-    selectedQuestionID: reduxState.questionsReducer.selectedQuestionID
+    selectedQuestionID: reduxState.questionsReducer.selectedQuestionID,
+    clickedTitle: reduxState.questionsReducer.clickedTitle
   };
 };
 

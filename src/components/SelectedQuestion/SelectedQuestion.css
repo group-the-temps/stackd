@@ -1,3 +1,9 @@
+/* .selected-question-modal {
+  z-index: 3;
+  background: transparent;
+  
+} */
+
 .SelectedQuestion-container {
   width: 100%;
   display: flex;
@@ -20,6 +26,7 @@
   border-radius: 8px;
   box-shadow: 5px 5px 5px -5px rgb(0, 0, 0, 0.56);
   background-color: white;
+  overflow: scroll;
 }
 
 .SelectedQuestion-header {
@@ -74,3 +81,4 @@
   margin-left: 54px;
   text-align: left;
 }
+

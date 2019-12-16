@@ -37,6 +37,7 @@ viewSelectedQuestion = async (req, res) => {
 getSelectedAnswers = async (req, res) => {
   const db = req.app.get("db");
   const { question_id } = req.params;
+  // const { user_id } = req.body;
 
   const selectedAnswers = await db.questions.answers.get_selected_answers(
     question_id
