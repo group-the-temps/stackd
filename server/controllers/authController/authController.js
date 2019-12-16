@@ -1,5 +1,13 @@
 const bcrypt = require("bcryptjs");
 
+const remainLoggedIn = (req, res, next) => {
+    if (req.session.user) { 
+        res.status(200).json(req.session.user);
+    } else {
+        res.status(401).json("You must login in to view this content!");
+    }
+};
+
 const register = async (req, res) => {
     const db = req.app.get('db');
     const { email, password, display_name, is_admin, student_invite_code, admin_invite_code, img } = req.body;
@@ -68,5 +76,6 @@ const logout = (req, res) => {
 module.exports = {
     login,
     register,
-    logout
+    logout,
+    remainLoggedIn
 }
