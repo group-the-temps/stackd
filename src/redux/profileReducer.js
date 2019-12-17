@@ -7,7 +7,7 @@ const initialState = {
 };
 //ACTIONS
 const GET_PROFILE = "GET_PROFILE";
-const GET_ASKED_QUESTIONS = "GET_ASKED_QUESTIONS";
+// const GET_ASKED_QUESTIONS = "GET_ASKED_QUESTIONS";
 const EDIT_NAME = "EDIT_NAME";
 const EDIT_BIO = "EDIT_BIO";
 const EDIT_COHORT = "EDIT_COHORT";
@@ -21,12 +21,12 @@ export function getProfile(user_id) {
     };
 };
 
-export function getAskedQuestions(user_id) {
-    return {
-        type: GET_ASKED_QUESTIONS,
-        payload: axios.get(`/prof/askedquestions/${user_id}`)
-    };
-};
+// export function getAskedQuestions(user_id) {
+//     return {
+//         type: GET_ASKED_QUESTIONS,
+//         payload: axios.get(`/prof/askedquestions/${user_id}`)
+//     };
+// };
 
 export function editBio(bio) {
     return {
@@ -56,18 +56,19 @@ export function editDisplayName(display_name) {
 };
 
 export default function profileReducer(state = initialState, action) {
-    console.log(state.profile)
+    // console.log(state.profile)
     const { payload, type } = action;
     switch (type) {
         case `${GET_PROFILE}_PENDING`:
             return { ...state, loading: true }
         case `${GET_PROFILE}_FULFILLED`:
+            console.log(state.askedQuestions)
             console.log(state.profile)
             return { ...state, loading: false, askedQuestions: payload.data }
-        case `${GET_ASKED_QUESTIONS}_PENDING`:
-            return { ...state, loading: true }
-        case `${GET_ASKED_QUESTIONS}_FULFILLED`:
-            return { ...state, loading: false, askedQuestions: payload.data }
+        // case `${GET_ASKED_QUESTIONS}_PENDING`:
+        //     return { ...state, loading: true }
+        // case `${GET_ASKED_QUESTIONS}_FULFILLED`:
+        //     return { ...state, loading: false, askedQuestions: payload.data }
         case `${EDIT_BIO}_PENDING`:
             return { ...state, loading: true }
         case `${EDIT_BIO}_FULFILLED`:

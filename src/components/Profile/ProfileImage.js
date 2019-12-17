@@ -47,7 +47,7 @@ class ProfileImage extends Component {
             <div>
                 <div>
                     <img className="profile__image" src={this.state.imageUrl} alt="Upload a pic!"></img>
-                    <input type="file" onChange={this.handleImageUpload} />
+                    <input className="firebase__btns" type="file" onChange={this.handleImageUpload} />
                 </div>
                 <button className="save__image" onClick={this.saveImg}>Save Image</button>
             </div>
