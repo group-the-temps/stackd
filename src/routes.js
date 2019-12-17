@@ -13,8 +13,8 @@ export default (
     <Route component={Landing} exact path="/" />
     <Route component={Register} path="/register" />
     <Route component={Login} path="/login" />
-    <Route component={Profile} path="/profile" />
     <Route component={Profile} path="/profile/:id" />
+    <Route component={Profile} path="/profile" />
     <Route component={QuestionsList} path="/questionslist" />
     <Route component={AskQuestion} path="/askquestion" />
     <Route component={SelectedQuestion} path="/selectedquestion/:question_id" />
