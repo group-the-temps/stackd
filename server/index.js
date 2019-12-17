@@ -11,6 +11,7 @@ const AC = require('./controllers/authController/authController');
 const SC = require('./controllers/searchController/searchController');
 const QC = require('./controllers/questionsController/questionsController');
 const PC = require('./controllers/profileController/profileController');
+const LC = require('./controllers/likeController/likeController');
 
 const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env;
 
@@ -53,6 +54,9 @@ app.get('/question/selected/:question_id', QC.viewSelectedQuestion);
 app.get('/question/selected/answers/:question_id', QC.getSelectedAnswers);
 app.post('/question/create', QC.createQuestion);
 app.post('/question/create/answer/:question_id', QC.createAnswer);
+
+//Likes
+app.put()
 
 //Profile
 app.get('/prof/all/:id', PC.getUserProfile);

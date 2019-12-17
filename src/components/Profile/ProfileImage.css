@@ -12,3 +12,8 @@
     color: rgb(15, 15, 15);
     background: #5dc8dd;
 }
+
+.firebase__btns {
+    text-align: center;
+    width: 75%
+}

@@ -4,6 +4,8 @@
     align-items: center;
     justify-content: center;
     width: 100vw;
+    position: absolute;
+    top: 27%;
     
 }
 
@@ -38,7 +40,7 @@
     display: flex;
     align-self: flex-start;
     align-items: center;
-    width: 1000px;
+    width: 650px;
     margin-left: 5px;
     color: rgb(238, 229, 229);
     font-weight: 550;
@@ -55,7 +57,7 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    width: 70%;
+    width: 100%;
     margin-right: 5px;
     text-align: left;
     font-size: 15px;
@@ -144,9 +146,7 @@
     margin-left: 5px;
     height: 105px;
     overflow-y: scroll;
-    /* overflow: scroll hidden; */
-    box-shadow: 7px 10px 12px -5px rgb(0, 0, 0, 0.42);
-
+    font-weight: 300;
 }
 
 .profile__bio::-webkit-scrollbar {
