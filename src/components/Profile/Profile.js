@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {getProfile, editBio, editDisplayName, editCohort} from '../../redux/profileReducer';
+import {getProfile, editBio, editDisplayName, editCohort, getAskedQuestions} from '../../redux/profileReducer';
 import ProfileImage from './ProfileImage';
 import './Profile.css';
 
@@ -16,11 +16,20 @@ class Profile extends Component {
         display_name: "",
         showProfileName: false,
         showProfileBio: false,
-        showProfileCohort: false
+        showProfileCohort: false,
+        askedQuestions: []
     }
 
     componentDidMount() {
         this.props.getProfile(this.props.user_id);
+        // this.handleGetAskedQuestions();
+        this.props.getAskedQuestions(this.props.profile.user_id)
+        // .then( (response) => {
+        //     this.setState({askedQuestions: response.data})
+        // })
+    }
+
+    handleGetAskedQuestions = () => {
     }
 
     handleOpenBio = () => {
@@ -117,6 +126,7 @@ class Profile extends Component {
     render() {
         console.log(this.state.display_name)
         console.log(this.state)
+        console.log(this.state.askedQuestions)
         // console.log(this.props.user)
         // console.log(this.props.profile)
         const {display_name, bio, cohort} = this.props.user;
@@ -127,7 +137,7 @@ class Profile extends Component {
                         <section className="img__section">
                             <ProfileImage user_id={this.props.user_id} />
                             <div className="cohort__cont">
-                                {!this.state.showProfileCohort ? <label>Cohort: DM{cohort}</label> : <label>Cohort: DM{this.state.cohort}</label>}
+                                {!this.state.showProfileCohort ? <label>Cohort: {cohort}</label> : <label>Cohort: {this.state.cohort}</label>}
                                 <div className="cohort__edit">
                                     <button className="edit__cohort__btn" onClick={this.handleOpenCohort}>
                                         <i className="fas fa-edit fa-1x"></i>
@@ -137,8 +147,11 @@ class Profile extends Component {
                             {this.state.editCohort ? 
                                 (
                                 <>
-                                    <input name="cohort" placeholder="26." onChange={this.handleChange} />
-                                    <input className="save__changes__btn" type="button" value="Save Changes" onClick={this.handleEditCohort} />
+                                    <input name="cohort" placeholder="e.g.  DM26" onChange={this.handleChange} />
+                                    <div>
+                                        <input className="save__changes__btn" type="button" value="Save Changes" onClick={this.handleEditCohort} />
+                                        <input className="close__btn" type="button" value="Cancel" onClick={this.handleOpenCohort} />
+                                    </div>
                                 </>
                                 ) : null}
                             <label>{`166 CRUDability`}</label>
@@ -157,8 +170,11 @@ class Profile extends Component {
                             {this.state.editName ?
                                 (
                                     <>
-                                        <input name="display_name" placeholder="New Display Name" onChange={this.handleChange} />
-                                        <input className="save__changes__btn" type="button" value="Save Changes" onClick={this.handleEditName} />
+                                        <input className="name__input" name="display_name" placeholder="New Display Name" onChange={this.handleChange} />
+                                        <div>
+                                            <input className="save__changes__btn" type="button" value="Save Changes" onClick={this.handleEditName} />
+                                            <input className="close__btn" type="button" value="Cancel" onClick={this.handleOpenName} />
+                                        </div>
                                     </>
                                 ) : null}
                             <div className="cont">
@@ -173,21 +189,24 @@ class Profile extends Component {
                             {this.state.editBio ? 
                                 (
                                 <>
-                                    <input name="bio" placeholder="Tell us a little about yourself." onChange={this.handleChange} />
-                                    <input className="save__changes__btn" type="button" value="Save Changes" onClick={this.handleEditBio} />
+                                    <textarea className="bio__input" name="bio" placeholder="Tell us a little about yourself." onChange={this.handleChange} />
+                                    <div>
+                                        <input className="save__changes__btn" type="button" value="Save Changes" onClick={this.handleEditBio} />
+                                        <input className="close__btn" type="button" value="Cancel" onClick={this.handleOpenBio} />
+                                    </div>
                                 </>
                                 ) : null}
-
                         </section>
                     </div>
                 </div>
                         <section className="extra__info__section">
                             <div className="profile__questions">
                                 <label>Asked Questions List</label>
+                                <h1>{this.state.askedQuestions}</h1>
                             </div>
-                            <div className="profile__questions">
+                            {/* <div className="profile__questions">
                                 <label>Saved Questions List</label>
-                            </div>
+                            </div> */}
                         </section>
             </main>
         )
@@ -200,7 +219,8 @@ const mapStateToProps = reduxState => {
         id: reduxState.profileReducer.profile.user_id,
         user: reduxState.authReducer.user,
         user_id: reduxState.authReducer.user.user_id
+
     }
 }
 
-export default connect(mapStateToProps, {getProfile, editBio, editDisplayName, editCohort})(Profile);
+export default connect(mapStateToProps, {getProfile, editBio, editDisplayName, editCohort, getAskedQuestions})(Profile);

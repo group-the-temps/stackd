@@ -3,15 +3,16 @@ getUserProfile =  (req, res) => {
     const {id} = req.params;
     const {user_id} = req.session.user;
     if (user_id !== id) {
-         db.users.get_user_profile(user_id)
-         .then ( (response) => {
-            //  console.log(response[0])
+        console.log(id)
+         db.users.get_user_profile(id)
+         .then( (response) => {
+             console.log(response)
              res.status(200).json(response[0]);
          })
     } else {
-        db.users.get_user_profile(id)
-        .then ( (response) => {
-            // console.log(response[0])
+        db.users.get_user_profile(user_id)
+        .then( (response) => {
+            console.log(response[0])
             res.status(200).json(response[0]);
         })
         
@@ -76,11 +77,20 @@ getImg = async (req, res) => {
     res.status(200).json(getImage);
 }
 
+getAskedQuestions = async (req, res) => {
+    const db = req.app.get("db");
+    const {user_id} = +req.params;
+
+    const askedQuestions = await db.questions.get_profile_questions(user_id)
+    res.status(200).json(askedQuestions);
+}
+
 module.exports = {
     getUserProfile,
     getImg,
     editDisplayName,
     editBio,
     editImg,
-    editCohort
+    editCohort,
+    getAskedQuestions
 }
