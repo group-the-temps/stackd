@@ -14,6 +14,7 @@ const UPDATE_STATE = 'UPDATE_STATE';
 const REGISTER_USER = 'REGISTER_USER';
 const LOGIN_USER = 'LOGIN_USER';
 const LOGOUT_USER = 'LOGOUT_USER';
+const GET_SESSION = 'GET_SESSION';
 // const EDIT_NAME = "EDIT_NAME";
 
 export const updateState = e => {
@@ -48,6 +49,13 @@ export const loginUser = (email, password) => {
     }
 
 }
+export const getSession = () => {
+    return {
+        type: GET_SESSION,
+        payload: axios.get('/auth/session')
+    }
+}
+
 export const logoutUser = () => {
     return {
         type: LOGOUT_USER,
