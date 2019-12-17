@@ -6,6 +6,7 @@
   width: 99vw;
   position: absolute;
   top: 27%;
+  z-index: -1;
 }
 .page__container-top {
   margin: 12px;
