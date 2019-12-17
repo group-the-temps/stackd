@@ -32,9 +32,9 @@ class QuestionsList extends Component {
     // console.log(this.props.searchResults);
     // console.log(this.props.clickedTitle);
     // console.log(this.props);
-    console.log(this.props.allQuestions);
+    // console.log(this.props.allQuestions);
     // console.log(this.props.searchResults);
-    console.log(this.props.answerCount);
+    // console.log(this.props.answerCount);
     // const questionsMapped =
     //   this.props.searchResults &&
     //   this.props.searchResults.map(search => {
@@ -51,12 +51,11 @@ class QuestionsList extends Component {
             }
           }
         });
-        console.log(this.props.searchResults);
         return (
           <div className="QuestionsList-question-container">
             <div className="QuestionsList-question-left">
               <div className="QuestionsList-question-box">
-                <li>{question.total_vote_count}</li>
+                <li>{question.likes_count}</li>
                 <li>Liked</li>
               </div>
               {/* <div className="QuestionsList-question-box">
@@ -101,12 +100,11 @@ class QuestionsList extends Component {
             }
           }
         });
-        console.log(mappedCount);
         return (
           <div className="QuestionsList-question-container">
             <div className="QuestionsList-question-left">
               <div className="QuestionsList-question-box">
-                <li>{question.total_vote_count}</li>
+                <li>{question.likes_count}</li>
                 <li>Liked</li>
               </div>
               {/* <div className="QuestionsList-question-box">

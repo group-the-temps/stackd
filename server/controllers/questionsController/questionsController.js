@@ -55,7 +55,7 @@ getSelectedAnswers = async (req, res) => {
 createAnswer = async (req, res) => {
   const db = req.app.get("db");
   const { question_id } = req.params;
-  const { user_id } = +req.session.user;
+  const { user_id } = req.body;
   const { answer_desc } = req.body;
   console.log(question_id);
   console.log(user_id);
