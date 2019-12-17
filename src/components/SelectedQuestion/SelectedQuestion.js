@@ -148,33 +148,37 @@ class SelectedQuestion extends Component {
       // >
       <div className="SelectedQuestion-container">
         <h6 className="SelectedQuestion-header">Question</h6>
-        <div className="SelectedQuestion-question-container">
-          <div className="SelectedQuestion-title">
-            <div className="SelectedQuestion-icons-container">
-              <div className="SelectedQuestion-icons-container-count">0</div>
-              <div className="SelectedQuestion-like-box">
-                <img className="SelectedQuestion-arrow" src={Like} alt="up" />
-                Like
-              </div>
-              {/* <img
+        <div className="SelectedQuestion-question-background">
+          <div className="SelectedQuestion-question-container">
+            <div className="SelectedQuestion-title">
+              <div className="SelectedQuestion-icons-container">
+                <div className="SelectedQuestion-icons-container-count">0</div>
+                <div className="SelectedQuestion-like-box">
+                  <img className="SelectedQuestion-arrow" src={Like} alt="up" />
+                  Like
+                </div>
+                {/* <img
                 className="SelectedQuestion-arrow"
                 src={ArrowDown}
                 alt="down"
               />
               <img className="SelectedQuestion-star" src={Star} alt="star" /> */}
+              </div>
+              <h3>
+                {selectedQuestion.question_title}
+                <h6 className="SelectedQuestion-subtitle-details">
+                  Asked <Moment fromNow>{selectedQuestion.time_stamp}</Moment>{" "}
+                  by {selectedQuestion.display_name} from{" "}
+                  {selectedQuestion.cohort}
+                </h6>
+              </h3>
             </div>
-            <h3>
-              {selectedQuestion.question_title}
-              <h6 className="SelectedQuestion-subtitle-details">
-              Asked <Moment fromNow>{selectedQuestion.time_stamp}</Moment> by{" "} {selectedQuestion.display_name} from {selectedQuestion.cohort}
-              </h6>
-            </h3>
+            <ReactMarkdown
+              className="SelectedQuestion-question"
+              source={selectedQuestion.question_desc}
+              escapeHtml={false}
+            ></ReactMarkdown>
           </div>
-          <ReactMarkdown
-            className="SelectedQuestion-question"
-            source={selectedQuestion.question_desc}
-            escapeHtml={false}
-          ></ReactMarkdown>
         </div>
         <h6 className="SelectedQuestion-header">Answers</h6>
         <div className="SelectedQuestion-answers-container">

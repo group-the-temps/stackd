@@ -34,7 +34,7 @@ class QuestionsList extends Component {
     // console.log(this.props);
     console.log(this.props.allQuestions);
     // console.log(this.props.searchResults);
-    console.log(this.props.answerCount)
+    console.log(this.props.answerCount);
     // const questionsMapped =
     //   this.props.searchResults &&
     //   this.props.searchResults.map(search => {
@@ -42,11 +42,11 @@ class QuestionsList extends Component {
     //   });
     if (this.props.searchResults.length > 0) {
       var mappedAllQuestions = this.props.searchResults.map(question => {
-        const mappedCount = this.props.answerCount.map((answer) => {
+        const mappedCount = this.props.answerCount.map(answer => {
           if (question.question_id === answer.question_id) {
-            return answer.count
+            return answer.count;
           }
-        })
+        });
         console.log(this.props.searchResults);
         return (
           <div className="QuestionsList-question-container">
@@ -55,10 +55,10 @@ class QuestionsList extends Component {
                 <li>{question.total_vote_count}</li>
                 <li>Liked</li>
               </div>
-              <div className="QuestionsList-question-box">
+              {/* <div className="QuestionsList-question-box">
                 <li>0</li>
                 <li>Saved</li>
-              </div>
+              </div> */}
             </div>
             <div className="QuestionsList-question-right">
               <h1
@@ -81,19 +81,23 @@ class QuestionsList extends Component {
                 Asked <Moment fromNow>{question.time_stamp}</Moment> by{" "}
                 {question.display_name} from {question.cohort}
               </h5>
-              {mappedCount ? <h5>{mappedCount} Answers Submitted</h5> : <h5>0 Answers Submitted</h5>}
+              {mappedCount ? (
+                <h5>{mappedCount} Answers Submitted</h5>
+              ) : (
+                <h5>0 Answers Submitted</h5>
+              )}
             </div>
           </div>
         );
       });
     } else {
       mappedAllQuestions = this.props.allQuestions.map(question => {
-        const mappedCount = this.props.answerCount.map((answer) => {
-          console.log(answer)
+        const mappedCount = this.props.answerCount.map(answer => {
+          console.log(answer);
           if (question.question_id === answer.question_id) {
-            return answer.count
+            return answer.count;
           }
-        })
+        });
         console.log(mappedCount);
         return (
           <div className="QuestionsList-question-container">
@@ -102,10 +106,10 @@ class QuestionsList extends Component {
                 <li>{question.total_vote_count}</li>
                 <li>Liked</li>
               </div>
-              <div className="QuestionsList-question-box">
+              {/* <div className="QuestionsList-question-box">
                 <li>0</li>
                 <li>Saved</li>
-              </div>
+              </div> */}
             </div>
             <div className="QuestionsList-question-right">
               {/* <h1
@@ -145,7 +149,11 @@ class QuestionsList extends Component {
                 Asked <Moment fromNow>{question.time_stamp}</Moment> by{" "}
                 {question.display_name} from {question.cohort}
               </h5>
-              {mappedCount ? <h5>{mappedCount} Answers Submitted</h5> : <h5>0 Answers Submitted</h5>}
+              {mappedCount ? (
+                <h5>{mappedCount} Answers Submitted</h5>
+              ) : (
+                <h5>0 Answers Submitted</h5>
+              )}
 
               {/* {mappedCount[0] !== undefined || mappedCount[1] !== undefined ? <h5>{mappedCount} Answers Submitted</h5> : <h5>0 Answers Submitted</h5>} */}
             </div>
