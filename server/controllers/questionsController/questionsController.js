@@ -15,9 +15,12 @@ createQuestion = async (req, res) => {
 
 getAllQuestions = async (req, res) => {
   const db = req.app.get("db");
+  // const { question_id } = req.body;
 
   const allQuestions = await db.questions.get_all_questions();
-  res.status(200).json(allQuestions);
+  const countAnswers = await db.questions.answers.count_answers();
+  const response = [allQuestions, countAnswers];
+  res.status(200).json(response);
 };
 
 viewSelectedQuestion = async (req, res) => {
@@ -52,9 +55,11 @@ getSelectedAnswers = async (req, res) => {
 createAnswer = async (req, res) => {
   const db = req.app.get("db");
   const { question_id } = req.params;
-  const { user_id } = req.session.user;
+  const { user_id } = +req.session.user;
   const { answer_desc } = req.body;
-
+  console.log(question_id);
+  console.log(user_id);
+  console.log(answer_desc);
   await db.questions.answers.create_answer(question_id, user_id, answer_desc);
   const createdAnswer = {
     question_id: +question_id,

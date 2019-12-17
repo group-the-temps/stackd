@@ -9,8 +9,10 @@ import DevMountain from "../../icons and pics/devmountain logo.png";
 import LevelUp from "../../icons and pics/level up.png";
 import Ask from "../../icons and pics/ask.png";
 import ContactUs from "../ContactUs/ContactUs";
+import { connect } from "react-redux";
+import { updateSearchState } from "../../redux/searchReducer";
 
-export default class Landing extends Component {
+class Landing extends Component {
   render() {
     return (
       <>
@@ -31,9 +33,10 @@ export default class Landing extends Component {
                 a later date.
               </h6>
               <div className="Landing-button">
-                <Link to="/questionslist">
-                  <button>Start Learning</button>
-                </Link>
+                  <button onClick={() => {
+                    this.props.updateSearchState({ searchResults: [] });
+                    this.props.history.push('/questionslist');
+                  }}>Start Learning</button>
               </div>
             </div>
           </div>
@@ -120,3 +123,11 @@ export default class Landing extends Component {
     );
   }
 }
+
+const mapStateToProps = reduxState => {
+  return {
+    searchResults: reduxState.searchReducer.searchResults
+  }
+}
+
+export default connect(mapStateToProps, { updateSearchState })(Landing);
