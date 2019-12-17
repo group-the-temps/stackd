@@ -116,6 +116,7 @@ class Header extends Component {
         .get(`/search/tags?tags=${this.state.searchInput}`)
         .then(response => {
           this.props.updateSearchResults(response.data);
+          this.props.history.push('/questionslist');
         })
         .catch(() => {
           alert("No Results Found");

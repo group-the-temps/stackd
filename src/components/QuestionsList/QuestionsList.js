@@ -44,7 +44,11 @@ class QuestionsList extends Component {
       var mappedAllQuestions = this.props.searchResults.map(question => {
         const mappedCount = this.props.answerCount.map((answer) => {
           if (question.question_id === answer.question_id) {
-            return answer.count
+            for (let i=0; i < answer.count.length; i++) {
+              if (answer.count[i] !== undefined) {
+                return <h5>{answer.count} Answers Submitted</h5>
+              } 
+            }
           }
         })
         console.log(this.props.searchResults);
@@ -81,7 +85,7 @@ class QuestionsList extends Component {
                 Asked <Moment fromNow>{question.time_stamp}</Moment> by{" "}
                 {question.display_name} from {question.cohort}
               </h5>
-              {mappedCount ? <h5>{mappedCount} Answers Submitted</h5> : <h5>0 Answers Submitted</h5>}
+              {mappedCount}
             </div>
           </div>
         );
@@ -89,9 +93,12 @@ class QuestionsList extends Component {
     } else {
       mappedAllQuestions = this.props.allQuestions.map(question => {
         const mappedCount = this.props.answerCount.map((answer) => {
-          console.log(answer)
           if (question.question_id === answer.question_id) {
-            return answer.count
+            for (let i=0; i < answer.count.length; i++) {
+              if (answer.count[i] !== undefined) {
+                return <h5>{answer.count} Answers Submitted</h5>
+              } 
+            }
           }
         })
         console.log(mappedCount);
@@ -145,9 +152,7 @@ class QuestionsList extends Component {
                 Asked <Moment fromNow>{question.time_stamp}</Moment> by{" "}
                 {question.display_name} from {question.cohort}
               </h5>
-              {mappedCount ? <h5>{mappedCount} Answers Submitted</h5> : <h5>0 Answers Submitted</h5>}
-
-              {/* {mappedCount[0] !== undefined || mappedCount[1] !== undefined ? <h5>{mappedCount} Answers Submitted</h5> : <h5>0 Answers Submitted</h5>} */}
+              {mappedCount}
             </div>
           </div>
           //   </div>
