@@ -1,65 +1,83 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux';
-import { storage } from '../../config/firebaseConfig';
-import axios from 'axios';
-import './ProfileImage.css';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { storage } from "../../config/firebaseConfig";
+import axios from "axios";
+import "./ProfileImage.css";
 
 class ProfileImage extends Component {
+  state = {
+    imageUrl: "",
+    newImage: ""
+  };
 
-    state = {
-        imageUrl: ''
-         
+  componentDidMount = () => {
+    axios.get("/prof/img").then(response => {
+      console.log(response);
+      this.setState({ imageUrl: response.data[0].img });
+    });
+  };
+
+  handleImageUpload = e => {
+    if (e.target.files[0]) {
+      const img = e.target.files[0];
+      this.setState({ imageUrl: "loading", newImage: "loading" });
+      const uploadTask = storage.ref(`profile_pictures/${img.name}`).put(img);
+      uploadTask.on("state_changed", () => {
+        storage
+          .ref("profile_pictures")
+          .child(img.name)
+          .getDownloadURL()
+          .then(url => {
+            this.setState({ imageUrl: url, newImage: url });
+          });
+      });
     }
+  };
 
-    componentDidMount = () => {
-        
-        axios.get('/prof/img').then( response => {
-            console.log(response);
-            this.setState({ imageUrl: response.data[0].img })
-        })
-    }
+  saveImg = async () => {
+    await axios.put(`/prof/img/${this.props.user.user_id}`, {
+      img: this.state.newImage
+    });
+    this.setState({ newImage: "" });
+  };
 
-    handleImageUpload = e => {
-        if (e.target.files[0]) {
-            const img = e.target.files[0];
-            const uploadTask = storage.ref(`profile_pictures/${img.name}`)
-            .put(img);
-            uploadTask.on('state_changed',
-            () => {
-                storage.ref('profile_pictures').child(img.name).getDownloadURL()
-                    .then(url => {
-                        this.setState({imageUrl: url});
-                })
-            })
-        }
-    };
-
-    saveImg = async () => {
-        await axios.put(`/prof/img/${this.props.user.user_id}`, {
-            img: this.state.imageUrl
-        });
-    }
-
-    render() {
-        console.log(this.state.imageUrl);
-        console.log(this.props.user.user_id)
-        return (
-            <div>
-                <div>
-                    <img className="profile__image" src={this.state.imageUrl} alt="Upload a pic!"></img>
-                    <input className="firebase__btns" type="file" onChange={this.handleImageUpload} />
-                </div>
-                <button className="save__image" onClick={this.saveImg}>Save Image</button>
-            </div>
-
-        )
-    }
+  render() {
+    console.log(this.state.imageUrl);
+    console.log(this.props.user.user_id);
+    return (
+      <div>
+        <div>
+          <img
+            className="profile__image"
+            src={this.state.imageUrl}
+            alt="Upload a pic!"
+          ></img>
+        </div>
+        <div className="firebase__btns-container">
+          <input
+            className="firebase__btns"
+            type="file"
+            onChange={this.handleImageUpload}
+          />
+          {this.state.newImage !== "" ||
+          this.state.newImage === this.state.imageUrl ? (
+            <input
+              type="button"
+              className="firebase__btn2"
+              value="Save Image"
+              onClick={this.saveImg}
+            />
+          ) : null}
+        </div>
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = reduxState => {
-    return {
-        user: reduxState.authReducer.user
-    }
-}
+  return {
+    user: reduxState.authReducer.user
+  };
+};
 
 export default connect(mapStateToProps)(ProfileImage);

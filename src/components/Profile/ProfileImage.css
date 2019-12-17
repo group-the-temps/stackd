@@ -1,19 +1,30 @@
 .profile__image {
-    object-fit: cover;
-    height: 150px;
-    width: 150px;
-    border-radius: 50%;
-    box-shadow: 7px 10px 12px -5px rgb(0, 0, 0, 0.42);
-    margin-bottom: 15px;
+  object-fit: cover;
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  box-shadow: 7px 10px 12px -5px rgb(0, 0, 0, 0.42);
+  margin-bottom: 25px;
 }
 
 .save__image:hover {
-    font-weight: 550;
-    color: rgb(15, 15, 15);
-    background: #5dc8dd;
+  font-weight: 550;
+  color: rgb(15, 15, 15);
+  background: #5dc8dd;
+}
+
+.firebase__btns-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .firebase__btns {
-    text-align: center;
-    width: 75%
+  text-align: center;
+  width: 75%;
+}
+
+.firebase__btn2 {
+  text-align: center;
+  width: 29%;
 }
