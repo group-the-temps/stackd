@@ -9,6 +9,7 @@ import {
 import ProfileImage from "./ProfileImage";
 import { getAskedQuestions } from "../../redux/authReducer";
 import "./Profile.css";
+import Moment from 'react-moment';
 
 class Profile extends Component {
   state = {
@@ -127,7 +128,15 @@ class Profile extends Component {
     // console.log(this.props.profile)
     var mappedQuestions = this.props.myAsked.map(question => {
       console.log(question.question_title);
-      return <li>{question.question_title}</li>;
+
+      return <div className="question__box">
+                <li className="question__title">{question.question_title}</li>
+                <h5>
+                Asked <Moment fromNow>{question.time_stamp}</Moment> by{" "}
+                {question.display_name} from {question.cohort}
+                </h5>
+            </div>
+      ;
     });
     const { display_name, bio, cohort } = this.props.user;
     return (
@@ -148,7 +157,7 @@ class Profile extends Component {
                       className="edit__cohort__btn"
                       onClick={this.handleOpenCohort}
                     >
-                      <i className="fas fa-edit fa-1x"></i>
+                      <i className="fas fa-edit fa-2x"></i>
                     </button>
                   </div>
                 </div>
@@ -194,7 +203,7 @@ class Profile extends Component {
                     className="edit__name__btn"
                     onClick={this.handleOpenName}
                   >
-                    <i className="fas fa-edit fa-1x"></i>
+                    <i className="fas fa-edit fa-2x"></i>
                   </button>
                 </div>
                 {this.state.editName ? (
@@ -234,7 +243,7 @@ class Profile extends Component {
                     className="edit__bio__btn"
                     onClick={this.handleOpenBio}
                   >
-                    <i className="fas fa-edit fa-1x"></i>
+                    <i className="fas fa-edit fa-2x"></i>
                   </button>
                 </div>
                 {this.state.editBio ? (
@@ -267,9 +276,9 @@ class Profile extends Component {
         </div>
         <div className="page__container-bottom">
           <section className="extra__info__section">
-            <div className="profile__questions">
               <label>Asked Questions List</label>
-              <h1>{mappedQuestions}</h1>
+            <div className="profile__questions">
+                {mappedQuestions}
             </div>
             {/* <div className="profile__questions">
                                 <label>Saved Questions List</label>
