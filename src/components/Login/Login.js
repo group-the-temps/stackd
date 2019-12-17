@@ -42,37 +42,68 @@ class Login extends Component {
   };
   render() {
     return (
-      <div className="Login-container">
-        <Modal isOpen={this.state.showModal} className="login-modal">
-          <Link to="/">
-            <button className="close-button" onClick={this.handleCloseModal}>
-              X
+      <>
+        <div className="Landing-container">
+          <div className="Landing-main-container">
+            <div className="Landing-heading">
+              <h1>Ask questions. Get answers.</h1>
+            </div>
+            <div className="Landing-overview">
+              <h6>
+                Learning to code is hard enough. So why do it alone? This is why
+                we created Stack'd - an exclusive site for DevMountain students.
+              </h6>
+
+              <h6>
+                With Stack'd you can seek help by asking questions, give help by
+                replying to questions, or save questions/topics for reviewing at
+                a later date.
+              </h6>
+              <div className="Landing-button">
+                <button
+                  onClick={() => {
+                    this.props.updateSearchState({ searchResults: [] });
+                    this.props.history.push("/questionslist");
+                  }}
+                >
+                  Start Learning
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="Login-container">
+          <Modal isOpen={this.state.showModal} className="login-modal">
+            <Link to="/">
+              <button className="close-button" onClick={this.handleCloseModal}>
+                X
+              </button>
+            </Link>
+            <h1 className="login-header">Login</h1>
+            <form className="Login-form">
+              <input
+                className="login-input"
+                onChange={this.handleInput}
+                name="email"
+                placeholder="email"
+              />
+              <input
+                className="login-input"
+                onChange={this.handleInput}
+                type="password"
+                name="password"
+                placeholder="password"
+              />
+            </form>
+            <button className="modal-button" onClick={this.handleSubmit}>
+              Login
             </button>
-          </Link>
-          <h1 className="login-header">Login</h1>
-          <form className="Login-form">
-            <input
-              className="login-input"
-              onChange={this.handleInput}
-              name="email"
-              placeholder="email"
-            />
-            <input
-              className="login-input"
-              onChange={this.handleInput}
-              type="password"
-              name="password"
-              placeholder="password"
-            />
-          </form>
-          <button className="modal-button" onClick={this.handleSubmit}>
-            Login
-          </button>
-          <Link to="/register">
-            <p className="new-account">create new account</p>
-          </Link>
-        </Modal>
-      </div>
+            <Link to="/register">
+              <p className="new-account">create new account</p>
+            </Link>
+          </Modal>
+        </div>
+      </>
     );
   }
 }
