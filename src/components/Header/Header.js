@@ -171,8 +171,6 @@ class Header extends Component {
     if (this.props.user.user_id) {
       navLoggedOut += "-loggedin";
     }
-
-    console.log(this.props.clickedTags);
     return (
       <div className="Nav-bar-container">
         <div className="Logo-search-container">
