@@ -8,7 +8,8 @@ const initialState = {
   selectedAnswers: [{}],
   clickedTitle: false,
   answerCount: [],
-  createAnswer: []
+  createAnswer: [],
+  likedQuestionCount: ''
 };
 
 const CREATE_QUESTION = "CREATE_QUESTION";
