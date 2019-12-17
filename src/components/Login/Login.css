@@ -8,7 +8,7 @@
   background-attachment: scroll;
   background-position: center center; */
   /* background-size: cover; */
-  /* overflow: none; */
+  overflow: none;
 }
 
 .Login-form {
