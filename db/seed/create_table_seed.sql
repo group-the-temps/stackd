@@ -45,5 +45,5 @@ like_id SERIAL PRIMARY KEY,
 user_id INT REFERENCES users(user_id),
 question_id INT REFERENCES questions(question_id),
 answer_id INT REFERENCES answers(answer_id),
-is_liked BOOLEAN NOT NULL
+is_liked BOOLEAN
 );
