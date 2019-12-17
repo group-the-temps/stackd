@@ -14,6 +14,7 @@ import Star from "../../icons and pics/star.png";
 import Like from "../../icons and pics/like.png";
 import ReactMarkdown from "react-markdown";
 import Moment from "react-moment";
+import { getQuestionLikes } from "../../redux/likesReducer";
 // import Modal from "react-modal";
 
 /*
@@ -77,13 +78,14 @@ class SelectedQuestion extends Component {
   componentDidMount() {
     this.props.getSelectedQuestion(this.props.selectedQuestionID);
     this.props.getSelectedAnswers(this.props.selectedQuestionID);
+    this.props.getQuestionLikes(this.props.selectedQuestionID, this.props.user_id);
   }
   handleQuillChange = value => {
     this.setState({ answer_desc: value });
   };
 
   handleSubmit = async e => {
-    console.log(this.props);
+    // console.log(this.props);
     e.preventDefault();
     // this.setState({ testing: this.state.question_desc });
     await this.props.createAnswer(
@@ -118,13 +120,14 @@ class SelectedQuestion extends Component {
   ];
 
   render() {
-    console.log(this.props.selectedQuestionID);
-    console.log(this.props.selectedQuestion[0]);
-    console.log(this.props.selectedAnswers);
+    console.log(this.props.likedQuestion);
+    // console.log(this.props.selectedQuestionID);
+    // console.log(this.props.selectedQuestion[0]);
+    // console.log(this.props.selectedAnswers);
     const selectedQuestion =
       this.props.selectedQuestion && this.props.selectedQuestion[0];
     const answersMapped = this.props.selectedAnswers.map(answer => {
-      console.log(answer)
+      // console.log(answer)
       return (
         <div>
           <div className="SelectedQuestion-answer-container">
@@ -234,12 +237,14 @@ const mapStateToProps = reduxState => {
     clickedTitle: reduxState.questionsReducer.clickedTitle,
     user: reduxState.authReducer.user,
     user_id: reduxState.authReducer.user.user_id,
-    likedQuestionCount: reduxState.questionsReducer.likedQuestionCount
+    likedQuestionCount: reduxState.questionsReducer.likedQuestionCount,
+    likedQuestion: reduxState.likesReducer.likedQuestion
   };
 };
 
 export default connect(mapStateToProps, {
   getSelectedQuestion,
   getSelectedAnswers,
-  createAnswer
+  createAnswer,
+  getQuestionLikes
 })(SelectedQuestion);

@@ -102,7 +102,7 @@ class QuestionsList extends Component {
             }
           }
         });
-        console.log(question)
+        // console.log(question)
         return (
           <div className="QuestionsList-question-container">
             <div className="QuestionsList-question-left">
