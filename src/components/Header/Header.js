@@ -3,7 +3,7 @@ import "./Header.css";
 import { Link, withRouter } from "react-router-dom";
 import searchicon from "../../search_icon.png";
 import { connect } from "react-redux";
-import { logoutUser } from "../../redux/authReducer";
+import { logoutUser, getSession } from "../../redux/authReducer";
 import {
   handleOpenTags,
   handleCloseTags,
@@ -28,6 +28,10 @@ class Header extends Component {
       toggleNode: false,
       toggleSQL: false
     };
+  }
+
+  componentDidMount() {
+    this.props.getSession();
   }
 
   handleJS = () => {
@@ -345,6 +349,7 @@ const mapStateToProps = reduxState => {
 export default withRouter(
   connect(mapStateToProps, {
     logoutUser,
+    getSession,
     handleOpenTags,
     handleCloseTags,
     getProfile,
