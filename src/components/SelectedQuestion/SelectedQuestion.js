@@ -124,6 +124,7 @@ class SelectedQuestion extends Component {
     const selectedQuestion =
       this.props.selectedQuestion && this.props.selectedQuestion[0];
     const answersMapped = this.props.selectedAnswers.map(answer => {
+      console.log(answer)
       return (
         <div>
           <div className="SelectedQuestion-answer-container">
@@ -168,7 +169,7 @@ class SelectedQuestion extends Component {
           <div className="SelectedQuestion-question-container">
             <div className="SelectedQuestion-title">
               <div className="SelectedQuestion-icons-container">
-                <div className="SelectedQuestion-icons-container-count">0</div>
+                <div className="SelectedQuestion-icons-container-count">{this.props.likedQuestionCount}</div>
                 <div className="SelectedQuestion-like-box">
                   <img className="SelectedQuestion-arrow" src={Like} alt="up" />
                   Like
@@ -232,7 +233,8 @@ const mapStateToProps = reduxState => {
     selectedAnswers: reduxState.questionsReducer.selectedAnswers,
     clickedTitle: reduxState.questionsReducer.clickedTitle,
     user: reduxState.authReducer.user,
-    user_id: reduxState.authReducer.user.user_id
+    user_id: reduxState.authReducer.user.user_id,
+    likedQuestionCount: reduxState.questionsReducer.likedQuestionCount
   };
 };
 
