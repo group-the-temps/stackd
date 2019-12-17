@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {getProfile, editBio, editDisplayName, editCohort, getAskedQuestions} from '../../redux/profileReducer';
+import {getProfile, editBio, editDisplayName, editCohort} from '../../redux/profileReducer';
 import ProfileImage from './ProfileImage';
+import {getAskedQuestions} from '../../redux/authReducer';
 import './Profile.css';
 
 class Profile extends Component {
@@ -17,19 +18,11 @@ class Profile extends Component {
         showProfileName: false,
         showProfileBio: false,
         showProfileCohort: false,
-        askedQuestions: []
     }
 
     componentDidMount() {
         this.props.getProfile(this.props.user_id);
-        // this.handleGetAskedQuestions();
-        this.props.getAskedQuestions(this.props.profile.user_id)
-        // .then( (response) => {
-        //     this.setState({askedQuestions: response.data})
-        // })
-    }
-
-    handleGetAskedQuestions = () => {
+        this.props.getAskedQuestions(this.props.user_id)
     }
 
     handleOpenBio = () => {
@@ -124,11 +117,14 @@ class Profile extends Component {
     }
 
     render() {
-        console.log(this.state.display_name)
-        console.log(this.state)
-        console.log(this.state.askedQuestions)
+        // console.log(this.state)
+        console.log(this.props.myAsked);
         // console.log(this.props.user)
         // console.log(this.props.profile)
+        var mappedQuestions = this.props.myAsked.map( question => {
+            console.log(question.question_title);
+            return <li>{question.question_title}</li>
+        } )
         const {display_name, bio, cohort} = this.props.user;
         return (
             <main className="page__container">
@@ -137,7 +133,7 @@ class Profile extends Component {
                         <section className="img__section">
                             <ProfileImage user_id={this.props.user_id} />
                             <div className="cohort__cont">
-                                {!this.state.showProfileCohort ? <label>Cohort: {cohort}</label> : <label>Cohort: {this.state.cohort}</label>}
+                                {!this.state.showProfileCohort ? <label>Cohort: DM {cohort}</label> : <label>Cohort: DM {this.state.cohort}</label>}
                                 <div className="cohort__edit">
                                     <button className="edit__cohort__btn" onClick={this.handleOpenCohort}>
                                         <i className="fas fa-edit fa-1x"></i>
@@ -202,7 +198,7 @@ class Profile extends Component {
                         <section className="extra__info__section">
                             <div className="profile__questions">
                                 <label>Asked Questions List</label>
-                                <h1>{this.state.askedQuestions}</h1>
+                                <h1>{mappedQuestions}</h1>
                             </div>
                             {/* <div className="profile__questions">
                                 <label>Saved Questions List</label>
@@ -218,7 +214,8 @@ const mapStateToProps = reduxState => {
         profile: reduxState.profileReducer.profile,
         id: reduxState.profileReducer.profile.user_id,
         user: reduxState.authReducer.user,
-        user_id: reduxState.authReducer.user.user_id
+        user_id: reduxState.authReducer.user.user_id,
+        myAsked: reduxState.authReducer.askedQuestions
 
     }
 }

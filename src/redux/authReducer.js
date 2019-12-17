@@ -7,6 +7,7 @@ const initialState = {
     admin_invite_code: '',
     img: '',
     user: {},
+    askedQuestions: [],
     loading: false,
     isAdmin: false
 }
@@ -15,6 +16,8 @@ const REGISTER_USER = 'REGISTER_USER';
 const LOGIN_USER = 'LOGIN_USER';
 const LOGOUT_USER = 'LOGOUT_USER';
 const GET_SESSION = 'GET_SESSION';
+const GET_ASKED_QUESTIONS = "GET_ASKED_QUESTIONS";
+
 // const EDIT_NAME = "EDIT_NAME";
 
 export const updateState = e => {
@@ -49,6 +52,14 @@ export const loginUser = (email, password) => {
     }
 
 }
+
+export function getAskedQuestions(user_id) {
+    return {
+        type: GET_ASKED_QUESTIONS,
+        payload: axios.get(`/prof/askedquestions/${user_id}`)
+    };
+};
+
 export const getSession = () => {
     return {
         type: GET_SESSION,
@@ -64,17 +75,9 @@ export const logoutUser = () => {
 
 }
 
-// export function editDisplayName(display_name) {
-//     return {
-//         type: EDIT_NAME,
-//         payload: axios.put("/prof/displayname", {
-//             display_name
-//         })
-//     }
-// };
-
 export default function authReducer(state = initialState, action) {
-    console.log(state.user)
+    // console.log(state.user)
+    console.log(state.askedQuestions)
     const { payload, type } = action;
     switch (type) {
         case UPDATE_STATE:
@@ -82,22 +85,20 @@ export default function authReducer(state = initialState, action) {
         case `${REGISTER_USER}_PENDING`:
             return { ...state, loading: true }
         case `${REGISTER_USER}_FULFILLED`:
-            console.log(payload.data);
+            // console.log(payload.data);
             return { ...state, loading: false, user: payload.data }
         case `${LOGIN_USER}_PENDING`:
             return { ...state, loading: true }
         case `${LOGIN_USER}_FULFILLED`:
             return { ...state, loading: false, user: payload.data }
+        case `${GET_ASKED_QUESTIONS}_PENDING`:
+            return { ...state, loading: true }
+        case `${GET_ASKED_QUESTIONS}_FULFILLED`:
+            return { ...state, loading: false, askedQuestions: payload.data }
         case `${LOGOUT_USER}_PENDING`:
             return { ...state, loading: true }
         case `${LOGOUT_USER}_FULFILLED`:
             return { ...state, loading: false, user: {} }
-        // case `${EDIT_NAME}_PENDING`:
-        //     return { ...state, loading: true }
-        // case `${EDIT_NAME}_FULFILLED`:
-        //     let newName = { ...state.user }
-        //     newName = payload.data
-        //     return { ...state, loading: false, profile: newName, display_name: newName.display_name }
 
         default:
             return state;

@@ -79,7 +79,7 @@ getImg = async (req, res) => {
 
 getAskedQuestions = async (req, res) => {
     const db = req.app.get("db");
-    const {user_id} = +req.params;
+    const {user_id} = req.params;
 
     const askedQuestions = await db.questions.get_profile_questions(user_id)
     res.status(200).json(askedQuestions);
