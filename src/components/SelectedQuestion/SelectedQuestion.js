@@ -4,7 +4,8 @@ import "./SelectedQuestion.css";
 import "react-quill/dist/quill.snow.css";
 import {
   getSelectedQuestion,
-  getSelectedAnswers
+  getSelectedAnswers,
+  createAnswer
 } from "../../redux/questionsReducer";
 import { connect } from "react-redux";
 import ArrowUp from "../../icons and pics/arrow_up.png";
@@ -68,7 +69,8 @@ class SelectedQuestion extends Component {
     super(props);
 
     this.state = {
-      showModal: true
+      showModal: true,
+      answer_desc: ""
     };
   }
 
@@ -76,7 +78,21 @@ class SelectedQuestion extends Component {
     this.props.getSelectedQuestion(this.props.selectedQuestionID);
     this.props.getSelectedAnswers(this.props.selectedQuestionID);
   }
+  handleQuillChange = value => {
+    this.setState({ answer_desc: value });
+  };
 
+  handleSubmit = e => {
+    console.log(this.props);
+    e.preventDefault();
+    // this.setState({ testing: this.state.question_desc });
+    this.props.createAnswer({
+      question_id: this.props.selectedQuestionID,
+      user_id: this.props.user_id,
+      answer_desc: this.state.answer_desc
+    });
+    this.setState({ showModal: false });
+  };
   static modules = {
     toolbar: {
       container: "#toolbar"
@@ -148,33 +164,37 @@ class SelectedQuestion extends Component {
       // >
       <div className="SelectedQuestion-container">
         <h6 className="SelectedQuestion-header">Question</h6>
-        <div className="SelectedQuestion-question-container">
-          <div className="SelectedQuestion-title">
-            <div className="SelectedQuestion-icons-container">
-              <div className="SelectedQuestion-icons-container-count">0</div>
-              <div className="SelectedQuestion-like-box">
-                <img className="SelectedQuestion-arrow" src={Like} alt="up" />
-                Like
-              </div>
-              {/* <img
+        <div className="SelectedQuestion-question-background">
+          <div className="SelectedQuestion-question-container">
+            <div className="SelectedQuestion-title">
+              <div className="SelectedQuestion-icons-container">
+                <div className="SelectedQuestion-icons-container-count">0</div>
+                <div className="SelectedQuestion-like-box">
+                  <img className="SelectedQuestion-arrow" src={Like} alt="up" />
+                  Like
+                </div>
+                {/* <img
                 className="SelectedQuestion-arrow"
                 src={ArrowDown}
                 alt="down"
               />
               <img className="SelectedQuestion-star" src={Star} alt="star" /> */}
+              </div>
+              <h3>
+                {selectedQuestion.question_title}
+                <h6 className="SelectedQuestion-subtitle-details">
+                  Asked <Moment fromNow>{selectedQuestion.time_stamp}</Moment>{" "}
+                  by {selectedQuestion.display_name} from{" "}
+                  {selectedQuestion.cohort}
+                </h6>
+              </h3>
             </div>
-            <h3>
-              {selectedQuestion.question_title}
-              <h6 className="SelectedQuestion-subtitle-details">
-              Asked <Moment fromNow>{selectedQuestion.time_stamp}</Moment> by{" "} {selectedQuestion.display_name} from {selectedQuestion.cohort}
-              </h6>
-            </h3>
+            <ReactMarkdown
+              className="SelectedQuestion-question"
+              source={selectedQuestion.question_desc}
+              escapeHtml={false}
+            ></ReactMarkdown>
           </div>
-          <ReactMarkdown
-            className="SelectedQuestion-question"
-            source={selectedQuestion.question_desc}
-            escapeHtml={false}
-          ></ReactMarkdown>
         </div>
         <h6 className="SelectedQuestion-header">Answers</h6>
         <div className="SelectedQuestion-answers-container">
@@ -187,13 +207,13 @@ class SelectedQuestion extends Component {
             <br />
             <CustomToolbar />
             <ReactQuill
-              //   value={this.state.question_desc}
-              //   onChange={this.handleQuillChange}
+              value={this.state.answer_desc}
+              onChange={this.handleQuillChange}
               modules={SelectedQuestion.modules}
               formats={SelectedQuestion.formats}
             />
             <div className="SubmitAnswer-button-box">
-              <button>Submit Your Answer</button>
+              <button onClick={this.handleSubmit}>Submit Your Answer</button>
             </div>
           </div>
         </div>
@@ -208,11 +228,13 @@ const mapStateToProps = reduxState => {
     selectedQuestionID: reduxState.questionsReducer.selectedQuestionID,
     selectedQuestion: reduxState.questionsReducer.selectedQuestion,
     selectedAnswers: reduxState.questionsReducer.selectedAnswers,
-    clickedTitle: reduxState.questionsReducer.clickedTitle
+    clickedTitle: reduxState.questionsReducer.clickedTitle,
+    user_id: reduxState.authReducer.user.user_id
   };
 };
 
 export default connect(mapStateToProps, {
   getSelectedQuestion,
-  getSelectedAnswers
+  getSelectedAnswers,
+  createAnswer
 })(SelectedQuestion);

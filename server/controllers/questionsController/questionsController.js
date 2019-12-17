@@ -19,10 +19,7 @@ getAllQuestions = async (req, res) => {
 
   const allQuestions = await db.questions.get_all_questions();
   const countAnswers = await db.questions.answers.count_answers();
-  const response = [
-    allQuestions,
-    countAnswers
-  ]
+  const response = [allQuestions, countAnswers];
   res.status(200).json(response);
 };
 
@@ -58,9 +55,11 @@ getSelectedAnswers = async (req, res) => {
 createAnswer = async (req, res) => {
   const db = req.app.get("db");
   const { question_id } = req.params;
-  const { user_id } = req.session.user;
+  const { user_id } = +req.session.user;
   const { answer_desc } = req.body;
-
+  console.log(question_id);
+  console.log(user_id);
+  console.log(answer_desc);
   await db.questions.answers.create_answer(question_id, user_id, answer_desc);
   const createdAnswer = {
     question_id: +question_id,

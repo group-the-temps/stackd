@@ -2,6 +2,7 @@
   position: absolute;
   top: 230px;
   width: 100%;
+  z-index: -1;
 }
 
 .QuestionsList-header {
@@ -36,7 +37,7 @@
   height: 76px;
   padding: 2px;
   margin-bottom: 4px;
-  width: 100%;
+  width: 99.5%;
 }
 
 .QuestionsList-question-container:hover {
@@ -55,11 +56,15 @@
 }
 
 .QuestionsList-question-box li {
-  font-size: 14px;
+  font-size: 16px;
+  padding: 5px;
 }
 
 .QuestionsList-question-left {
   width: 92px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .QuestionsList-question-right {
