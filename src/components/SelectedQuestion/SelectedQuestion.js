@@ -82,16 +82,16 @@ class SelectedQuestion extends Component {
     this.setState({ answer_desc: value });
   };
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     console.log(this.props);
     e.preventDefault();
     // this.setState({ testing: this.state.question_desc });
-    this.props.createAnswer({
-      question_id: this.props.selectedQuestionID,
-      user_id: this.props.user_id,
-      answer_desc: this.state.answer_desc
-    });
-    this.setState({ showModal: false });
+    await this.props.createAnswer(
+      this.props.selectedQuestionID,
+      this.props.user_id,
+      this.state.answer_desc
+    );
+    this.setState({ showModal: false, answer_desc: '' });
   };
   static modules = {
     toolbar: {
@@ -129,7 +129,7 @@ class SelectedQuestion extends Component {
           <div className="SelectedQuestion-answer-container">
             <div className="SelectedQuestion-title">
               <div className="SelectedQuestion-icons-container">
-                <div className="SelectedQuestion-icons-container-count">0</div>
+                <div className="SelectedQuestion-icons-container-count">{answer.likes_count}</div>
                 <div className="SelectedQuestion-like-box">
                   <img className="SelectedQuestion-arrow" src={Like} alt="up" />
                   Like
@@ -202,20 +202,22 @@ class SelectedQuestion extends Component {
           {answersMapped}
           {/* <div className="SelectedQuestion-answers-header">All Answers</div>
           <div className="SelectedQuestion-answers-mapped">Answers Mapped</div> */}
-          <div className="SubmitAnswer-body">
-            <h6>Submit your answer below!</h6>
-            <br />
-            <CustomToolbar />
-            <ReactQuill
-              value={this.state.answer_desc}
-              onChange={this.handleQuillChange}
-              modules={SelectedQuestion.modules}
-              formats={SelectedQuestion.formats}
-            />
-            <div className="SubmitAnswer-button-box">
-              <button onClick={this.handleSubmit}>Submit Your Answer</button>
-            </div>
-          </div>
+          {this.props.user.user_id ?
+            <div className="SubmitAnswer-body">
+              <h6>Submit your answer below!</h6>
+              <br />
+              <CustomToolbar />
+              <ReactQuill
+                value={this.state.answer_desc}
+                onChange={this.handleQuillChange}
+                modules={SelectedQuestion.modules}
+                formats={SelectedQuestion.formats}
+              />
+              <div className="SubmitAnswer-button-box">
+                <button onClick={this.handleSubmit}>Submit Your Answer</button>
+              </div>
+            </div> : null}
+
         </div>
       </div>
       // </Modal>
@@ -229,6 +231,7 @@ const mapStateToProps = reduxState => {
     selectedQuestion: reduxState.questionsReducer.selectedQuestion,
     selectedAnswers: reduxState.questionsReducer.selectedAnswers,
     clickedTitle: reduxState.questionsReducer.clickedTitle,
+    user: reduxState.authReducer.user,
     user_id: reduxState.authReducer.user.user_id
   };
 };
