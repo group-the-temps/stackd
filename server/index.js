@@ -56,7 +56,10 @@ app.post('/question/create', QC.createQuestion);
 app.post('/question/create/answer/:question_id', QC.createAnswer);
 
 //Likes
-app.put()
+app.put('/liked/question/:question_id', LC.likedQuestion);
+app.put('/liked/answer/:answer_id', LC.likedAnswer);
+app.post('/liked/question/bool', LC.boolLikedQuestion);
+app.post('/liked/answer/bool', LC.boolLikedAnswer);
 
 //Profile
 app.get('/prof/all/:id', PC.getUserProfile);

@@ -129,7 +129,7 @@ class SelectedQuestion extends Component {
           <div className="SelectedQuestion-answer-container">
             <div className="SelectedQuestion-title">
               <div className="SelectedQuestion-icons-container">
-                <div className="SelectedQuestion-icons-container-count">0</div>
+                <div className="SelectedQuestion-icons-container-count">{answer.likes_count}</div>
                 <div className="SelectedQuestion-like-box">
                   <img className="SelectedQuestion-arrow" src={Like} alt="up" />
                   Like
