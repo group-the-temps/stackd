@@ -24,9 +24,7 @@ user_id INT REFERENCES users(user_id),
 question_title VARCHAR(300) NOT null,
 question_desc TEXT NOT null,
 tags TEXT NOT null,
-up_vote_count INT NOT null,
-down_vote_count INT NOT null,
-total_vote_count INT NOT null,
+likes_count INT,
 time_stamp TEXT NOT null
 );
 
@@ -36,7 +34,8 @@ answer_id SERIAL PRIMARY KEY,
 question_id INT REFERENCES questions(question_id),
 user_id INT REFERENCES users(user_id),
 answer_desc TEXT NOT null,
-time_stamp TEXT NOT null
+time_stamp TEXT NOT null,
+likes_count INT
 );
 
 CREATE TABLE likes 
@@ -45,5 +44,5 @@ like_id SERIAL PRIMARY KEY,
 user_id INT REFERENCES users(user_id),
 question_id INT REFERENCES questions(question_id),
 answer_id INT REFERENCES answers(answer_id),
-is_liked BOOLEAN NOT NULL
+is_liked BOOLEAN
 );
