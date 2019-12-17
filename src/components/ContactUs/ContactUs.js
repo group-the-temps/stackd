@@ -19,7 +19,7 @@ export default class ContactUs extends Component {
     } else {
       axios({
         method: "POST",
-        url: "http://localhost:3000/send/to/us",
+        url: process.env.REACT_APP_LOCAL_HOST,
         data: {
           senderName,
           senderEmail,
