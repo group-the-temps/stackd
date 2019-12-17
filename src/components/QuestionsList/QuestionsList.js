@@ -68,7 +68,9 @@ class QuestionsList extends Component {
                 className="QuestionsList-question-title"
                 onClick={() => {
                   this.props.updateQuestionState({
-                    selectedQuestionID: question.question_id
+                    selectedQuestionID: question.question_id,
+                    clickedTitle: true,
+                    likedQuestionCount: question.likes_count
                   });
                   this.props.history.push(
                     `/selectedquestion/${question.question_id}`
@@ -100,6 +102,7 @@ class QuestionsList extends Component {
             }
           }
         });
+        // console.log(question)
         return (
           <div className="QuestionsList-question-container">
             <div className="QuestionsList-question-left">
@@ -134,7 +137,8 @@ class QuestionsList extends Component {
                 onClick={() => {
                   this.props.updateQuestionState({
                     selectedQuestionID: question.question_id,
-                    clickedTitle: true
+                    clickedTitle: true,
+                    likedQuestionCount: question.likes_count
                   });
                   this.props.history.push(
                     `/selectedquestion/${question.question_id}`
@@ -177,7 +181,8 @@ const mapStateToProps = reduxState => {
     allQuestions: reduxState.questionsReducer.allQuestions,
     selectedQuestionID: reduxState.questionsReducer.selectedQuestionID,
     clickedTitle: reduxState.questionsReducer.clickedTitle,
-    answerCount: reduxState.questionsReducer.answerCount
+    answerCount: reduxState.questionsReducer.answerCount,
+    likedQuestionCount: reduxState.questionsReducer.likedQuestionCount
   };
 };
 

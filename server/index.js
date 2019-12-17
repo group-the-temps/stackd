@@ -56,6 +56,7 @@ app.post('/question/create', QC.createQuestion);
 app.post('/question/create/answer/:question_id', QC.createAnswer);
 
 //Likes
+app.get('/question/liked/:question_id', LC.getLikedQuestions)
 app.put('/liked/question/:question_id', LC.likedQuestion);
 app.put('/liked/answer/:answer_id', LC.likedAnswer);
 app.post('/liked/question/bool', LC.boolLikedQuestion);
