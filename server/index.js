@@ -56,7 +56,8 @@ app.post('/question/create', QC.createQuestion);
 app.post('/question/create/answer/:question_id', QC.createAnswer);
 
 //Likes
-app.get('/question/liked/:question_id', LC.getLikedQuestions)
+app.get('/question/liked/:question_id', LC.getLikedQuestions);
+app.get('/answer/liked/:answer_id', LC.getLikedAnswers);
 app.put('/liked/question/:question_id', LC.likedQuestion);
 app.put('/liked/answer/:answer_id', LC.likedAnswer);
 app.post('/liked/question/bool', LC.boolLikedQuestion);
@@ -64,7 +65,7 @@ app.post('/liked/answer/bool', LC.boolLikedAnswer);
 
 //Profile
 app.get('/prof/all/:id', PC.getUserProfile);
-app.get('/prof/img', PC.getImg);
+app.get('/prof/img/:user_id', PC.getImg);
 app.get('/prof/askedquestions/:user_id', PC.getAskedQuestions);
 app.put('/prof/displayname', PC.editDisplayName);
 app.put('/prof/bio', PC.editBio);

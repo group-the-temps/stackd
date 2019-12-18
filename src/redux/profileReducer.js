@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const initialState = {
-    profile: {},
+    profile: [],
     askedQuestions: [],
     loading: false
 };
@@ -14,10 +14,10 @@ const EDIT_COHORT = "EDIT_COHORT";
 
 
 //ACTION CREATORS
-export function getProfile(user_id) {
+export function getProfile(id) {
     return {
         type: GET_PROFILE,
-        payload: axios.get(`/prof/all/${user_id}`)
+        payload: axios.get(`/prof/all/${id}`)
     };
 };
 
@@ -64,7 +64,7 @@ export default function profileReducer(state = initialState, action) {
         case `${GET_PROFILE}_FULFILLED`:
             console.log(state.askedQuestions)
             console.log(state.profile)
-            return { ...state, loading: false, askedQuestions: payload.data }
+            return { ...state, loading: false, profile: payload.data }
         // case `${GET_ASKED_QUESTIONS}_PENDING`:
         //     return { ...state, loading: true }
         // case `${GET_ASKED_QUESTIONS}_FULFILLED`:

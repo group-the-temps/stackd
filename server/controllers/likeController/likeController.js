@@ -40,10 +40,21 @@ boolLikedAnswer = async (req, res) => {
     res.status(200).json(likedAnswerCount)
 }
 
+getLikedAnswers = async (req, res) => {
+    const db = req.app.get('db');
+    const { answer_id } = req.params;
+    const { user_id } = req.session.user;
+
+    const allLikedAnswers = await db.likes.get_liked_answers(answer_id, user_id);
+    console.log(answer_id)
+    res.status(200).json(allLikedAnswers);
+}
+
 module.exports = {
     likedQuestion,
     boolLikedQuestion,
     likedAnswer,
     boolLikedAnswer,
-    getLikedQuestions
+    getLikedQuestions,
+    getLikedAnswers
 }

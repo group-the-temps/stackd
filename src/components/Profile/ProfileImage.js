@@ -11,7 +11,7 @@ class ProfileImage extends Component {
   };
 
   componentDidMount = () => {
-    axios.get("/prof/img").then(response => {
+    axios.get(`/prof/img/${this.props.selectedUserID}`).then(response => {
       console.log(response);
       this.setState({ imageUrl: response.data[0].img });
     });
@@ -35,7 +35,7 @@ class ProfileImage extends Component {
   };
 
   saveImg = async () => {
-    await axios.put(`/prof/img/${this.props.user.user_id}`, {
+    await axios.put(`/prof/img/${this.props.selectedUserID}`, {
       img: this.state.newImage
     });
     this.setState({ newImage: "" });
@@ -43,7 +43,7 @@ class ProfileImage extends Component {
 
   render() {
     console.log(this.state.imageUrl);
-    console.log(this.props.user.user_id);
+    console.log(this.props.selectedUserID);
     return (
       <div>
         <div>
@@ -76,7 +76,8 @@ class ProfileImage extends Component {
 
 const mapStateToProps = reduxState => {
   return {
-    user: reduxState.authReducer.user
+    user: reduxState.authReducer.user,
+    selectedUserID: reduxState.questionsReducer.selectedUserID
   };
 };
 
