@@ -203,7 +203,7 @@ class SelectedQuestion extends Component {
             </div>
             <ReactMarkdown
               className="SelectedQuestion-question"
-              renderers={{ code: CodeBlock }}
+              renderers={{ html: CodeBlock }}
               source={answer.answer_desc}
               escapeHtml={false}
             ></ReactMarkdown>
@@ -250,7 +250,7 @@ class SelectedQuestion extends Component {
             <ReactMarkdown
               className="SelectedQuestion-question"
               source={selectedQuestion.question_desc}
-              renderers={{ code: CodeBlock }}
+              renderers={{ html: CodeBlock }}
               escapeHtml={false}
             ></ReactMarkdown>
           </div>
