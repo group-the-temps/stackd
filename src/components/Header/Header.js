@@ -115,7 +115,12 @@ class Header extends Component {
   };
 
   _handleKeyDown = e => {
-    if (e.key === "Enter") {
+    if (
+      this.state.searchInput.charAt(0) === "{" &&
+      this.state.searchInput.charAt(this.state.searchInput.length - 1) === "}"
+    ) {
+      return alert("invalid characters");
+    } else if (e.key === "Enter") {
       axios
         .get(`/search/tags?tags=${this.state.searchInput}`)
         .then(response => {
@@ -356,3 +361,7 @@ export default withRouter(
     updateSearchState
   })(Header)
 );
+
+// module.exports = {
+//   _handleKeyDown
+// };
