@@ -9,8 +9,8 @@ import {
 import ProfileImage from "./ProfileImage";
 import { getAskedQuestions } from "../../redux/authReducer";
 import "./Profile.css";
-import Moment from 'react-moment';
-
+import {updateQuestionState} from '../../redux/questionsReducer'
+import Moment from "react-moment";
 class Profile extends Component {
   state = {
     error: false,
@@ -132,11 +132,25 @@ class Profile extends Component {
       console.log(question.question_title);
 
       return <div className="question__box">
-                <li className="question__title">{question.question_title}</li>
-                <h5>
-                Asked <Moment fromNow>{question.time_stamp}</Moment> by{" "}
-                {question.display_name} from {question.cohort}
-                </h5>
+                
+                    <h1 className="question__title"
+                        onClick={() => {
+                            this.props.updateQuestionState({
+                                selectedQuestionID: question.question_id,
+                                clickedTitle: true,
+                                likedQuestionCount: question.likes_count
+                            });
+                            this.props.history.push(
+                            `/selectedquestion/${question.question_id}`
+                            );
+                        }}
+                    >
+                    {question.question_title}
+                    </h1>
+                    <h3 className="question__time__stamp">
+                       Asked <Moment fromNow>{question.time_stamp}</Moment>.
+                    </h3>
+                
             </div>
       ;
     });
@@ -275,10 +289,9 @@ class Profile extends Component {
               </section>
             </div>
           </div>
-        </div>
         <div className="page__container-bottom">
           <section className="extra__info__section">
-              <label>Asked Questions List</label>
+              <label className="question__header__title">My Questions</label>
             <div className="profile__questions">
                 {mappedQuestions}
             </div>
@@ -286,6 +299,7 @@ class Profile extends Component {
                                 <label>Saved Questions List</label>
                             </div> */}
           </section>
+        </div>
         </div>
       </main>
     );
@@ -308,5 +322,6 @@ export default connect(mapStateToProps, {
   editBio,
   editDisplayName,
   editCohort,
-  getAskedQuestions
+  getAskedQuestions,
+  updateQuestionState
 })(Profile);

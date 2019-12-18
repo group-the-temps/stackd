@@ -3,7 +3,8 @@ import ReactQuill, { Quill } from "react-quill";
 import hljs from "highlight.js";
 import "react-quill/dist/quill.core.css";
 import "react-quill/dist/quill.bubble.css";
-import "highlight.js/styles/darkula.css";
+import "highlight.js/styles/github.css";
+import "highlight.js/styles/docco.css";
 import "./SelectedQuestion.css";
 import "react-quill/dist/quill.snow.css";
 import {
@@ -16,17 +17,22 @@ import ArrowUp from "../../icons and pics/arrow_up.png";
 import ArrowDown from "../../icons and pics/arrow_down.png";
 import Star from "../../icons and pics/star.png";
 import Like from "../../icons and pics/like.png";
-// import ReactMarkdown from "react-markdown";
+import ReactMarkdown from "react-markdown";
 import Moment from "react-moment";
 import { getQuestionLikes, getAnswerLikes } from "../../redux/likesReducer";
 import axios from "axios";
 import Highlight from "react-highlight.js";
 import javascript from "highlight.js/lib/languages/javascript";
 import CodeBlock from "./CodeBlock";
-const ReactMarkdown = require("react-markdown/with-html");
+import SyntaxHighlighter from "react-syntax-highlighter";
+import virtualizedRenderer from "react-syntax-highlighter-virtualized-renderer";
+import { darkula } from "react-syntax-highlighter/dist/esm/styles/hljs/";
+// const ReactMarkdown = require("react-markdown/with-html");
 // import Modal from "react-modal";
+hljs.registerLanguage("javascript", javascript);
 hljs.configure({
-  languages: ["javascript", "ruby", "python", "rust"]
+  languages: ["javascript", "ruby", "python", "rust"],
+  useBr: false
 });
 
 const modules = {
@@ -121,9 +127,12 @@ class SelectedQuestion extends Component {
   }
 
   componentDidMount() {
-    this.props.getQuestionLikes(this.props.selectedQuestionID, this.props.user_id);
     this.props.getSelectedQuestion(this.props.selectedQuestionID);
     this.props.getSelectedAnswers(this.props.selectedQuestionID);
+    this.props.getQuestionLikes(
+      this.props.selectedQuestionID,
+      this.props.user_id
+    );
   }
   handleQuillChange = value => {
     this.setState({ answer_desc: value });
