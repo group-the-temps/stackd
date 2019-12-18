@@ -128,24 +128,24 @@ class Header extends Component {
     }
   };
 
-  routeLogin = () => {
-    this.props.history.push("/login");
-    this.props.handleCloseTags();
+  closeAllTags = () => {
     this.setState({ toggleSQL: false });
     this.setState({ toggleReact: false });
     this.setState({ toggleJS: false });
     this.setState({ toggleCSS: false });
     this.setState({ toggleNode: false });
+  }
+
+  routeLogin = () => {
+    this.props.history.push("/login");
+    this.props.handleCloseTags();
+    this.closeAllTags()
   };
 
   logout = async () => {
     await this.props.logoutUser();
     this.props.history.push("/");
-    this.setState({ toggleSQL: false });
-    this.setState({ toggleReact: false });
-    this.setState({ toggleJS: false });
-    this.setState({ toggleCSS: false });
-    this.setState({ toggleNode: false });
+    this.closeAllTags();
   };
 
   viewMyProfile = async () => {
@@ -247,6 +247,7 @@ class Header extends Component {
                 toggleReact={toggleReact}
                 toggleNode={toggleNode}
                 toggleSQL={toggleSQL}
+                closeAllTags={this.closeAllTags}
               />
             </Tween>
           ) : null}
