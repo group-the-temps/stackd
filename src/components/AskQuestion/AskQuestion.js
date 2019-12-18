@@ -1,61 +1,109 @@
 import React, { Component } from "react";
 import ReactQuill, { Quill } from "react-quill";
 import "./AskQuestion.css";
+import hljs from "highlight.js";
+import "react-quill/dist/quill.core.css";
+import "react-quill/dist/quill.bubble.css";
+import "highlight.js/styles/darkula.css";
+import "highlight.js/styles/github.css";
+import "highlight.js/styles/docco.css";
+
 import "react-quill/dist/quill.snow.css";
 import { createQuestion } from "../../redux/questionsReducer";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Modal from "react-modal";
 import ReactMarkdown from "react-markdown";
+import javascript from "highlight.js/lib/languages/javascript";
+
 // const ReactMarkdown = require("react-markdown/with-html");
+hljs.registerLanguage("javascript", javascript);
+
+hljs.configure({
+  languages: ["javascript", "ruby", "python", "rust"],
+  useBr: false
+});
+const modules = {
+  syntax: {
+    highlight: text => hljs.highlightAuto(text).value
+  },
+  toolbar: [
+    ["bold", "italic", "underline", "blockquote"],
+    [{ list: "ordered" }, { list: "bullet" }],
+    ["link", "image", "video"],
+    ["clean"],
+    ["code-block"]
+  ],
+  clipboard: {
+    matchVisual: false
+  }
+};
+
+const formats = [
+  "header",
+  "font",
+  "size",
+  "bold",
+  "italic",
+  "underline",
+  "strike",
+  "blockquote",
+  "list",
+  "bullet",
+  "indent",
+  "link",
+  "image",
+  "video",
+  "code-block"
+];
 
 /*
  * Custom toolbar component including the custom heart button and dropdowns
  */
-const CustomToolbar = () => (
-  <div id="toolbar">
-    <select className="ql-font">
-      <option value="arial" selected>
-        Arial
-      </option>
-      <option value="comic-sans">Comic Sans</option>
-      <option value="courier-new">Courier New</option>
-      <option value="georgia">Georgia</option>
-      <option value="helvetica">Helvetica</option>
-      <option value="lucida">Lucida</option>
-    </select>
-    <select className="ql-size">
-      <option value="extra-small">Size 1</option>
-      <option value="small">Size 2</option>
-      <option value="medium" selected>
-        Size 3
-      </option>
-      <option value="large">Size 4</option>
-    </select>
-    <select className="ql-align" />
-    <select className="ql-color" />
-    <select className="ql-background" />
-    <button className="ql-clean" />
-    <button className="ql-code-block" />
-  </div>
-);
+// const CustomToolbar = () => (
+//   <div id="toolbar">
+//     <select className="ql-font">
+//       <option value="arial" selected>
+//         Arial
+//       </option>
+//       <option value="comic-sans">Comic Sans</option>
+//       <option value="courier-new">Courier New</option>
+//       <option value="georgia">Georgia</option>
+//       <option value="helvetica">Helvetica</option>
+//       <option value="lucida">Lucida</option>
+//     </select>
+//     <select className="ql-size">
+//       <option value="extra-small">Size 1</option>
+//       <option value="small">Size 2</option>
+//       <option value="medium" selected>
+//         Size 3
+//       </option>
+//       <option value="large">Size 4</option>
+//     </select>
+//     <select className="ql-align" />
+//     <select className="ql-color" />
+//     <select className="ql-background" />
+//     <button className="ql-clean" />
+//     <button className="ql-code-block" />
+//   </div>
+// );
 
 // Add sizes to whitelist and register them
-const Size = Quill.import("formats/size");
-Size.whitelist = ["extra-small", "small", "medium", "large"];
-Quill.register(Size, true);
+// const Size = Quill.import("formats/size");
+// Size.whitelist = ["extra-small", "small", "medium", "large"];
+// Quill.register(Size, true);
 
 // Add fonts to whitelist and register them
-const Font = Quill.import("formats/font");
-Font.whitelist = [
-  "arial",
-  "comic-sans",
-  "courier-new",
-  "georgia",
-  "helvetica",
-  "lucida"
-];
-Quill.register(Font, true);
+// const Font = Quill.import("formats/font");
+// Font.whitelist = [
+//   "arial",
+//   "comic-sans",
+//   "courier-new",
+//   "georgia",
+//   "helvetica",
+//   "lucida"
+// ];
+// Quill.register(Font, true);
 
 Modal.setAppElement("#root");
 
@@ -84,34 +132,36 @@ class AskQuestion extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    const codeDesc = "<code>" + this.state.question_desc + "</code>";
     this.setState({ testing: this.state.question_desc });
-    this.props.createQuestion(this.state);
+
+    this.props.createQuestion({ ...this.state, question_desc: codeDesc });
     this.setState({ showModal: false });
   };
 
-  static modules = {
-    toolbar: {
-      container: "#toolbar"
-    }
-  };
+  // static modules = {
+  //   toolbar: {
+  //     container: "#toolbar"
+  //   }
+  // };
 
-  static formats = [
-    "header",
-    "font",
-    "size",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "blockquote",
-    "list",
-    "bullet",
-    "indent",
-    "link",
-    "image",
-    "color",
-    "code-block"
-  ];
+  // static formats = [
+  //   "header",
+  //   "font",
+  //   "size",
+  //   "bold",
+  //   "italic",
+  //   "underline",
+  //   "strike",
+  //   "blockquote",
+  //   "list",
+  //   "bullet",
+  //   "indent",
+  //   "link",
+  //   "image",
+  //   "color",
+  //   "code-block"
+  // ];
 
   render() {
     console.log(this.props);
@@ -167,12 +217,13 @@ class AskQuestion extends Component {
                     Explain your question in detail and include necessary
                     details
                   </h6>
-                  <CustomToolbar />
+                  {/* <CustomToolbar /> */}
                   <ReactQuill
                     value={this.state.question_desc}
                     onChange={this.handleQuillChange}
-                    modules={AskQuestion.modules}
-                    formats={AskQuestion.formats}
+                    theme="snow"
+                    modules={modules}
+                    formats={formats}
                   />
                 </div>
                 <div className="AskQuestion-tags">
