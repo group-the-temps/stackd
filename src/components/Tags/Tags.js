@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import './Tags.css';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { handleCloseTags } from '../../redux/searchReducer';
-import { Tween } from 'react-gsap'
+import { handleCloseTags, updateTagsState } from '../../redux/searchReducer';
+import { Tween } from 'react-gsap';
+import { withRouter } from 'react-router-dom';
 
 class Tags extends Component {
     constructor() {
@@ -16,13 +17,15 @@ class Tags extends Component {
 
     clickTag = async e => {
         await this.setState({ searchTag: e.target.getAttribute('name') });
-        this.props.tagResults.splice(0);
-        axios.get(`/search/tags?tags=${this.state.searchTag}`).then(response => {
-            const { tagResults } = this.props;
-            tagResults.push(response.data);
+        this.props.updateTagsState({ searchResults: [] })
+        await axios.get(`/search/tags?tags=${this.state.searchTag}`).then(response => {
+            this.props.updateTagsState({ searchResults: response.data });
             this.props.handleCloseTags();
-            console.log(this.props.tagResults[0]);
-        }).catch(() => {
+            this.props.closeAllTags();
+            console.log(this.props.searchResults);
+            this.props.history.push('/questionslist');
+        })
+        .catch(() => {
             this.props.handleCloseTags();
             alert('No Results Found');
         })
@@ -90,7 +93,7 @@ class Tags extends Component {
                                 name='React 5, Router, react-router-dom, routes, HashRouter, Route, Link, this.props.history.push, Params with Routes, withRouter' 
                                 onClick={this.clickTag}>React 5</li>
                                 <li className='topic' 
-                                name='React 6, Redux, redux-promise-middleware, redux promise middleware, Store, Reducer, Immutable Data, Redux Pattern, ' 
+                                name='React 6, Redux, redux-promise-middleware, redux promise middleware, Store, Reducer, Immutable Data, Redux Pattern' 
                                 onClick={this.clickTag}>React 6</li>
                                 <li className='topic' 
                                 name='React 7, React Redux, redux-promise-middleware, redux promise middleware, connect, mapStateToProps, Axios in Redux' 
@@ -163,10 +166,10 @@ class Tags extends Component {
 
 const mapStateToProps = reduxState => {
     return {
-        tagResults: reduxState.searchReducer.tagResults,
+        searchResults: reduxState.searchReducer.searchResults,
         clickedTags: reduxState.searchReducer.clickedTags,
         user: reduxState.authReducer.user
     }
 }
 
-export default connect(mapStateToProps, { handleCloseTags })(Tags);
+export default withRouter(connect(mapStateToProps, { handleCloseTags, updateTagsState })(Tags));
