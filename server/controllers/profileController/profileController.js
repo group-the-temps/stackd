@@ -1,33 +1,32 @@
-getUserProfile =  (req, res) => {
-    const db = req.app.get("db");
-    const {id} = req.params;
-    const {user_id} = req.session.user;
-    if (user_id !== id) {
-        console.log(id)
-         db.users.get_user_profile(id)
-         .then( (response) => {
-             console.log(response)
-             res.status(200).json(response[0]);
-         })
-    } else {
-        db.users.get_user_profile(user_id)
-        .then( (response) => {
-            console.log(response[0])
-            res.status(200).json(response[0]);
-        })
-        
-    }
-    // return res.status(200).json(getProfile[0]);
-   
-};
-// getUserProfile = async (req, res) => {
+// getUserProfile =  (req, res) => {
 //     const db = req.app.get("db");
-//     const user_id = +req.params.user_id;
-//     const getProfile = await db.users.get_user_profile(user_id)
-//     console.log(getProfile)
-//     return res.status(200).json(getProfile[0]);
+//     const {id} = req.params;
+//     const {user_id} = req.session.user;
+//     if (user_id !== id) {
+//         console.log(id)
+//          db.users.get_user_profile(id)
+//          .then( (response) => {
+//              console.log(response)
+//              res.status(200).json(response[0]);
+//          })
+//     } else {
+//         db.users.get_user_profile(user_id)
+//         .then( (response) => {
+//             console.log(response[0])
+//             res.status(200).json(response[0]);
+//         })
+        
+//     }
    
 // };
+getUserProfile = async (req, res) => {
+    const db = req.app.get("db");
+    const {id} = req.params;
+
+    const getProfile = await db.users.get_user_profile(id)
+    console.log(id);
+    res.status(200).json(getProfile);
+};
 
 editDisplayName = async (req, res) => {
     const db = req.app.get("db");
@@ -71,7 +70,7 @@ editImg = async (req, res) => {
 
 getImg = async (req, res) => {
     const db = req.app.get("db");
-    const {user_id} = req.session.user;
+    const {user_id} = req.params;
 
     const getImage = await db.users.get_user_image(user_id)
     res.status(200).json(getImage);

@@ -18,7 +18,7 @@ import Star from "../../icons and pics/star.png";
 import Like from "../../icons and pics/like.png";
 // import ReactMarkdown from "react-markdown";
 import Moment from "react-moment";
-import { getQuestionLikes } from "../../redux/likesReducer";
+import { getQuestionLikes, getAnswerLikes } from "../../redux/likesReducer";
 import axios from "axios";
 import Highlight from "react-highlight.js";
 import javascript from "highlight.js/lib/languages/javascript";
@@ -142,6 +142,10 @@ class SelectedQuestion extends Component {
     }
   }
 
+  // likeAnswer = () => {
+  //   this.props.getAnswerLikes
+  // }
+
   handleSubmit = async e => {
     // console.log(this.props);
     e.preventDefault();
@@ -186,19 +190,31 @@ class SelectedQuestion extends Component {
     const selectedQuestion =
       this.props.selectedQuestion && this.props.selectedQuestion[0];
     const answersMapped = this.props.selectedAnswers.map(answer => {
-      // console.log(answer)
+      console.log(answer.answer_id)
       return (
         <div>
           <div className="SelectedQuestion-answer-container">
             <div className="SelectedQuestion-title">
               <div className="SelectedQuestion-icons-container">
-                <div className="SelectedQuestion-icons-container-count">
+                {this.props.user.user_id ? <div className="SelectedQuestion-icons-container-count">
                   {answer.likes_count}
-                </div>
-                <div className="SelectedQuestion-like-box">
-                  <img className="SelectedQuestion-arrow" src={Like} alt="up" />
+                </div> : null}
+                {this.props.user.user_id ? <div className="SelectedQuestion-like-box">
+                  <img className="SelectedQuestion-arrow" src={Like} alt="up" onClick={() => {
+                    this.props.getAnswerLikes(answer.answer_id, this.props.user_id).then(async () => {
+                      if (this.props.likedAnswer.length === 0) {
+                        await axios.post('/liked/answer/bool', {
+                          answer_id: answer.answer_id,
+                          user_id: this.props.user_id
+                        });
+                        axios.put(`/liked/answer/${answer.answer_id}`);
+                      } else {
+                        alert('You can only like an answer one time!')
+                      }
+                    })
+                  }} />
                   Like
-                </div>
+                </div> : null}
                 {/* <img
                 className="SelectedQuestion-arrow"
                 src={ArrowDown}
@@ -214,7 +230,7 @@ class SelectedQuestion extends Component {
             </div>
             <ReactMarkdown
               className="SelectedQuestion-question"
-              renderers={{ code: CodeBlock }}
+              renderers={{ inlineCode: CodeBlock }}
               source={answer.answer_desc}
               escapeHtml={false}
             ></ReactMarkdown>
@@ -234,12 +250,12 @@ class SelectedQuestion extends Component {
           <div className="SelectedQuestion-question-container">
             <div className="SelectedQuestion-title">
               <div className="SelectedQuestion-icons-container">
-              {this.props.user.user_id ? <div className="SelectedQuestion-icons-container-count">{this.props.likedQuestionCount}</div> : null}
-              {this.props.user.user_id ? <div className="SelectedQuestion-like-box">
-                 <img className="SelectedQuestion-arrow" src={Like} alt="up" onClick={this.likeQuestion} /> 
+                {this.props.user.user_id ? <div className="SelectedQuestion-icons-container-count">{this.props.likedQuestionCount}</div> : null}
+                {this.props.user.user_id ? <div className="SelectedQuestion-like-box">
+                  <img className="SelectedQuestion-arrow" src={Like} alt="up" onClick={this.likeQuestion} />
                   Like
                 </div> : null}
-              </div> 
+              </div>
               <h3>
                 {selectedQuestion.question_title}
                 <h6 className="SelectedQuestion-subtitle-details">
@@ -253,7 +269,7 @@ class SelectedQuestion extends Component {
             <ReactMarkdown
               className="SelectedQuestion-question"
               source={selectedQuestion.question_desc}
-              renderers={{ code: CodeBlock }}
+              renderers={{ inlineCode: CodeBlock }}
               escapeHtml={false}
             ></ReactMarkdown>
           </div>
@@ -299,7 +315,8 @@ const mapStateToProps = reduxState => {
     user: reduxState.authReducer.user,
     user_id: reduxState.authReducer.user.user_id,
     likedQuestionCount: reduxState.questionsReducer.likedQuestionCount,
-    likedQuestion: reduxState.likesReducer.likedQuestion
+    likedQuestion: reduxState.likesReducer.likedQuestion,
+    likedAnswer: reduxState.likesReducer.likedAnswer
   };
 };
 
@@ -307,5 +324,6 @@ export default connect(mapStateToProps, {
   getSelectedQuestion,
   getSelectedAnswers,
   createAnswer,
-  getQuestionLikes
+  getQuestionLikes,
+  getAnswerLikes
 })(SelectedQuestion);

@@ -151,7 +151,8 @@ class AskQuestion extends Component {
           <Modal className="questions-modal" isOpen={this.state.showModal}>
             <div className="AskQuestion-container">
               <div className="AskQuestion-form">
-                <button onClick={() => this.props.history.push("/")}>X</button>
+                <button 
+                onClick={() => { this.props.history.push('/questionslist') }}>X</button>
                 <div className="AskQuestion-title">
                   <h3>Title</h3>
                   <h6>At a high-level, what's your question?</h6>
@@ -187,7 +188,10 @@ class AskQuestion extends Component {
                 <div className="AskQuestion-submit">
                   <button
                     className="AskQuestion-submit-button"
-                    onClick={this.handleSubmit}
+                    onClick={ async (e) => {
+                      await this.handleSubmit(e);
+                      this.props.history.push('/questionslist');
+                    }}
                   >
                     Submit
                   </button>
@@ -205,15 +209,8 @@ class AskQuestion extends Component {
   }
 }
 
-const mapStateToProps = reduxState => {
-  console.log(reduxState);
-  return {
-    // question: reduxState.questionsReducer.question
-  };
-};
-
 export default withRouter(
-  connect(mapStateToProps, {
+  connect(null, {
     createQuestion
   })(AskQuestion)
 );
