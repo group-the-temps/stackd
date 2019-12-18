@@ -15,6 +15,9 @@ import Like from "../../icons and pics/like.png";
 import ReactMarkdown from "react-markdown";
 import Moment from "react-moment";
 import { getQuestionLikes } from "../../redux/likesReducer";
+import Highlight from "react-highlight.js";
+import javascript from "highlight.js/lib/languages/javascript";
+import CodeBlock from "./CodeBlock";
 // import Modal from "react-modal";
 
 /*
@@ -78,7 +81,10 @@ class SelectedQuestion extends Component {
   componentDidMount() {
     this.props.getSelectedQuestion(this.props.selectedQuestionID);
     this.props.getSelectedAnswers(this.props.selectedQuestionID);
-    this.props.getQuestionLikes(this.props.selectedQuestionID, this.props.user_id);
+    this.props.getQuestionLikes(
+      this.props.selectedQuestionID,
+      this.props.user_id
+    );
   }
   handleQuillChange = value => {
     this.setState({ answer_desc: value });
@@ -93,7 +99,7 @@ class SelectedQuestion extends Component {
       this.props.user_id,
       this.state.answer_desc
     );
-    this.setState({ showModal: false, answer_desc: '' });
+    this.setState({ showModal: false, answer_desc: "" });
   };
   static modules = {
     toolbar: {
@@ -133,7 +139,9 @@ class SelectedQuestion extends Component {
           <div className="SelectedQuestion-answer-container">
             <div className="SelectedQuestion-title">
               <div className="SelectedQuestion-icons-container">
-                <div className="SelectedQuestion-icons-container-count">{answer.likes_count}</div>
+                <div className="SelectedQuestion-icons-container-count">
+                  {answer.likes_count}
+                </div>
                 <div className="SelectedQuestion-like-box">
                   <img className="SelectedQuestion-arrow" src={Like} alt="up" />
                   Like
@@ -153,6 +161,7 @@ class SelectedQuestion extends Component {
             </div>
             <ReactMarkdown
               className="SelectedQuestion-question"
+              renderers={{ code: CodeBlock }}
               source={answer.answer_desc}
               escapeHtml={false}
             ></ReactMarkdown>
@@ -172,7 +181,9 @@ class SelectedQuestion extends Component {
           <div className="SelectedQuestion-question-container">
             <div className="SelectedQuestion-title">
               <div className="SelectedQuestion-icons-container">
-                <div className="SelectedQuestion-icons-container-count">{this.props.likedQuestionCount}</div>
+                <div className="SelectedQuestion-icons-container-count">
+                  {this.props.likedQuestionCount}
+                </div>
                 <div className="SelectedQuestion-like-box">
                   <img className="SelectedQuestion-arrow" src={Like} alt="up" />
                   Like
@@ -193,9 +204,11 @@ class SelectedQuestion extends Component {
                 </h6>
               </h3>
             </div>
+
             <ReactMarkdown
               className="SelectedQuestion-question"
               source={selectedQuestion.question_desc}
+              renderers={{ code: CodeBlock }}
               escapeHtml={false}
             ></ReactMarkdown>
           </div>
@@ -206,22 +219,24 @@ class SelectedQuestion extends Component {
           {answersMapped}
           {/* <div className="SelectedQuestion-answers-header">All Answers</div>
           <div className="SelectedQuestion-answers-mapped">Answers Mapped</div> */}
-          {this.props.user.user_id ?
+          {this.props.user.user_id ? (
             <div className="SubmitAnswer-body">
               <h6>Submit your answer below!</h6>
               <br />
               <CustomToolbar />
+
               <ReactQuill
                 value={this.state.answer_desc}
                 onChange={this.handleQuillChange}
                 modules={SelectedQuestion.modules}
                 formats={SelectedQuestion.formats}
               />
+
               <div className="SubmitAnswer-button-box">
                 <button onClick={this.handleSubmit}>Submit Your Answer</button>
               </div>
-            </div> : null}
-
+            </div>
+          ) : null}
         </div>
       </div>
       // </Modal>

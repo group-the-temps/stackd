@@ -297,7 +297,7 @@ class Header extends Component {
                 this.props.handleCloseTags();
               }}
             >
-              Ask Question
+              + Ask Question
             </li>
             <li
               className="Nav-link-1"
