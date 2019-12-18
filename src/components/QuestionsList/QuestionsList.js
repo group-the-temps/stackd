@@ -40,7 +40,7 @@ class QuestionsList extends Component {
     //   this.props.searchResults.map(search => {
     //     return <h1>{search.question_title}</h1>;
     //   });
-    if (this.props.searchResults.length > 0) {
+    if (this.props.searchResults.length !== 0) {
       var mappedAllQuestions = this.props.searchResults.map(question => {
         const mappedCount = this.props.answerCount.map(answer => {
           if (question.question_id === answer.question_id) {
@@ -93,6 +93,7 @@ class QuestionsList extends Component {
       });
     } else {
       mappedAllQuestions = this.props.allQuestions.map(question => {
+        console.log(question)
         const mappedCount = this.props.answerCount.map(answer => {
           if (question.question_id === answer.question_id) {
             for (let i = 0; i < answer.count.length; i++) {
@@ -102,7 +103,6 @@ class QuestionsList extends Component {
             }
           }
         });
-        // console.log(question)
         return (
           <div className="QuestionsList-question-container">
             <div className="QuestionsList-question-left">
@@ -150,7 +150,9 @@ class QuestionsList extends Component {
               {/* <h3>{question.cohort}</h3> */}
               {/* <h3>{question.question_desc}</h3> */}
 
-              <h5>
+              <h5 onClick={() => {
+                this.props.history.push(`/profile/${question.user_id}`)
+              }}>
                 Asked <Moment fromNow>{question.time_stamp}</Moment> by{" "}
                 {question.display_name} from {question.cohort}
               </h5>
@@ -177,6 +179,7 @@ class QuestionsList extends Component {
 const mapStateToProps = reduxState => {
   return {
     clickedTags: reduxState.searchReducer.clickedTags,
+    tagResults: reduxState.searchReducer.tagResults,
     searchResults: reduxState.searchReducer.searchResults,
     allQuestions: reduxState.questionsReducer.allQuestions,
     selectedQuestionID: reduxState.questionsReducer.selectedQuestionID,
