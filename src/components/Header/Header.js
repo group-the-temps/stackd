@@ -10,6 +10,7 @@ import {
   updateSearchResults,
   updateSearchState
 } from "../../redux/searchReducer";
+import { updateQuestionState } from '../../redux/questionsReducer';
 import { getProfile } from "../../redux/profileReducer";
 import Tags from "../Tags/Tags";
 import { Tween } from "react-gsap";
@@ -154,8 +155,9 @@ export class Header extends Component {
   };
 
   viewMyProfile = async () => {
-    await this.props.getProfile(this.props.user.user_id);
-    this.props.history.push("/profile");
+    await this.props.updateQuestionState({selectedUserID: this.props.user.user_id})
+    await this.props.getProfile(this.props.selectedUserID);
+    this.props.history.push(`/profile/${this.props.user.display_name}`);
   };
 
   render() {
@@ -347,7 +349,8 @@ const mapStateToProps = reduxState => {
   return {
     user: reduxState.authReducer.user,
     clickedTags: reduxState.searchReducer.clickedTags,
-    searchResults: reduxState.searchReducer.searchResults
+    searchResults: reduxState.searchReducer.searchResults,
+    selectedUserID: reduxState.questionsReducer.selectedUserID
   };
 };
 
@@ -359,7 +362,8 @@ export default withRouter(
     handleCloseTags,
     getProfile,
     updateSearchResults,
-    updateSearchState
+    updateSearchState,
+    updateQuestionState
   })(Header)
 );
 

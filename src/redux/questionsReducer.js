@@ -4,12 +4,14 @@ const initialState = {
   createQuestion: [],
   allQuestions: [],
   selectedQuestionID: "",
+  selectedAnswerID: "",
   selectedQuestion: [{}],
   selectedAnswers: [{}],
   clickedTitle: false,
   answerCount: [],
   createAnswer: [],
-  likedQuestionCount: ''
+  likedQuestionCount: '',
+  selectedUserID: ''
 };
 
 const CREATE_QUESTION = "CREATE_QUESTION";
