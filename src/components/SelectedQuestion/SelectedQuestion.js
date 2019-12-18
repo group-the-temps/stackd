@@ -3,7 +3,8 @@ import ReactQuill, { Quill } from "react-quill";
 import hljs from "highlight.js";
 import "react-quill/dist/quill.core.css";
 import "react-quill/dist/quill.bubble.css";
-import "highlight.js/styles/darkula.css";
+import "highlight.js/styles/github.css";
+import "highlight.js/styles/docco.css";
 import "./SelectedQuestion.css";
 import "react-quill/dist/quill.snow.css";
 import {
@@ -16,17 +17,21 @@ import ArrowUp from "../../icons and pics/arrow_up.png";
 import ArrowDown from "../../icons and pics/arrow_down.png";
 import Star from "../../icons and pics/star.png";
 import Like from "../../icons and pics/like.png";
-// import ReactMarkdown from "react-markdown";
+import ReactMarkdown from "react-markdown";
 import Moment from "react-moment";
 import { getQuestionLikes } from "../../redux/likesReducer";
-import axios from "axios";
 import Highlight from "react-highlight.js";
 import javascript from "highlight.js/lib/languages/javascript";
 import CodeBlock from "./CodeBlock";
-const ReactMarkdown = require("react-markdown/with-html");
+import SyntaxHighlighter from "react-syntax-highlighter";
+import virtualizedRenderer from "react-syntax-highlighter-virtualized-renderer";
+import { darkula } from "react-syntax-highlighter/dist/esm/styles/hljs/";
+// const ReactMarkdown = require("react-markdown/with-html");
 // import Modal from "react-modal";
+hljs.registerLanguage("javascript", javascript);
 hljs.configure({
-  languages: ["javascript", "ruby", "python", "rust"]
+  languages: ["javascript", "ruby", "python", "rust"],
+  useBr: false
 });
 
 const modules = {
@@ -121,26 +126,16 @@ class SelectedQuestion extends Component {
   }
 
   componentDidMount() {
-    this.props.getQuestionLikes(this.props.selectedQuestionID, this.props.user_id);
     this.props.getSelectedQuestion(this.props.selectedQuestionID);
     this.props.getSelectedAnswers(this.props.selectedQuestionID);
+    this.props.getQuestionLikes(
+      this.props.selectedQuestionID,
+      this.props.user_id
+    );
   }
   handleQuillChange = value => {
     this.setState({ answer_desc: value });
   };
-
-  likeQuestion = () => {
-    if (this.props.likedQuestion.length === 0) {
-      axios.post('/liked/question/bool', {
-        question_id: this.props.selectedQuestionID,
-        user_id: this.props.user_id
-      }).then(() => {
-        axios.put(`/liked/question/${this.props.selectedQuestionID}`)
-      })
-    } else {
-      alert('You can only like a question one time!')
-    }
-  }
 
   handleSubmit = async e => {
     // console.log(this.props);
@@ -234,12 +229,20 @@ class SelectedQuestion extends Component {
           <div className="SelectedQuestion-question-container">
             <div className="SelectedQuestion-title">
               <div className="SelectedQuestion-icons-container">
-              {this.props.user.user_id ? <div className="SelectedQuestion-icons-container-count">{this.props.likedQuestionCount}</div> : null}
-              {this.props.user.user_id ? <div className="SelectedQuestion-like-box">
-                 <img className="SelectedQuestion-arrow" src={Like} alt="up" onClick={this.likeQuestion} /> 
+                <div className="SelectedQuestion-icons-container-count">
+                  {this.props.likedQuestionCount}
+                </div>
+                <div className="SelectedQuestion-like-box">
+                  <img className="SelectedQuestion-arrow" src={Like} alt="up" />
                   Like
-                </div> : null}
-              </div> 
+                </div>
+                {/* <img
+                className="SelectedQuestion-arrow"
+                src={ArrowDown}
+                alt="down"
+              />
+              <img className="SelectedQuestion-star" src={Star} alt="star" /> */}
+              </div>
               <h3>
                 {selectedQuestion.question_title}
                 <h6 className="SelectedQuestion-subtitle-details">
