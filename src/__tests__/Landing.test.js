@@ -1,8 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Landing from '../components/Landing/Landing.js';
+import { act } from "react-dom/test-utils";
 
 test('Renders out starting text', () => {
-    const {container} = ReactDOM.render(<Landing />)
-    expect(container.textContent).toContain('Ask questions. Get answers.')
+    act(() => {
+        ReactDOM.render(<Landing />, container)
+    })
+
+    const h1 = container.querySelector("h1");
+    expect(h1.textContent).toBe("Ask questions. Get answers.")
 })
