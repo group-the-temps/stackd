@@ -115,12 +115,17 @@ class Header extends Component {
   };
 
   _handleKeyDown = e => {
-    if (e.key === "Enter") {
+    if (
+      this.state.searchInput.charAt(0) === "{" &&
+      this.state.searchInput.charAt(this.state.searchInput.length - 1) === "}"
+    ) {
+      return alert("invalid characters");
+    } else if (e.key === "Enter") {
       axios
         .get(`/search/tags?tags=${this.state.searchInput}`)
         .then(response => {
           this.props.updateSearchResults(response.data);
-          this.props.history.push('/questionslist');
+          this.props.history.push("/questionslist");
         })
         .catch(() => {
           alert("No Results Found");
@@ -298,7 +303,7 @@ class Header extends Component {
                 this.props.handleCloseTags();
               }}
             >
-              Ask Question
+              + Ask Question
             </li>
             <li
               className="Nav-link-1"
@@ -357,3 +362,7 @@ export default withRouter(
     updateSearchState
   })(Header)
 );
+
+// module.exports = {
+//   _handleKeyDown
+// };

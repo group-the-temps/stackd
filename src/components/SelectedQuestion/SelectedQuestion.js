@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import ReactQuill, { Quill } from "react-quill";
+import hljs from "highlight.js";
+import "react-quill/dist/quill.core.css";
+import "react-quill/dist/quill.bubble.css";
+import "highlight.js/styles/darkula.css";
 import "./SelectedQuestion.css";
 import "react-quill/dist/quill.snow.css";
 import {
@@ -12,59 +16,99 @@ import ArrowUp from "../../icons and pics/arrow_up.png";
 import ArrowDown from "../../icons and pics/arrow_down.png";
 import Star from "../../icons and pics/star.png";
 import Like from "../../icons and pics/like.png";
-import ReactMarkdown from "react-markdown";
+// import ReactMarkdown from "react-markdown";
 import Moment from "react-moment";
 import { getQuestionLikes } from "../../redux/likesReducer";
 import axios from "axios";
+import Highlight from "react-highlight.js";
+import javascript from "highlight.js/lib/languages/javascript";
+import CodeBlock from "./CodeBlock";
+const ReactMarkdown = require("react-markdown/with-html");
 // import Modal from "react-modal";
+hljs.configure({
+  languages: ["javascript", "ruby", "python", "rust"]
+});
 
+const modules = {
+  syntax: {
+    highlight: text => hljs.highlightAuto(text).value
+  },
+  toolbar: [
+    ["bold", "italic", "underline", "blockquote"],
+    [{ list: "ordered" }, { list: "bullet" }],
+    ["link", "image", "video"],
+    ["clean"],
+    ["code-block"]
+  ],
+  clipboard: {
+    matchVisual: false
+  }
+};
+
+const formats = [
+  "header",
+  "font",
+  "size",
+  "bold",
+  "italic",
+  "underline",
+  "strike",
+  "blockquote",
+  "list",
+  "bullet",
+  "indent",
+  "link",
+  "image",
+  "video",
+  "code-block"
+];
 /*
  * Custom toolbar component including the custom heart button and dropdowns
  */
-const CustomToolbar = () => (
-  <div id="toolbar">
-    <select className="ql-font">
-      <option value="arial" selected>
-        Arial
-      </option>
-      <option value="comic-sans">Comic Sans</option>
-      <option value="courier-new">Courier New</option>
-      <option value="georgia">Georgia</option>
-      <option value="helvetica">Helvetica</option>
-      <option value="lucida">Lucida</option>
-    </select>
-    <select className="ql-size">
-      <option value="extra-small">Size 1</option>
-      <option value="small">Size 2</option>
-      <option value="medium" selected>
-        Size 3
-      </option>
-      <option value="large">Size 4</option>
-    </select>
-    <select className="ql-align" />
-    <select className="ql-color" />
-    <select className="ql-background" />
-    <button className="ql-clean" />
-    <button className="ql-code-block" />
-  </div>
-);
+// const CustomToolbar = () => (
+//   <div id="toolbar">
+//     <select className="ql-font">
+//       <option value="arial" selected>
+//         Arial
+//       </option>
+//       <option value="comic-sans">Comic Sans</option>
+//       <option value="courier-new">Courier New</option>
+//       <option value="georgia">Georgia</option>
+//       <option value="helvetica">Helvetica</option>
+//       <option value="lucida">Lucida</option>
+//     </select>
+//     <select className="ql-size">
+//       <option value="extra-small">Size 1</option>
+//       <option value="small">Size 2</option>
+//       <option value="medium" selected>
+//         Size 3
+//       </option>
+//       <option value="large">Size 4</option>
+//     </select>
+//     <select className="ql-align" />
+//     <select className="ql-color" />
+//     <select className="ql-background" />
+//     <button className="ql-clean" />
+//     <button className="ql-code-block" />
+//   </div>
+// );
 
 // Add sizes to whitelist and register them
-const Size = Quill.import("formats/size");
-Size.whitelist = ["extra-small", "small", "medium", "large"];
-Quill.register(Size, true);
+// const Size = Quill.import("formats/size");
+// Size.whitelist = ["extra-small", "small", "medium", "large"];
+// Quill.register(Size, true);
 
 // Add fonts to whitelist and register them
-const Font = Quill.import("formats/font");
-Font.whitelist = [
-  "arial",
-  "comic-sans",
-  "courier-new",
-  "georgia",
-  "helvetica",
-  "lucida"
-];
-Quill.register(Font, true);
+// const Font = Quill.import("formats/font");
+// Font.whitelist = [
+//   "arial",
+//   "comic-sans",
+//   "courier-new",
+//   "georgia",
+//   "helvetica",
+//   "lucida"
+// ];
+// Quill.register(Font, true);
 
 class SelectedQuestion extends Component {
   constructor(props) {
@@ -107,31 +151,32 @@ class SelectedQuestion extends Component {
       this.props.user_id,
       this.state.answer_desc
     );
-    this.setState({ showModal: false, answer_desc: '' });
-  };
-  static modules = {
-    toolbar: {
-      container: "#toolbar"
-    }
+    this.setState({ showModal: false, answer_desc: "" });
   };
 
-  static formats = [
-    "header",
-    "font",
-    "size",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "blockquote",
-    "list",
-    "bullet",
-    "indent",
-    "link",
-    "image",
-    "color",
-    "code-block"
-  ];
+  //   static modules = {
+  //     toolbar: {
+  //       container: "#toolbar"
+  //     }
+  //   };
+
+  //   static formats = [
+  //     "header",
+  //     "font",
+  //     "size",
+  //     "bold",
+  //     "italic",
+  //     "underline",
+  //     "strike",
+  //     "blockquote",
+  //     "list",
+  //     "bullet",
+  //     "indent",
+  //     "link",
+  //     "image",
+  //     "color",
+  //     "code-block"
+  //   ];
 
   render() {
     console.log(this.props.likedQuestion);
@@ -147,7 +192,9 @@ class SelectedQuestion extends Component {
           <div className="SelectedQuestion-answer-container">
             <div className="SelectedQuestion-title">
               <div className="SelectedQuestion-icons-container">
-                <div className="SelectedQuestion-icons-container-count">{answer.likes_count}</div>
+                <div className="SelectedQuestion-icons-container-count">
+                  {answer.likes_count}
+                </div>
                 <div className="SelectedQuestion-like-box">
                   <img className="SelectedQuestion-arrow" src={Like} alt="up" />
                   Like
@@ -167,6 +214,7 @@ class SelectedQuestion extends Component {
             </div>
             <ReactMarkdown
               className="SelectedQuestion-question"
+              renderers={{ code: CodeBlock }}
               source={answer.answer_desc}
               escapeHtml={false}
             ></ReactMarkdown>
@@ -201,9 +249,11 @@ class SelectedQuestion extends Component {
                 </h6>
               </h3>
             </div>
+
             <ReactMarkdown
               className="SelectedQuestion-question"
               source={selectedQuestion.question_desc}
+              renderers={{ code: CodeBlock }}
               escapeHtml={false}
             ></ReactMarkdown>
           </div>
@@ -214,22 +264,25 @@ class SelectedQuestion extends Component {
           {answersMapped}
           {/* <div className="SelectedQuestion-answers-header">All Answers</div>
           <div className="SelectedQuestion-answers-mapped">Answers Mapped</div> */}
-          {this.props.user.user_id ?
+          {this.props.user.user_id ? (
             <div className="SubmitAnswer-body">
               <h6>Submit your answer below!</h6>
               <br />
-              <CustomToolbar />
+              {/* <CustomToolbar /> */}
+
               <ReactQuill
                 value={this.state.answer_desc}
                 onChange={this.handleQuillChange}
-                modules={SelectedQuestion.modules}
-                formats={SelectedQuestion.formats}
+                theme="snow"
+                modules={modules}
+                formats={formats}
               />
+
               <div className="SubmitAnswer-button-box">
                 <button onClick={this.handleSubmit}>Submit Your Answer</button>
               </div>
-            </div> : null}
-
+            </div>
+          ) : null}
         </div>
       </div>
       // </Modal>
