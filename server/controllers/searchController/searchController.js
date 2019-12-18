@@ -34,7 +34,7 @@ searchTags = (req, res) => {
     tags = `{${tags}}`;
     db.search.search_tags(tags).then(response => {
         if(response.length === 0) {
-            res.status(404).json("No Results Found");
+            res.status(404).json(console.log("No Results Found"));
         } else {
             res.status(200).json(response);
         }
