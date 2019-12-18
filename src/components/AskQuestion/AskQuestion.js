@@ -105,9 +105,9 @@ const formats = [
 // ];
 // Quill.register(Font, true);
 
-Modal.setAppElement("#root");
+// Modal.setAppElement("#root");
 
-class AskQuestion extends Component {
+export class AskQuestion extends Component {
   state = {
     question_title: "",
     question_desc: "",
@@ -198,7 +198,7 @@ class AskQuestion extends Component {
           </div>
         </div>
         <div className="AskQuestion-background">
-          <Modal className="questions-modal" isOpen={this.state.showModal}>
+          <Modal className="questions-modal" isOpen={this.state.showModal} ariaHideApp={false}>
             <div className="AskQuestion-container">
               <div className="AskQuestion-form">
                 <button 

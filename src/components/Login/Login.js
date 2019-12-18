@@ -5,9 +5,9 @@ import "./Login.css";
 import { connect } from "react-redux";
 import Modal from "react-modal";
 
-Modal.setAppElement("#root");
 
-class Login extends Component {
+
+export class Login extends Component {
   constructor() {
     super();
     this.state = {
@@ -73,7 +73,7 @@ class Login extends Component {
           </div>
         </div>
         <div className="Login-container">
-          <Modal isOpen={this.state.showModal} className="login-modal">
+          <Modal isOpen={this.state.showModal} className="login-modal" ariaHideApp={false}>
             <Link to="/">
               <button className="close-button" onClick={this.handleCloseModal}>
                 X

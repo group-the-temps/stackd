@@ -12,7 +12,7 @@ import ContactUs from "../ContactUs/ContactUs";
 import { connect } from "react-redux";
 import { updateSearchState } from "../../redux/searchReducer";
 
-class Landing extends Component {
+export class Landing extends Component {
   render() {
     return (
       <>

@@ -17,7 +17,7 @@ import { Tween } from "react-gsap";
 import stackd_logo from "../../stackd_logo.png";
 import axios from "axios";
 
-class Header extends Component {
+export class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {

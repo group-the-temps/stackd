@@ -11,7 +11,7 @@ import { getAskedQuestions } from "../../redux/authReducer";
 import "./Profile.css";
 import {updateQuestionState} from '../../redux/questionsReducer'
 import Moment from "react-moment";
-class Profile extends Component {
+export class Profile extends Component {
   state = {
     error: false,
     editBio: false,
