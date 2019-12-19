@@ -14,8 +14,8 @@ class CodeBlock extends PureComponent {
   };
 
   render() {
-    console.log(this.props.value);
     const { language, value } = this.props;
+    console.log(this.props.value);
     return (
       <SyntaxHighlighter language={language} style={docco}>
         {value}
@@ -25,3 +25,20 @@ class CodeBlock extends PureComponent {
 }
 
 export default CodeBlock;
+
+// export default function CodeBlock({ language, value }) {
+//   const codeEle = useRef(null);
+
+//   useEffect(() => {
+//     console.log("CodeBlock: useEffect");
+//     Prism.highlightElement(codeEle, false);
+//   }, [codeEle]);
+
+//   return (
+//     <pre>
+//       <code ref={codeEle} className={`language-${language}`}>
+//         {value}
+//       </code>
+//     </pre>
+//   );
+// }

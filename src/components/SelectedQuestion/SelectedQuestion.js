@@ -1,6 +1,6 @@
 import React, { Component } from "react";
+// import hljs from "highlight.js";
 import ReactQuill, { Quill } from "react-quill";
-import hljs from "highlight.js";
 import "react-quill/dist/quill.core.css";
 import "react-quill/dist/quill.bubble.css";
 import "highlight.js/styles/github.css";
@@ -17,7 +17,6 @@ import ArrowUp from "../../icons and pics/arrow_up.png";
 import ArrowDown from "../../icons and pics/arrow_down.png";
 import Star from "../../icons and pics/star.png";
 import Like from "../../icons and pics/like.png";
-import ReactMarkdown from "react-markdown";
 import Moment from "react-moment";
 import { getQuestionLikes, getAnswerLikes } from "../../redux/likesReducer";
 import axios from "axios";
@@ -27,15 +26,33 @@ import CodeBlock from "./CodeBlock";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import virtualizedRenderer from "react-syntax-highlighter-virtualized-renderer";
 import { darkula } from "react-syntax-highlighter/dist/esm/styles/hljs/";
+// import ReactMarkdown from "react-markdown";
+const hljs = require("highlight.js");
+const ReactMarkdown = require("react-markdown");
+// const htmlParser = require("react-markdown/plugins/html-parser");
+// const parseHtml = htmlParser({
+//   isValidNode: node => node.type !== "script",
+//   processingInstructions: [
+//     /* ... */
+//   ]
+// });
 // const ReactMarkdown = require("react-markdown/with-html");
 // import Modal from "react-modal";
-hljs.registerLanguage("javascript", javascript);
+hljs.initHighlightingOnLoad();
+hljs.listLanguages();
+// hljs.registerLanguage("javascript", javascript);
 hljs.configure({
-  languages: ["javascript", "ruby", "python", "rust"],
+  //   languages: ["javascript", "ruby", "python", "rust", "JSX", "HTML", "JSON"],
   useBr: false
 });
+// hljs.configure({ useBR: true });
+
+// document.querySelectorAll("pre").forEach(block => {
+//   hljs.highlightBlock(block);
+// });
 
 const modules = {
+  //   syntax: true,
   syntax: {
     highlight: text => hljs.highlightAuto(text).value
   },
@@ -68,6 +85,7 @@ const formats = [
   "video",
   "code-block"
 ];
+
 /*
  * Custom toolbar component including the custom heart button and dropdowns
  */
@@ -140,16 +158,18 @@ class SelectedQuestion extends Component {
 
   likeQuestion = () => {
     if (this.props.likedQuestion.length === 0) {
-      axios.post('/liked/question/bool', {
-        question_id: this.props.selectedQuestionID,
-        user_id: this.props.user_id
-      }).then(() => {
-        axios.put(`/liked/question/${this.props.selectedQuestionID}`)
-      })
+      axios
+        .post("/liked/question/bool", {
+          question_id: this.props.selectedQuestionID,
+          user_id: this.props.user_id
+        })
+        .then(() => {
+          axios.put(`/liked/question/${this.props.selectedQuestionID}`);
+        });
     } else {
-      alert('You can only like a question one time!')
+      alert("You can only like a question one time!");
     }
-  }
+  };
 
   // likeAnswer = () => {
   //   this.props.getAnswerLikes
@@ -199,31 +219,42 @@ class SelectedQuestion extends Component {
     const selectedQuestion =
       this.props.selectedQuestion && this.props.selectedQuestion[0];
     const answersMapped = this.props.selectedAnswers.map(answer => {
-      console.log(answer.answer_id)
+      console.log(answer.answer_id);
       return (
         <div>
           <div className="SelectedQuestion-answer-container">
             <div className="SelectedQuestion-title">
               <div className="SelectedQuestion-icons-container">
-                {this.props.user.user_id ? <div className="SelectedQuestion-icons-container-count">
-                  {answer.likes_count}
-                </div> : null}
-                {this.props.user.user_id ? <div className="SelectedQuestion-like-box">
-                  <img className="SelectedQuestion-arrow" src={Like} alt="up" onClick={() => {
-                    this.props.getAnswerLikes(answer.answer_id, this.props.user_id).then(async () => {
-                      if (this.props.likedAnswer.length === 0) {
-                        await axios.post('/liked/answer/bool', {
-                          answer_id: answer.answer_id,
-                          user_id: this.props.user_id
-                        });
-                        axios.put(`/liked/answer/${answer.answer_id}`);
-                      } else {
-                        alert('You can only like an answer one time!')
-                      }
-                    })
-                  }} />
-                  Like
-                </div> : null}
+                {this.props.user.user_id ? (
+                  <div className="SelectedQuestion-icons-container-count">
+                    {answer.likes_count}
+                  </div>
+                ) : null}
+                {this.props.user.user_id ? (
+                  <div className="SelectedQuestion-like-box">
+                    <img
+                      className="SelectedQuestion-arrow"
+                      src={Like}
+                      alt="up"
+                      onClick={() => {
+                        this.props
+                          .getAnswerLikes(answer.answer_id, this.props.user_id)
+                          .then(async () => {
+                            if (this.props.likedAnswer.length === 0) {
+                              await axios.post("/liked/answer/bool", {
+                                answer_id: answer.answer_id,
+                                user_id: this.props.user_id
+                              });
+                              axios.put(`/liked/answer/${answer.answer_id}`);
+                            } else {
+                              alert("You can only like an answer one time!");
+                            }
+                          });
+                      }}
+                    />
+                    Like
+                  </div>
+                ) : null}
                 {/* <img
                 className="SelectedQuestion-arrow"
                 src={ArrowDown}
@@ -247,8 +278,9 @@ class SelectedQuestion extends Component {
             </div>
             <ReactMarkdown
               className="SelectedQuestion-question"
-              renderers={{ inlineCode: CodeBlock }}
+              renderers={{ code: CodeBlock }}
               source={answer.answer_desc}
+              //   astPlugins={[parseHtml]}
               escapeHtml={false}
             ></ReactMarkdown>
           </div>
@@ -267,11 +299,22 @@ class SelectedQuestion extends Component {
           <div className="SelectedQuestion-question-container">
             <div className="SelectedQuestion-title">
               <div className="SelectedQuestion-icons-container">
-                {this.props.user.user_id ? <div className="SelectedQuestion-icons-container-count">{this.props.likedQuestionCount}</div> : null}
-                {this.props.user.user_id ? <div className="SelectedQuestion-like-box">
-                  <img className="SelectedQuestion-arrow" src={Like} alt="up" onClick={this.likeQuestion} />
-                  Like
-                </div> : null}
+                {this.props.user.user_id ? (
+                  <div className="SelectedQuestion-icons-container-count">
+                    {this.props.likedQuestionCount}
+                  </div>
+                ) : null}
+                {this.props.user.user_id ? (
+                  <div className="SelectedQuestion-like-box">
+                    <img
+                      className="SelectedQuestion-arrow"
+                      src={Like}
+                      alt="up"
+                      onClick={this.likeQuestion}
+                    />
+                    Like
+                  </div>
+                ) : null}
               </div>
               <h3>
                 {selectedQuestion.question_title}
@@ -294,7 +337,8 @@ class SelectedQuestion extends Component {
             <ReactMarkdown
               className="SelectedQuestion-question"
               source={selectedQuestion.question_desc}
-              renderers={{ inlineCode: CodeBlock }}
+              renderers={{ code: CodeBlock }}
+              //   astPlugins={[parseHtml]}
               escapeHtml={false}
             ></ReactMarkdown>
           </div>

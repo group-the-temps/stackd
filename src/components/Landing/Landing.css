@@ -176,3 +176,17 @@
   justify-content: center;
   align-self: center;
 }
+
+.Landing-social-icons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.Landing-social-icons img {
+  width: 30px;
+  height: 30px;
+  border-radius: 0;
+  box-shadow: none;
+  margin: 8px;
+}
