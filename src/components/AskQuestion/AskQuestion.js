@@ -203,7 +203,7 @@ export class AskQuestion extends Component {
               <div className="AskQuestion-form">
                 <button 
                 className="AskQuestion-close"
-                onClick={() => { this.props.history.push('/questionslist') }}>X</button>
+                onClick={() => { this.props.history.goBack() }}>X</button>
                 <div className="AskQuestion-title">
                   <h3>Title</h3>
                   <h6>At a high-level, what's your question?</h6>
@@ -254,6 +254,7 @@ export class AskQuestion extends Component {
               </div> */}
               </div>
             </div>
+            {!this.props.user_id ? window.location.href = '/' : null}
           </Modal>
         </div>
       </>
@@ -261,8 +262,14 @@ export class AskQuestion extends Component {
   }
 }
 
+const mapStateToProps = reduxState => {
+  return {
+    user_id: reduxState.authReducer.user.user_id
+  }
+}
+
 export default withRouter(
-  connect(null, {
+  connect(mapStateToProps, {
     createQuestion
   })(AskQuestion)
 );
