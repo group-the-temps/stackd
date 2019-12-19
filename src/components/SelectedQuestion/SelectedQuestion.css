@@ -67,6 +67,7 @@
 .SelectedQuestion-title {
   /* padding: 15px; */
   text-align: left;
+  margin-bottom: 10px;
   height: 88px;
   width: 100%;
   display: flex;
@@ -102,10 +103,6 @@
   font-weight: 400;
   padding-top: 11px;
   padding-bottom: 13px;
-}
-
-.SelectedQuestion-subtitle-details:hover {
-  cursor: pointer;
 }
 
 .SelectedQuestion-like-box {
@@ -202,9 +199,18 @@
   overflow: hidden;
 }
 
-.ql-container {
-  height: 92%;
+pre.ql-syntax {
+  background-color: #23241f;
+  color: #f8f8f2;
+  overflow: visible;
 }
-.SelectedQuestion-question p code p span img {
-  width: 500px;
+
+pre {
+  padding: 10px;
+}
+
+.answer-block {
+  flex: 1;
+  width: 100%;
+  text-align: initial;
 }

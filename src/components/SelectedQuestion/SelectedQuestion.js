@@ -1,12 +1,14 @@
 import React, { Component } from "react";
-// import hljs from "highlight.js";
 import ReactQuill, { Quill } from "react-quill";
+import hljs from "highlight.js";
+
 import "react-quill/dist/quill.core.css";
 import "react-quill/dist/quill.bubble.css";
 import "highlight.js/styles/github.css";
 import "highlight.js/styles/docco.css";
 import "./SelectedQuestion.css";
 import "react-quill/dist/quill.snow.css";
+
 import {
   getSelectedQuestion,
   getSelectedAnswers,
@@ -17,6 +19,7 @@ import ArrowUp from "../../icons and pics/arrow_up.png";
 import ArrowDown from "../../icons and pics/arrow_down.png";
 import Star from "../../icons and pics/star.png";
 import Like from "../../icons and pics/like.png";
+import ReactMarkdown from "react-markdown";
 import Moment from "react-moment";
 import { getQuestionLikes, getAnswerLikes } from "../../redux/likesReducer";
 import axios from "axios";
@@ -26,33 +29,15 @@ import CodeBlock from "./CodeBlock";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import virtualizedRenderer from "react-syntax-highlighter-virtualized-renderer";
 import { darkula } from "react-syntax-highlighter/dist/esm/styles/hljs/";
-// import ReactMarkdown from "react-markdown";
-const hljs = require("highlight.js");
-const ReactMarkdown = require("react-markdown");
-// const htmlParser = require("react-markdown/plugins/html-parser");
-// const parseHtml = htmlParser({
-//   isValidNode: node => node.type !== "script",
-//   processingInstructions: [
-//     /* ... */
-//   ]
-// });
 // const ReactMarkdown = require("react-markdown/with-html");
 // import Modal from "react-modal";
-hljs.initHighlightingOnLoad();
-hljs.listLanguages();
-// hljs.registerLanguage("javascript", javascript);
+hljs.registerLanguage("javascript", javascript);
 hljs.configure({
-  //   languages: ["javascript", "ruby", "python", "rust", "JSX", "HTML", "JSON"],
+  languages: ["javascript", "ruby", "python", "rust"],
   useBr: false
 });
-// hljs.configure({ useBR: true });
-
-// document.querySelectorAll("pre").forEach(block => {
-//   hljs.highlightBlock(block);
-// });
 
 const modules = {
-  //   syntax: true,
   syntax: {
     highlight: text => hljs.highlightAuto(text).value
   },
@@ -85,7 +70,6 @@ const formats = [
   "video",
   "code-block"
 ];
-
 /*
  * Custom toolbar component including the custom heart button and dropdowns
  */
@@ -218,6 +202,7 @@ class SelectedQuestion extends Component {
     // console.log(this.props.selectedAnswers);
     const selectedQuestion =
       this.props.selectedQuestion && this.props.selectedQuestion[0];
+    console.log(`selected Question ${selectedQuestion}`);
     const answersMapped = this.props.selectedAnswers.map(answer => {
       console.log(answer.answer_id);
       return (
@@ -263,24 +248,15 @@ class SelectedQuestion extends Component {
               <img className="SelectedQuestion-star" src={Star} alt="star" /> */}
               </div>
 
-              <h6 className="SelectedQuestion-subtitle-details" onClick={ async () => {
-                await this.props.updateQuestionState({
-                  selectedUserID: answer.user_id,
-                  selectedUserDisplayName: answer.display_name,
-                  selectedUserBio: answer.bio,
-                  selectedUserCohort: answer.cohort
-                })
-                this.props.history.push(`/profile/${answer.display_name}`);
-              }}>
+              <h6 className="SelectedQuestion-subtitle-details">
                 Submitted <Moment fromNow={answer.time_stamp}></Moment> by{" "}
                 {answer.display_name} from {answer.cohort}
               </h6>
             </div>
             <ReactMarkdown
               className="SelectedQuestion-question"
-              renderers={{ code: CodeBlock }}
+              renderers={{ inlineCode: CodeBlock }}
               source={answer.answer_desc}
-              //   astPlugins={[parseHtml]}
               escapeHtml={false}
             ></ReactMarkdown>
           </div>
@@ -318,29 +294,26 @@ class SelectedQuestion extends Component {
               </div>
               <h3>
                 {selectedQuestion.question_title}
-                <h6 className="SelectedQuestion-subtitle-details" onClick={ async () => {
-                await this.props.updateQuestionState({
-                  selectedUserID: selectedQuestion.user_id,
-                  selectedUserDisplayName: selectedQuestion.display_name,
-                  selectedUserBio: selectedQuestion.bio,
-                  selectedUserCohort: selectedQuestion.cohort
-                })
-                this.props.history.push(`/profile/${selectedQuestion.display_name}`);
-              }}>
+                <h6 className="SelectedQuestion-subtitle-details">
                   Asked <Moment fromNow>{selectedQuestion.time_stamp}</Moment>{" "}
                   by {selectedQuestion.display_name} from{" "}
                   {selectedQuestion.cohort}
                 </h6>
               </h3>
             </div>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: selectedQuestion.question_desc
+              }}
+              className="answer-block"
+            ></div>
 
-            <ReactMarkdown
+            {/* <ReactMarkdown
               className="SelectedQuestion-question"
               source={selectedQuestion.question_desc}
-              renderers={{ code: CodeBlock }}
-              //   astPlugins={[parseHtml]}
+              renderers={{ inlineCode: CodeBlock }}
               escapeHtml={false}
-            ></ReactMarkdown>
+            ></ReactMarkdown> */}
           </div>
         </div>
         <h6 className="SelectedQuestion-header">Answers</h6>
