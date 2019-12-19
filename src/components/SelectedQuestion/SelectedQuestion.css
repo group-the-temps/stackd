@@ -201,3 +201,7 @@
   background-color: white;
   overflow: hidden;
 }
+
+.SelectedQuestion-question p code p span img {
+  width: 500px
+}

@@ -61,7 +61,7 @@ export const getSelectedAnswers = question_id => {
 
 export const createAnswer = (question_id, user_id, newAnswer) => {
   return {
-    type: CREATE_QUESTION,
+    type: CREATE_ANSWER,
     payload: axios.post(`/question/create/answer/${question_id}`, {
       user_id: user_id,
       answer_desc: newAnswer

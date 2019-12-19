@@ -177,3 +177,7 @@
   border-radius: 5px;
   padding-left: 7px;
 }
+
+.ql-editor p img {
+  width: 500px
+}

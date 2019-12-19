@@ -29,6 +29,7 @@ export class QuestionsList extends Component {
   }
 
   render() {
+    console.log(this.props.selectedUserDisplayName);
     // console.log(this.props.searchResults);
     // console.log(this.props.clickedTitle);
     // console.log(this.props);
