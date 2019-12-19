@@ -161,8 +161,8 @@
   position: absolute;
   display: flex;
   flex-direction: column;
-  left: 50%;
-  top: 25%;
+  left: 33%;
+  top: 26%;
   transform: translate(-50%, -50%);
   width: 300px;
   height: 225px;
