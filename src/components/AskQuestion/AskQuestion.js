@@ -132,7 +132,8 @@ export class AskQuestion extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const codeDesc = "<code>" + this.state.question_desc + "</code>";
+    // const codeDesc = "<code>" + this.state.question_desc + "</code>";
+    const codeDesc = this.state.question_desc;
     this.setState({ testing: this.state.question_desc });
 
     this.props.createQuestion({ ...this.state, question_desc: codeDesc });
@@ -198,11 +199,20 @@ export class AskQuestion extends Component {
           </div>
         </div>
         <div className="AskQuestion-background">
-          <Modal className="questions-modal" isOpen={this.state.showModal} ariaHideApp={false}>
+          <Modal
+            className="questions-modal"
+            isOpen={this.state.showModal}
+            ariaHideApp={false}
+          >
             <div className="AskQuestion-container">
               <div className="AskQuestion-form">
-                <button 
-                onClick={() => { this.props.history.push('/questionslist') }}>X</button>
+                <button
+                  onClick={() => {
+                    this.props.history.push("/questionslist");
+                  }}
+                >
+                  X
+                </button>
                 <div className="AskQuestion-title">
                   <h3>Title</h3>
                   <h6>At a high-level, what's your question?</h6>
@@ -239,9 +249,9 @@ export class AskQuestion extends Component {
                 <div className="AskQuestion-submit">
                   <button
                     className="AskQuestion-submit-button"
-                    onClick={ async (e) => {
+                    onClick={async e => {
                       await this.handleSubmit(e);
-                      this.props.history.push('/questionslist');
+                      this.props.history.push("/questionslist");
                     }}
                   >
                     Submit

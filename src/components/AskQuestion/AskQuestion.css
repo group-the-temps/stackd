@@ -86,13 +86,13 @@
   /* border: 1px solid lightgrey;
   border-radius: 4px; */
 }
-.ql-snow .ql-editor pre.ql-syntax {
+/* .ql-snow .ql-editor pre.ql-syntax {
   background-color: #cccccc;
 }
 
 .ql-editor.ql-blank:focus {
   box-shadow: 0 0 10px #719ece;
-}
+} */
 
 /* .ql-syntax {
   background: #23241f;
