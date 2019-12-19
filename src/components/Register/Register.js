@@ -46,7 +46,7 @@ export class Register extends Component {
     const userEmail = this.props.email;
     axios({
       method: "POST",
-      url: "http://localhost:3000/send",
+      url: process.env.REACT_APP_WELCOME,
       data: {
         userName,
         userEmail
@@ -111,18 +111,21 @@ export class Register extends Component {
               <input
                 className="register-input"
                 onChange={this.handleInput}
+                type="password"
                 name="password"
                 placeholder="password"
               />
               <input
                 className="register-input"
                 onChange={this.handleInput}
+                type="password"
                 name="student_invite_code"
                 placeholder="student access code"
               />
               <input
                 className="register-input"
                 onChange={this.handleInput}
+                type="password"
                 name="admin_invite_code"
                 placeholder="admin access code"
               />

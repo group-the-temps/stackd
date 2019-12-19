@@ -1,5 +1,5 @@
 # Stack'd
-**"Built By Students, For Students."**
+**"For Students, By Students."**
 LIVE DEMO ---> [Stack'd]()
 
 ![landing page](https://github.com/ab364608/Stack-d-readMe.-imgs/blob/master/Screen%20Shot%202019-12-18%20at%206.47.50%20PM.png?raw=true)
@@ -26,6 +26,11 @@ The motto here at Stack'd is ask questions, get answers. This web application wa
 - Filter search results by a topic
 - Different view for a guest user
 
-![ask question](https://github.com/ab364608/Stack-d-readMe.-imgs/blob/master/Screen%20Shot%202019-12-19%20at%203.12.43%20PM.png?raw=true)
+
+![ask question](https://github.com/ab364608/Stack-d-readMe.-imgs/blob/master/Screen%20Shot%202019-12-19%20at%204.41.35%20PM.png?raw=true)
+
+
 ![view questions](https://github.com/ab364608/Stack-d-readMe.-imgs/blob/master/Screen%20Shot%202019-12-19%20at%203.13.12%20PM.png?raw=true)
+
+
 ![profile](https://github.com/ab364608/Stack-d-readMe.-imgs/blob/master/Screen%20Shot%202019-12-19%20at%203.14.33%20PM.png?raw=true)
