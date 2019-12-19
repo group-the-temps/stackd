@@ -62,9 +62,7 @@ export default function profileReducer(state = initialState, action) {
         case `${GET_PROFILE}_PENDING`:
             return { ...state, loading: true }
         case `${GET_PROFILE}_FULFILLED`:
-            console.log(state.askedQuestions)
-            console.log(state.profile)
-            return { ...state, loading: false, askedQuestions: payload.data }
+            return { ...state, loading: false, profile: payload.data }
         // case `${GET_ASKED_QUESTIONS}_PENDING`:
         //     return { ...state, loading: true }
         // case `${GET_ASKED_QUESTIONS}_FULFILLED`:

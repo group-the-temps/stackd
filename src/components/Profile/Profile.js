@@ -11,7 +11,7 @@ import { getAskedQuestions } from "../../redux/authReducer";
 import "./Profile.css";
 import {updateQuestionState} from '../../redux/questionsReducer'
 import Moment from "react-moment";
-class Profile extends Component {
+export class Profile extends Component {
   state = {
     error: false,
     editBio: false,
@@ -29,6 +29,12 @@ class Profile extends Component {
     this.props.getProfile(this.props.user_id);
     this.props.getAskedQuestions(this.props.user_id);
   }
+
+
+  handleSum = (a, b) => {
+    return a + b;
+  };
+
 
   handleOpenBio = () => {
     if (this.state.editBio === false) {
