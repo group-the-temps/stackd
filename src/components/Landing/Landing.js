@@ -110,14 +110,14 @@ export class Landing extends Component {
                 <a
                   className="Landing-social-icon"
                   target="popup"
-                  href="https://github.com/JamesBlountIV"
+                  href="https://www.linkedin.com/in/james-blount-b029ba161/"
                 >
                   <img src={LinkedIn} alt="linkedin" />
                 </a>
                 <a
                   className="Landing-social-icon"
                   target="popup"
-                  href="https://www.linkedin.com/in/james-blount-b029ba161/"
+                  href="https://github.com/JamesBlountIV"
                 >
                   <img src={Github} alt="github" />
                 </a>
