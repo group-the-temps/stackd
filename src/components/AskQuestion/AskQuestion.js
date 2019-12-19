@@ -202,6 +202,7 @@ export class AskQuestion extends Component {
             <div className="AskQuestion-container">
               <div className="AskQuestion-form">
                 <button 
+                className="AskQuestion-close"
                 onClick={() => { this.props.history.push('/questionslist') }}>X</button>
                 <div className="AskQuestion-title">
                   <h3>Title</h3>
