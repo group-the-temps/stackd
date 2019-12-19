@@ -15,7 +15,7 @@ import Moment from "react-moment";
 // import SelectedQuestion from "../SelectedQuestion/SelectedQuestion";
 // import Modal from "react-modal"
 
-class QuestionsList extends Component {
+export class QuestionsList extends Component {
   constructor() {
     super();
 
