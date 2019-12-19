@@ -162,7 +162,7 @@ export class Header extends Component {
       selectedUserBio: this.props.user.bio
     })
     await this.props.getProfile(this.props.selectedUserID);
-    this.props.history.push(`/profile/${this.props.user.display_name}`);
+    this.props.history.push(`/profile/${this.props.selectedUserDisplayName}`);
   };
 
   render() {

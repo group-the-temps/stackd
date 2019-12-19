@@ -68,7 +68,7 @@ export class Profile extends Component {
           editBio: false,
           showProfileBio: true
         });
-        this.props.history.push("/profile");
+        this.props.history.push(`/profile/${this.props.selectedDisplayName}`);
         this.props.getProfile(this.props.selectedUserID);
         this.setState({
           bio: this.props[0].bio
@@ -91,7 +91,7 @@ export class Profile extends Component {
           editName: false,
           showProfileName: true
         });
-        this.props.history.push("/profile");
+        this.props.history.push(`/profile/${this.props.selectedDisplayName}`);
         this.props.getProfile(this.props.selectedUserID);
       })
       .catch(() => {
@@ -110,7 +110,7 @@ export class Profile extends Component {
           showProfileCohort: true,
           editCohort: false
         });
-        this.props.history.push("/profile");
+        this.props.history.push(`/profile/${this.props.selectedDisplayName}`);
         this.props.getProfile(this.props.selectedUserID);
         this.setState({
           cohort: this.props[0].cohort
@@ -131,7 +131,7 @@ export class Profile extends Component {
     // const { display_name, bio, cohort } = this.props.profile[0];
     // console.log(this.props.selectedUserID);
     // console.log(this.state)
-    console.log(this.props.myAsked);
+    // console.log(this.props.myAsked);
     // console.log(this.props.user)
     // console.log(this.props.profile)
     var mappedQuestions = this.props.myAsked.map(question => {
