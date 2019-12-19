@@ -25,9 +25,15 @@ export class Profile extends Component {
     showProfileCohort: false
   };
 
-  componentDidMount() {
-    this.props.getProfile(this.props.selectedUserID);
-    this.props.getAskedQuestions(this.props.selectedUserID);
+  async componentDidMount() {
+    console.log(this.props.selectedUserID);
+    await setTimeout(this.runSetTimeout(), 1000);
+    console.log(this.props.profile[0]);
+  }
+
+  runSetTimeout = async () => {
+    await this.props.getProfile(this.props.selectedUserID);
+    await this.props.getAskedQuestions(this.props.selectedUserID);
   }
 
   handleOpenBio = () => {
@@ -62,7 +68,7 @@ export class Profile extends Component {
           editBio: false,
           showProfileBio: true
         });
-        this.props.history.push("/profile");
+        this.props.history.push(`/profile/${this.props.selectedDisplayName}`);
         this.props.getProfile(this.props.selectedUserID);
         this.setState({
           bio: this.props[0].bio
@@ -85,7 +91,7 @@ export class Profile extends Component {
           editName: false,
           showProfileName: true
         });
-        this.props.history.push("/profile");
+        this.props.history.push(`/profile/${this.props.selectedDisplayName}`);
         this.props.getProfile(this.props.selectedUserID);
       })
       .catch(() => {
@@ -104,7 +110,7 @@ export class Profile extends Component {
           showProfileCohort: true,
           editCohort: false
         });
-        this.props.history.push("/profile");
+        this.props.history.push(`/profile/${this.props.selectedDisplayName}`);
         this.props.getProfile(this.props.selectedUserID);
         this.setState({
           cohort: this.props[0].cohort
@@ -122,14 +128,14 @@ export class Profile extends Component {
   };
 
   render() {
-    console.log(this.props.profile[0]);
-    console.log(this.props.selectedUserID);
+    // const { display_name, bio, cohort } = this.props.profile[0];
+    // console.log(this.props.selectedUserID);
     // console.log(this.state)
-    console.log(this.props.myAsked);
+    // console.log(this.props.myAsked);
     // console.log(this.props.user)
     // console.log(this.props.profile)
     var mappedQuestions = this.props.myAsked.map(question => {
-      console.log(question.question_title);
+      // console.log(question.question_title);
 
       return <div className="question__box">
                 
@@ -154,7 +160,6 @@ export class Profile extends Component {
             </div>
       ;
     });
-    const { display_name, bio, cohort } = this.props.profile[0];
     return (
       <main className="page__container">
         <div className="page__container-top">
@@ -164,17 +169,18 @@ export class Profile extends Component {
                 <ProfileImage user_id={this.props.selectedUserID} />
                 <div className="cohort__cont">
                   {!this.state.showProfileCohort ? (
-                    <label>Cohort: DM {cohort}</label>
+                    <label>Cohort: DM {this.props.selectedUserCohort}</label>
                   ) : (
                     <label>Cohort: DM {this.state.cohort}</label>
                   )}
                   <div className="cohort__edit">
+                    {this.props.user_id === this.props.selectedUserID ?
                     <button
                       className="edit__cohort__btn"
                       onClick={this.handleOpenCohort}
                     >
                       <i className="fas fa-edit fa-2x"></i>
-                    </button>
+                    </button> : null}
                   </div>
                 </div>
                 {this.state.editCohort ? (
@@ -208,19 +214,20 @@ export class Profile extends Component {
                 <div className="cont">
                   <section className="name__container">
                     {!this.state.showProfileName ? (
-                      <label className="profile__name">{display_name}</label>
+                      <label className="profile__name">{this.props.selectedUserDisplayName}</label>
                     ) : (
                       <label className="profile__name">
                         {this.state.display_name}
                       </label>
                     )}
                   </section>
+                  {this.props.user_id === this.props.selectedUserID ?
                   <button
                     className="edit__name__btn"
                     onClick={this.handleOpenName}
                   >
                     <i className="fas fa-edit fa-2x"></i>
-                  </button>
+                  </button> : null}
                 </div>
                 {this.state.editName ? (
                   <>
@@ -250,17 +257,18 @@ export class Profile extends Component {
                   <section className="bio__container">
                     <h2 className="bio__header">About Me:</h2>
                     {!this.state.showProfileBio ? (
-                      <p className="profile__bio">{bio}</p>
+                      <p className="profile__bio">{this.props.selectedUserBio}</p>
                     ) : (
                       <p className="profile__bio">{this.state.bio}</p>
                     )}
                   </section>
+                  {this.props.user_id === this.props.selectedUserID ?
                   <button
                     className="edit__bio__btn"
                     onClick={this.handleOpenBio}
                   >
                     <i className="fas fa-edit fa-2x"></i>
-                  </button>
+                  </button> : null}
                 </div>
                 {this.state.editBio ? (
                   <>
@@ -313,7 +321,10 @@ const mapStateToProps = reduxState => {
     user: reduxState.authReducer.user,
     user_id: reduxState.authReducer.user.user_id,
     myAsked: reduxState.authReducer.askedQuestions,
-    selectedUserID: reduxState.questionsReducer.selectedUserID
+    selectedUserID: reduxState.questionsReducer.selectedUserID,
+    selectedUserDisplayName: reduxState.questionsReducer.selectedUserDisplayName,
+    selectedUserBio: reduxState.questionsReducer.selectedUserBio,
+    selectedUserCohort: reduxState.questionsReducer.selectedUserCohort
   };
 };
 
