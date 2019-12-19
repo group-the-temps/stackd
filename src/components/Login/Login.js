@@ -80,12 +80,13 @@ export class Login extends Component {
               </button>
             </Link>
             <h1 className="login-header">Login</h1>
-            <form className="Login-form">
+            <form className="Login-form" autoComplete="nope">
               <input
                 className="login-input"
                 onChange={this.handleInput}
                 name="email"
                 placeholder="email"
+                autoComplete="off"
               />
               <input
                 className="login-input"
@@ -93,6 +94,7 @@ export class Login extends Component {
                 type="password"
                 name="password"
                 placeholder="password"
+                autoComplete="off"
               />
             </form>
             <button className="modal-button" onClick={this.handleSubmit}>

@@ -218,6 +218,7 @@ export class AskQuestion extends Component {
                 </button>
 =======
                 <button 
+                className="AskQuestion-close"
                 onClick={() => { this.props.history.goBack() }}>X</button>
 >>>>>>> master
                 <div className="AskQuestion-title">
