@@ -51,6 +51,7 @@ class QuestionsList extends Component {
               }
             }
           }
+          return console.log("test");
         });
         return (
           <div className="QuestionsList-question-container">
@@ -111,6 +112,7 @@ class QuestionsList extends Component {
               }
             }
           }
+          return console.log("test");
         });
         return (
           <div className="QuestionsList-question-container">
@@ -159,6 +161,17 @@ class QuestionsList extends Component {
               {/* <h3>{question.cohort}</h3> */}
               {/* <h3>{question.question_desc}</h3> */}
 
+<<<<<<< HEAD
+              <h5
+                onClick={async () => {
+                  await this.props.updateQuestionState({
+                    selectedUserID: question.user_id
+                  });
+                  this.props.history.push(`/profile/${question.display_name}`);
+                  // console.log(this.props.selectedUserID)
+                }}
+              >
+=======
               <h5 className='QuestionsList-subtitle-details' onClick={ async () => {
                 await this.props.updateQuestionState({
                   selectedUserID: question.user_id,
@@ -168,6 +181,7 @@ class QuestionsList extends Component {
                 })
                 this.props.history.push(`/profile/${question.display_name}`);
               }}>
+>>>>>>> master
                 Asked <Moment fromNow>{question.time_stamp}</Moment> by{" "}
                 {question.display_name} from {question.cohort}
               </h5>

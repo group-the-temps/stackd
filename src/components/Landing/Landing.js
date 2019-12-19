@@ -11,6 +11,8 @@ import Ask from "../../icons and pics/ask.png";
 import ContactUs from "../ContactUs/ContactUs";
 import { connect } from "react-redux";
 import { updateSearchState } from "../../redux/searchReducer";
+import Github from "../../icons and pics/github.png";
+import LinkedIn from "../../icons and pics/linkedin.png";
 
 export class Landing extends Component {
   render() {
@@ -33,10 +35,14 @@ export class Landing extends Component {
                 a later date.
               </h6>
               <div className="Landing-button">
-                  <button onClick={() => {
+                <button
+                  onClick={() => {
                     this.props.updateSearchState({ searchResults: [] });
-                    this.props.history.push('/questionslist');
-                  }}>Start Learning</button>
+                    this.props.history.push("/questionslist");
+                  }}
+                >
+                  Start Learning
+                </button>
               </div>
             </div>
           </div>
@@ -80,34 +86,82 @@ export class Landing extends Component {
             <div className="Landing-aboutus-person">
               <img src={Ben} alt="Profile pic" />
               <h3>Ben Anderson</h3>
-              <h6>
-                Ben's about section goes here. This will be a short write up of
-                each person
-              </h6>
+              <div className="Landing-social-icons">
+                <a
+                  className="Landing-social-icon"
+                  target="popup"
+                  href="https://www.linkedin.com/in/ben-anderson-248472197/"
+                >
+                  <img src={LinkedIn} alt="linkedin" />
+                </a>
+                <a
+                  className="Landing-social-icon"
+                  target="popup"
+                  href="https://github.com/ab364608"
+                >
+                  <img src={Github} alt="github" />
+                </a>
+              </div>
             </div>
             <div className="Landing-aboutus-person">
               <img src={James} alt="Profile pic" />
               <h3>James Blount</h3>
-              <h6>
-                Jame's about section goes here. This will be a short write up of
-                each person
-              </h6>
+              <div className="Landing-social-icons">
+                <a
+                  className="Landing-social-icon"
+                  target="popup"
+                  href="https://github.com/JamesBlountIV"
+                >
+                  <img src={LinkedIn} alt="linkedin" />
+                </a>
+                <a
+                  className="Landing-social-icon"
+                  target="popup"
+                  href="https://www.linkedin.com/in/james-blount-b029ba161/"
+                >
+                  <img src={Github} alt="github" />
+                </a>
+              </div>
             </div>
             <div className="Landing-aboutus-person">
               <img src={Pat} alt="Profile pic" />
               <h3>Pat Thibodeau</h3>
-              <h6>
-                Pat's about section goes here. This will be a short write up of
-                each person
-              </h6>
+              <div className="Landing-social-icons">
+                <a
+                  className="Landing-social-icon"
+                  target="popup"
+                  href="https://www.linkedin.com/in/pat-thibodeau/"
+                >
+                  <img src={LinkedIn} alt="linkedin" />
+                </a>
+                <a
+                  className="Landing-social-icon"
+                  target="popup"
+                  href="https://github.com/pthibodeau11"
+                >
+                  <img src={Github} alt="github" />
+                </a>
+              </div>
             </div>
             <div className="Landing-aboutus-person">
               <img src={Shane} alt="Profile pic" />
               <h3>Shane Gallatin</h3>
-              <h6>
-                Shane's about section goes here. This will be a short write up
-                of each person
-              </h6>
+              <div className="Landing-social-icons">
+                <a
+                  className="Landing-social-icon"
+                  target="popup"
+                  href="http://linkedin.com/in/shane-gallatin-341a41173"
+                >
+                  <img src={LinkedIn} alt="linkedin" />
+                </a>
+                <a
+                  className="Landing-social-icon"
+                  target="popup"
+                  href="https://github.com/ShaneGallatin"
+                >
+                  <img src={Github} alt="github" />
+                </a>
+              </div>
             </div>
           </div>
           <div>
@@ -127,7 +181,7 @@ export class Landing extends Component {
 const mapStateToProps = reduxState => {
   return {
     searchResults: reduxState.searchReducer.searchResults
-  }
-}
+  };
+};
 
 export default connect(mapStateToProps, { updateSearchState })(Landing);
