@@ -2,7 +2,7 @@
 **"Built By Students, For Students."**
 LIVE DEMO ---> [Stack'd]()
 
-![Landing Page](./icons and pics/landing-screenshot.png)
+![landing page](https://github.com/ab364608/Stack-d-readMe.-imgs/blob/master/Screen%20Shot%202019-12-18%20at%206.47.50%20PM.png?raw=true)
 
 ## About
 
@@ -15,15 +15,17 @@ The motto here at Stack'd is ask questions, get answers. This web application wa
 
  ## Technology Overview
 
- This is a full-stack web application created by 4 developers and was completed within 12 business days.
+**Stack'd** is a full-stack web application built by four developers and was completed within 12 business days. The **Stack'd** team built this app with React, Express-Session, PostgresSQL, Node, and CSS. We also implemented Firebase cloud storage, Nodemailer, React Markdown, React Quill, and highlight.js into the app.
 
-- include summary of tech used
-- the time-scale of the project
-- purpose of the project
-- the problems the project aimed to solve
-- technologies/techniques used to solve the problems
-	- also why you chose that particular tech
-- project **screenshots**
-- list of group members *with* links to personal githubs and portfolios
-- anything else you think worthy of sharing, *but* don't be too wordy
-- keep the reader's attention
+## Primary Features
+
+- Create a new account (bcrypt.js for auth) and customize the profile
+- Search for a question or post a question
+- Post an answer for a specific question
+- Like a post if it is found useful
+- Filter search results by a topic
+- Different view for a guest user
+
+![ask question](https://github.com/ab364608/Stack-d-readMe.-imgs/blob/master/Screen%20Shot%202019-12-19%20at%203.12.43%20PM.png?raw=true)
+![view questions](https://github.com/ab364608/Stack-d-readMe.-imgs/blob/master/Screen%20Shot%202019-12-19%20at%203.13.12%20PM.png?raw=true)
+![profile](https://github.com/ab364608/Stack-d-readMe.-imgs/blob/master/Screen%20Shot%202019-12-19%20at%203.14.33%20PM.png?raw=true)
