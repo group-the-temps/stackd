@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import hljs from "highlight.js";
+// import hljs from "highlight.js";
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.core.css";
 import "react-quill/dist/quill.bubble.css";
@@ -27,6 +27,7 @@ import SyntaxHighlighter from "react-syntax-highlighter";
 import virtualizedRenderer from "react-syntax-highlighter-virtualized-renderer";
 import { darkula } from "react-syntax-highlighter/dist/esm/styles/hljs/";
 // import ReactMarkdown from "react-markdown";
+const hljs = require("highlight.js");
 const ReactMarkdown = require("react-markdown");
 // const htmlParser = require("react-markdown/plugins/html-parser");
 // const parseHtml = htmlParser({
@@ -41,7 +42,7 @@ hljs.initHighlightingOnLoad();
 hljs.listLanguages();
 // hljs.registerLanguage("javascript", javascript);
 hljs.configure({
-  languages: ["javascript", "ruby", "python", "rust", "JSX", "HTML", "JSON"],
+  //   languages: ["javascript", "ruby", "python", "rust", "JSX", "HTML", "JSON"],
   useBr: false
 });
 // hljs.configure({ useBR: true });

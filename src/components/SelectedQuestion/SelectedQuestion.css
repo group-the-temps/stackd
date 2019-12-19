@@ -197,3 +197,7 @@
   background-color: white;
   overflow: hidden;
 }
+
+.ql-container {
+  height: 92%;
+}

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ReactQuill, { Quill } from "react-quill";
 import "./AskQuestion.css";
-import hljs from "highlight.js";
+// import hljs from "highlight.js";
 import "react-quill/dist/quill.core.css";
 import "react-quill/dist/quill.bubble.css";
 import "highlight.js/styles/darkula.css";
@@ -14,13 +14,15 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Modal from "react-modal";
 import ReactMarkdown from "react-markdown";
-import javascript from "highlight.js/lib/languages/javascript";
+const hljs = require("highlight.js");
+// import javascript from "highlight.js/lib/languages/javascript";
 
 // const ReactMarkdown = require("react-markdown/with-html");
-hljs.registerLanguage("javascript", javascript);
-
+// hljs.registerLanguage("javascript", javascript);
+hljs.initHighlightingOnLoad();
+hljs.listLanguages();
 hljs.configure({
-  languages: ["javascript", "ruby", "python", "rust"],
+  // languages: ["javascript", "ruby", "python", "rust"],
   useBr: false
 });
 const modules = {
