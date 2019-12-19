@@ -232,7 +232,15 @@ class SelectedQuestion extends Component {
               <img className="SelectedQuestion-star" src={Star} alt="star" /> */}
               </div>
 
-              <h6 className="SelectedQuestion-subtitle-details">
+              <h6 className="SelectedQuestion-subtitle-details" onClick={ async () => {
+                await this.props.updateQuestionState({
+                  selectedUserID: answer.user_id,
+                  selectedUserDisplayName: answer.display_name,
+                  selectedUserBio: answer.bio,
+                  selectedUserCohort: answer.cohort
+                })
+                this.props.history.push(`/profile/${answer.display_name}`);
+              }}>
                 Submitted <Moment fromNow={answer.time_stamp}></Moment> by{" "}
                 {answer.display_name} from {answer.cohort}
               </h6>
@@ -267,7 +275,15 @@ class SelectedQuestion extends Component {
               </div>
               <h3>
                 {selectedQuestion.question_title}
-                <h6 className="SelectedQuestion-subtitle-details">
+                <h6 className="SelectedQuestion-subtitle-details" onClick={ async () => {
+                await this.props.updateQuestionState({
+                  selectedUserID: selectedQuestion.user_id,
+                  selectedUserDisplayName: selectedQuestion.display_name,
+                  selectedUserBio: selectedQuestion.bio,
+                  selectedUserCohort: selectedQuestion.cohort
+                })
+                this.props.history.push(`/profile/${selectedQuestion.display_name}`);
+              }}>
                   Asked <Moment fromNow>{selectedQuestion.time_stamp}</Moment>{" "}
                   by {selectedQuestion.display_name} from{" "}
                   {selectedQuestion.cohort}

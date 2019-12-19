@@ -11,8 +11,10 @@ const initialState = {
   answerCount: [],
   createAnswer: [],
   likedQuestionCount: '',
-  selectedUserID: '',
-  selectedUserDisplayName: ''
+  selectedUserID: 0,
+  selectedUserDisplayName:'',
+  selectedUserBio: '',
+  selectedUserCohort: ''
 };
 
 const CREATE_QUESTION = "CREATE_QUESTION";

@@ -48,6 +48,10 @@
   /* margin-bottom: -1px; */
 }
 
+.QuestionsList-subtitle-details:hover {
+  cursor: pointer;
+}
+
 .QuestionsList-question-box {
   height: 38px;
   display: flex;
