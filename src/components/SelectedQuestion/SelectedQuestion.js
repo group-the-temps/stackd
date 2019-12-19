@@ -84,6 +84,7 @@ const formats = [
   "video",
   "code-block"
 ];
+
 /*
  * Custom toolbar component including the custom heart button and dropdowns
  */
