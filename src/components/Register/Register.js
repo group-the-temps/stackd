@@ -6,9 +6,9 @@ import "./Register.css";
 import Modal from "react-modal";
 import axios from "axios";
 
-Modal.setAppElement("#root");
 
-class Register extends Component {
+
+export class Register extends Component {
   constructor() {
     super();
     this.state = {
@@ -87,7 +87,7 @@ class Register extends Component {
           </div>
         </div>
         <div className="Register-container">
-          <Modal isOpen={this.state.showModal} className="register-modal">
+          <Modal isOpen={this.state.showModal} className="register-modal" ariaHideApp={false}>
             <Link to="/">
               <button className="close-button" onClick={this.handleCloseModal}>
                 X

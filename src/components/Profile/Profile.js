@@ -26,8 +26,8 @@ export class Profile extends Component {
   };
 
   componentDidMount() {
-    this.props.getProfile(this.props.user_id);
-    this.props.getAskedQuestions(this.props.user_id);
+    this.props.getProfile(this.props.selectedUserID);
+    this.props.getAskedQuestions(this.props.selectedUserID);
   }
 
 
@@ -69,7 +69,7 @@ export class Profile extends Component {
           showProfileBio: true
         });
         this.props.history.push("/profile");
-        this.props.getProfile(this.props.user_id);
+        this.props.getProfile(this.props.selectedUserID);
         this.setState({
           bio: this.props[0].bio
         });
@@ -92,7 +92,7 @@ export class Profile extends Component {
           showProfileName: true
         });
         this.props.history.push("/profile");
-        this.props.getProfile(this.props.user_id);
+        this.props.getProfile(this.props.selectedUserID);
       })
       .catch(() => {
         this.setState({
@@ -111,7 +111,7 @@ export class Profile extends Component {
           editCohort: false
         });
         this.props.history.push("/profile");
-        this.props.getProfile(this.props.user_id);
+        this.props.getProfile(this.props.selectedUserID);
         this.setState({
           cohort: this.props[0].cohort
         });
@@ -128,6 +128,8 @@ export class Profile extends Component {
   };
 
   render() {
+    console.log(this.props.profile[0]);
+    console.log(this.props.selectedUserID);
     // console.log(this.state)
     console.log(this.props.myAsked);
     // console.log(this.props.user)
@@ -158,14 +160,14 @@ export class Profile extends Component {
             </div>
       ;
     });
-    const { display_name, bio, cohort } = this.props.user;
+    const { display_name, bio, cohort } = this.props.profile[0];
     return (
       <main className="page__container">
         <div className="page__container-top">
           <div className="profile__container">
             <div className="left__innerCont">
               <section className="img__section">
-                <ProfileImage user_id={this.props.user_id} />
+                <ProfileImage user_id={this.props.selectedUserID} />
                 <div className="cohort__cont">
                   {!this.state.showProfileCohort ? (
                     <label>Cohort: DM {cohort}</label>
@@ -316,7 +318,8 @@ const mapStateToProps = reduxState => {
     id: reduxState.profileReducer.profile.user_id,
     user: reduxState.authReducer.user,
     user_id: reduxState.authReducer.user.user_id,
-    myAsked: reduxState.authReducer.askedQuestions
+    myAsked: reduxState.authReducer.askedQuestions,
+    selectedUserID: reduxState.questionsReducer.selectedUserID
   };
 };
 

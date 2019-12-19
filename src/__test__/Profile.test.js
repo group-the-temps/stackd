@@ -1,3 +1,6 @@
+import React from "react";
+import {render} from '@testing-library/react';
+import {Profile} from "../components/Profile/Profile";
 // import {handleOpenBio} from "../components/Profile/Profile";
 import {handleSum} from "../components/Profile/Profile";
 // import { exportAllDeclaration } from "@babel/types";
@@ -29,3 +32,13 @@ describe(`"handleOpenBio" should return the correct and necessary values`, () =>
 //     expect(handleOpenBio({}).type).toBe('handleOpenBio')
 // })
 
+
+test('Renders profiles cohort name', () => {
+    const {container} = render(<Profile />)
+    expect(container.textContent).toContain("Cohort")
+})
+
+test('Renders Profiles header over the user asked questions', () => {
+    const {container} = render(<Profile />)
+    expect(container.textContent).toContain("My Questions")
+})
