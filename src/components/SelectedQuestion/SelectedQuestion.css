@@ -104,6 +104,10 @@
   padding-bottom: 13px;
 }
 
+.SelectedQuestion-subtitle-details:hover {
+  cursor: pointer;
+}
+
 .SelectedQuestion-like-box {
   display: flex;
   flex-direction: row;
