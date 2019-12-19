@@ -60,7 +60,7 @@ export default function profileReducer(state = initialState, action) {
     const { payload, type } = action;
     switch (type) {
         case `${GET_PROFILE}_PENDING`:
-            return { ...state, loading: true }
+            return { ...state, loading: true, profile: [{display_name: 'pending'}] }
         case `${GET_PROFILE}_FULFILLED`:
             console.log(state.askedQuestions)
             console.log(state.profile)

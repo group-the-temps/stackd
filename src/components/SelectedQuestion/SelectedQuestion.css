@@ -104,6 +104,10 @@
   padding-bottom: 13px;
 }
 
+.SelectedQuestion-subtitle-details:hover {
+  cursor: pointer;
+}
+
 .SelectedQuestion-like-box {
   display: flex;
   flex-direction: row;
@@ -196,4 +200,8 @@
   box-shadow: 5px 5px 5px -5px rgb(0, 0, 0, 0.56);
   background-color: white;
   overflow: hidden;
+}
+
+.SelectedQuestion-question p code p span img {
+  width: 500px
 }
