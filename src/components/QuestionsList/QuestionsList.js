@@ -82,7 +82,15 @@ class QuestionsList extends Component {
               {/* <h3>{question.cohort}</h3> */}
               {/* <h3>{question.question_desc}</h3> */}
 
-              <h5>
+              <h5 className='QuestionsList-subtitle-details' onClick={ async () => {
+                await this.props.updateQuestionState({
+                  selectedUserID: question.user_id,
+                  selectedUserDisplayName: question.display_name,
+                  selectedUserBio: question.bio,
+                  selectedUserCohort: question.cohort
+                })
+                this.props.history.push(`/profile/${question.display_name}`);
+              }}>
                 Asked <Moment fromNow>{question.time_stamp}</Moment> by{" "}
                 {question.display_name} from {question.cohort}
               </h5>
@@ -93,7 +101,7 @@ class QuestionsList extends Component {
       });
     } else {
       mappedAllQuestions = this.props.allQuestions.map(question => {
-        // console.log(question)
+        console.log(question)
         const mappedCount = this.props.answerCount.map(answer => {
           if (question.question_id === answer.question_id) {
             for (let i = 0; i < answer.count.length; i++) {
@@ -150,10 +158,14 @@ class QuestionsList extends Component {
               {/* <h3>{question.cohort}</h3> */}
               {/* <h3>{question.question_desc}</h3> */}
 
-              <h5 onClick={ async () => {
-                await this.props.updateQuestionState({selectedUserID: question.user_id})
+              <h5 className='QuestionsList-subtitle-details' onClick={ async () => {
+                await this.props.updateQuestionState({
+                  selectedUserID: question.user_id,
+                  selectedUserDisplayName: question.display_name,
+                  selectedUserBio: question.bio,
+                  selectedUserCohort: question.cohort
+                })
                 this.props.history.push(`/profile/${question.display_name}`);
-                // console.log(this.props.selectedUserID)
               }}>
                 Asked <Moment fromNow>{question.time_stamp}</Moment> by{" "}
                 {question.display_name} from {question.cohort}
@@ -188,7 +200,10 @@ const mapStateToProps = reduxState => {
     clickedTitle: reduxState.questionsReducer.clickedTitle,
     answerCount: reduxState.questionsReducer.answerCount,
     likedQuestionCount: reduxState.questionsReducer.likedQuestionCount,
-    selectedUserID: reduxState.questionsReducer.selectedUserID
+    selectedUserID: reduxState.questionsReducer.selectedUserID,
+    selectedUserDisplayName: reduxState.questionsReducer.selectedUserDisplayName,
+    selectedUserBio: reduxState.questionsReducer.selectedUserBio,
+    selectedUserCohort: reduxState.questionsReducer.selectedUserCohort
   };
 };
 
