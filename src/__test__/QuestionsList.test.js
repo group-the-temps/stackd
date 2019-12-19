@@ -1,25 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom"
 import {act, Simulate} from "react-dom/test-utils"
-import App from "../App"
+import {QuestionsList} from "../components/QuestionsList/QuestionsList"
 
 
-let container = null
 
-// beforeEach(() => {
-//     container = document.createElement("div");
-//     document.body.appendChild(container);
-// })
 
-// afterEach(() => {
-//     ReactDOM.unmountComponentAtNode(container)
-//     document.body.removeChild(container)
-//     container = null;
-// })
+beforeEach(() => {
+    container = document.createElement("div");
+    document.body.appendChild(container);
+})
+
+afterEach(() => {
+    ReactDOM.unmountComponentAtNode(container)
+    document.body.removeChild(container)
+    container = null;
+})
 
 test(`"QuestionsList should load when View Questions is clicked`, () => {
     act(() => {
-        ReactDOM.render(<App />, container);
+        ReactDOM.render(<QuestionsList />, container);
     })
 
     const slogan = container.querySelector("h6")

@@ -14,9 +14,19 @@ test('Renders landing overview', () => {
     expect(container.textContent).toContain("Learning to code is hard enough. So why do it alone?")
 })
 
+test('Renders landing button', () => {
+    const {container} = render(<Landing />)
+    expect(container.textContent).toContain("Start Learning")
+})
+
 test('Renders landing features header', () => {
     const {container} = render(<Landing />)
     expect(container.textContent).toContain("Features")
+})
+
+test('Renders features description', () => {
+    const {container} = render(<Landing/>)
+    expect(container.textContent).toContain("Quickly and easily ask your questions to the community of software developers.")
 })
 
 test('Renders landing about us header', () => {
@@ -27,6 +37,11 @@ test('Renders landing about us header', () => {
 test('Renders landing Bens section', () => {
     const {container} = render(<Landing />)
     expect(container.textContent).toContain("Ben Anderson")
+})
+
+test('Renders the about section for a member of the stackd team', () => {
+    const {container} = render(<Landing/>)
+    expect(container.textContent).toContain("Ben's about section goes here. This will be a short write up of each person")
 })
 
 test('Renders landing James section', () => {
@@ -42,6 +57,11 @@ test('Renders landing Pat section', () => {
 test('Renders landing Shane section', () => {
     const {container} = render(<Landing />)
     expect(container.textContent).toContain("Shane Gallatin")
+})
+
+test('Renders the contact us section of the landing page', () => {
+    const {container} = render(<Landing/>)
+    expect(container.textContent).toContain("Contact Us")
 })
 
 test('Makes sure render does not contain bleep bloop', () => {
