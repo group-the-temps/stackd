@@ -29,6 +29,7 @@ class QuestionsList extends Component {
   }
 
   render() {
+    console.log(this.props.selectedUserDisplayName);
     // console.log(this.props.searchResults);
     // console.log(this.props.clickedTitle);
     // console.log(this.props);
@@ -151,8 +152,8 @@ class QuestionsList extends Component {
               {/* <h3>{question.question_desc}</h3> */}
 
               <h5 onClick={ async () => {
-                await this.props.updateQuestionState({selectedUserID: question.user_id})
-                this.props.history.push(`/profile/${question.display_name}`);
+                await this.props.updateQuestionState({selectedUserID: question.user_id, selectedUserDisplayName: question.display_name })
+                this.props.history.push(`/profile/${this.props.selectedUserDisplayName}`);
                 // console.log(this.props.selectedUserID)
               }}>
                 Asked <Moment fromNow>{question.time_stamp}</Moment> by{" "}
@@ -188,7 +189,8 @@ const mapStateToProps = reduxState => {
     clickedTitle: reduxState.questionsReducer.clickedTitle,
     answerCount: reduxState.questionsReducer.answerCount,
     likedQuestionCount: reduxState.questionsReducer.likedQuestionCount,
-    selectedUserID: reduxState.questionsReducer.selectedUserID
+    selectedUserID: reduxState.questionsReducer.selectedUserID,
+    selectedUserDisplayName: reduxState.questionsReducer.selectedUserDisplayName
   };
 };
 

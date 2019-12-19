@@ -155,9 +155,9 @@ export class Header extends Component {
   };
 
   viewMyProfile = async () => {
-    await this.props.updateQuestionState({selectedUserID: this.props.user.user_id})
+    await this.props.updateQuestionState({selectedUserID: this.props.user.user_id, selectedUserDisplayName: this.props.user.display_name})
     await this.props.getProfile(this.props.selectedUserID);
-    this.props.history.push(`/profile/${this.props.user.display_name}`);
+    this.props.history.push(`/profile/${this.props.selectedUserDisplayName}`);
   };
 
   render() {
@@ -350,7 +350,8 @@ const mapStateToProps = reduxState => {
     user: reduxState.authReducer.user,
     clickedTags: reduxState.searchReducer.clickedTags,
     searchResults: reduxState.searchReducer.searchResults,
-    selectedUserID: reduxState.questionsReducer.selectedUserID
+    selectedUserID: reduxState.questionsReducer.selectedUserID,
+    selectedUserDisplayName: reduxState.questionsReducer.selectedUserDisplayName
   };
 };
 
