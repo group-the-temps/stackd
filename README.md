@@ -1,6 +1,6 @@
 # Stack'd
 **"For Students, By Students."**
-LIVE DEMO ---> [Stack'd]()
+LIVE DEMO ---> [Stack'd](http://142.93.12.13:5000/#/)
 
 ![landing page](https://github.com/ab364608/Stack-d-readMe.-imgs/blob/master/Screen%20Shot%202019-12-18%20at%206.47.50%20PM.png?raw=true)
 
